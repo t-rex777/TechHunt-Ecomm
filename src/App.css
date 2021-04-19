@@ -1,0 +1,89 @@
+@import url("https://glitchpop-css.herokuapp.com/library/styles.css");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f3f4f6;
+}
+.nav-items {
+  justify-content: flex-end;
+}
+
+.nav-logo {
+  font-family: "Raleway", sans-serif;
+  font-weight: 800;
+  position: absolute;
+  left: 1rem;
+  top: 1.6rem;
+  font-size: 2rem;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 2rem;
+  height: 390px;
+  background-color: #fff;
+  border: solid 2px #fff;
+}
+.card-image {
+  max-height: 250px;
+  height: auto;
+  width: auto;
+  max-width: 200px;
+  border: none;
+}
+.card-header {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+}
+.card-body {
+  flex-grow: 1;
+}
+
+.wishlist {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 2rem;
+}
+.wishlist > p {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+.wishlist:hover {
+  color: red;
+}
+.remove-btn {
+  font-size: 1.8rem;
+}
+.remove-btn:hover {
+  color: rgb(226, 25, 25);
+}
+.quant-btn {
+  display: flex;
+  justify-content: space-around;
+}
+.quant-btn > button {
+  width: 20px;
+  height: 20px;
+}
+.place-btn {
+  border: solid 1px rgb(206, 197, 197);
+  padding: 0.5rem 0.8rem;
+  margin: 0.8rem 0;
+  border-radius: 10px;
+}
+.place-btn:hover {
+  background-color: rgb(226, 25, 25);
+  color: white;
+  border: solid 1px red;
+  opacity: 0.8;
+}
