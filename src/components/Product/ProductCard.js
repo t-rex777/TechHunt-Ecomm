@@ -1,7 +1,7 @@
 import { AiTwotoneHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { addCartItem } from "../Cart/helper";
-const Card = ({ title, img, price, item, quantity }) => {
+const ProductCard = ({ title, img, price, item, quantity }) => {
   return (
     <div>
       <div className="card">
@@ -10,7 +10,7 @@ const Card = ({ title, img, price, item, quantity }) => {
         </span>
         <img className="card-image" src={img} alt="oneplus" />
         <h1 className="card-header">{title}</h1>
-        <p className="card-body">{price}</p>
+        <p className="card-body">₹ {price}</p>
         <button
           className="card-btn btn-secondary"
           onClick={() => {
@@ -28,4 +28,4 @@ const Card = ({ title, img, price, item, quantity }) => {
     </div>
   );
 };
-export default Card;
+export default ProductCard;

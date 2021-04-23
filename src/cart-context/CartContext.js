@@ -17,7 +17,7 @@ export function CartContext({ children }) {
 
   const [state, dispatch] = useReducer(reducerFunction, {
     products: [],
-    cart: {},
+    cart: [],
     wishlist: [],
   });
 

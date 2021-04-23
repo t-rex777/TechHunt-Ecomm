@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useCart } from "../../cart-context/CartContext";
 import { getProducts } from "./helper";
 import Nav from "./../Nav";
-import Card from "./Card";
+import ProductCard from "./ProductCard";
 
 function Product() {
   const { dispatch, state } = useCart();
@@ -19,7 +19,7 @@ function Product() {
       <div className="products">
         {products.map((item) => {
           return (
-            <Card
+            <ProductCard
               key={item._id}
               item={item}
               title={item.name}

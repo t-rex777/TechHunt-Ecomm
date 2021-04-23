@@ -30,8 +30,9 @@ const Nav = () => {
           <Link to="/cart">
             <li className="nav-item  ml-3">
               <AiOutlineShoppingCart />
+              
             </li>
-          </Link>
+          </Link><p className="badge-circle-s danger"> 10</p>
           <Link to="">
             <li className="nav-item ml-3 mr-3">
               <AiOutlineSearch />

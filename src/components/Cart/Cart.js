@@ -3,7 +3,7 @@ import { useCart } from "../../cart-context/CartContext";
 import Nav from "../Nav";
 import { useEffect } from "react";
 import { getCartItems } from "./helper";
-import Card from "./Card";
+import CartCard from "./CartCard";
 
 function Cart() {
   const { state, dispatch } = useCart();
@@ -16,14 +16,13 @@ function Cart() {
         .catch((err) => console.log(err));
     })();
   }, []);
-  console.log(cart.cartItems);
   return (
     <>
       <Nav />
-      {/* <div className="products">
-        {cart.cartItems.map((item) => {
+      <div className="products">
+        {cart.map((item) => {
           return (
-            <Card
+            <CartCard
               key={item._id}
               item={item}
               title={item.name}
@@ -33,7 +32,7 @@ function Cart() {
             />
           );
         })}
-      </div> */}
+      </div>
     </>
   );
 }

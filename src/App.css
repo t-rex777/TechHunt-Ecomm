@@ -38,7 +38,7 @@ body {
   max-height: 250px;
   height: auto;
   width: auto;
-  max-width: 200px;
+  max-width: 200zpx;
   border: none;
 }
 .card-header {
@@ -86,4 +86,13 @@ body {
   color: white;
   border: solid 1px red;
   opacity: 0.8;
+}
+
+.badge-circle-s{
+  font-size: 15px;
+  height: fit-content;
+  text-decoration: none;
+  position: relative;
+  top:15px;
+  left: -10px;
 }
