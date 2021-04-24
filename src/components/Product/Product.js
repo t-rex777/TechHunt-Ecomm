@@ -1,18 +1,12 @@
 import React from "react";
-import { useEffect } from "react";
 import { useCart } from "../../cart-context/CartContext";
-import { getProducts } from "./helper";
 import Nav from "./../Nav";
 import ProductCard from "./ProductCard";
 
 function Product() {
-  const { dispatch, state } = useCart();
+  const { state } = useCart();
   const { products } = state;
-  useEffect(() => {
-    getProducts().then((data) => {
-      dispatch({ type: "PRODUCT", payload: data });
-    });
-  }, []);
+
   return (
     <>
       <Nav />

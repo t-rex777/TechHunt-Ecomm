@@ -2,6 +2,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { useCart } from "../../cart-context/CartContext";
 import { addWishlistItem } from "../Wishlist/helper";
 import { deleteCartItem, getCartItems, updateCartItem } from "./helper";
+import { getWishlistItems } from './../Wishlist/helper';
 
 const CartCard = ({ title, img, price, item, quantity }) => {
   const { dispatch } = useCart();
@@ -51,14 +52,17 @@ const CartCard = ({ title, img, price, item, quantity }) => {
     await addWishlistItem(wishlistItem)
       .then((data) => console.log("item added successfully!", data))
       .catch((err) => console.log(err));
+      await getWishlistItems()
+      .then((data) => dispatch({ type: "WISHLIST", payload: data }))
+      .catch((err) => console.log(err));
   };
   return (
     <div>
-      <div className="card">
+      <div className="card" style={{height:"470px"}}>
         <img className="card-image" src={img} alt="oneplus" />
         <h1 className="card-header">{title}</h1>
-        <p className="card-body">{price}</p>
-        <div className="quant-btn">
+        <p className="card-body">₹ {price}</p>
+        <div className="quant-btn mt-1">
           <button onClick={increaseItem}>+</button>
           <p>Quantity : {quantity}</p>
           <button onClick={decreaseItem}>-</button>

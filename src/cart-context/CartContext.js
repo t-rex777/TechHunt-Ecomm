@@ -1,4 +1,7 @@
-import React, { createContext, useContext, useReducer } from "react";
+import React, { useEffect, createContext, useContext, useReducer } from "react";
+import { getProducts } from "../components/Product/helper";
+import { getCartItems } from "./../components/Cart/helper";
+import { getWishlistItems } from "./../components/Wishlist/helper";
 
 const cartProvider = createContext();
 export function CartContext({ children }) {
@@ -20,6 +23,24 @@ export function CartContext({ children }) {
     cart: [],
     wishlist: [],
   });
+
+  useEffect(() => {
+    (async () => {
+      await getProducts()
+        .then((data) => dispatch({ type: "PRODUCT", payload: data }))
+        .catch((err) => console.log(err));
+    })();
+    (async () => {
+      await getCartItems()
+        .then((data) => dispatch({ type: "CART", payload: data }))
+        .catch((err) => console.log(err));
+    })();
+    (async () => {
+      await getWishlistItems()
+        .then((data) => dispatch({ type: "WISHLIST", payload: data }))
+        .catch((err) => console.log(err));
+    })();
+  }, []);
 
   return (
     <cartProvider.Provider value={{ state, dispatch }}>

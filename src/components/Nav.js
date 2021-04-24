@@ -6,8 +6,10 @@ import {
 } from "react-icons/ai";
 
 import { Link } from "react-router-dom";
+import { useCart } from "../cart-context/CartContext";
 
 const Nav = () => {
+  const {state} = useCart();
   return (
     <div>
       <nav className="nav dark text-white">
@@ -27,12 +29,13 @@ const Nav = () => {
               <AiTwotoneHeart />
             </li>
           </Link>
+          <p className="badge-circle-s danger"> {state.wishlist.length}</p>
           <Link to="/cart">
             <li className="nav-item  ml-3">
               <AiOutlineShoppingCart />
-              
             </li>
-          </Link><p className="badge-circle-s danger"> 10</p>
+          </Link>
+          <p className="badge-circle-s danger">{state.cart.length}</p>
           <Link to="">
             <li className="nav-item ml-3 mr-3">
               <AiOutlineSearch />

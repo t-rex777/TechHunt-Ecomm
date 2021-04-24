@@ -1,21 +1,14 @@
 import React from "react";
 import { useCart } from "../../cart-context/CartContext";
 import Nav from "../Nav";
-import { useEffect } from "react";
-import { getCartItems } from "./helper";
+
 import CartCard from "./CartCard";
 
 function Cart() {
-  const { state, dispatch } = useCart();
+  const { state } = useCart();
   const { cart } = state;
 
-  useEffect(() => {
-    (async () => {
-      await getCartItems()
-        .then((data) => dispatch({ type: "CART", payload: data }))
-        .catch((err) => console.log(err));
-    })();
-  }, []);
+  
   return (
     <>
       <Nav />

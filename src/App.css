@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: #f3f4f6;
+  background: #d5d6da;
 }
 .nav-items {
   justify-content: flex-end;
@@ -29,24 +29,26 @@ body {
 .card {
   display: flex;
   flex-direction: column;
-  margin: 1rem 2rem;
-  height: 390px;
+  margin: 1rem 1.5rem;
+  padding: 2rem;
+  height: 410px;
   background-color: #fff;
   border: solid 2px #fff;
+  border-radius: 12px;
 }
 .card-image {
-  max-height: 250px;
-  height: auto;
-  width: auto;
-  max-width: 200zpx;
+ max-height: 200px;
   border: none;
+  object-fit:contain;
 }
 .card-header {
   margin-top: 1rem;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 .card-body {
   flex-grow: 1;
+  margin-top: 1rem;
+  font-size: 1.2rem;
 }
 
 .wishlist {
@@ -70,16 +72,20 @@ body {
 .quant-btn {
   display: flex;
   justify-content: space-around;
+  margin-bottom: 1rem;
 }
 .quant-btn > button {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
+  outline: none;
+}
+.quant-btn>p{
+  font-size: 1.2rem;
 }
 .place-btn {
-  border: solid 1px rgb(206, 197, 197);
+  border: solid 1px rgb(31, 28, 28);
   padding: 0.5rem 0.8rem;
   margin: 0.8rem 0;
-  border-radius: 10px;
 }
 .place-btn:hover {
   background-color: rgb(226, 25, 25);
@@ -88,11 +94,11 @@ body {
   opacity: 0.8;
 }
 
-.badge-circle-s{
+.badge-circle-s {
   font-size: 15px;
   height: fit-content;
   text-decoration: none;
   position: relative;
-  top:15px;
+  top: 15px;
   left: -10px;
 }

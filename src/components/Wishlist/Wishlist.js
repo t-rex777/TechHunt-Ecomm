@@ -1,22 +1,13 @@
 import React from "react";
 import { useCart } from "../../cart-context/CartContext";
 import Nav from "../Nav";
-import { useEffect } from "react";
-import { getWishlistItems } from "./helper";
 import WishlistCard from "./WishlistCard";
 
 function Wishlist() {
-  const { state, dispatch } = useCart();
+  const { state } = useCart();
   const { wishlist } = state;
 
-  useEffect(() => {
-    (async () => {
-      await getWishlistItems()
-        .then((data) => dispatch({ type: "WISHLIST", payload: data }))
-        .catch((err) => console.log(err));
-    })();
-  }, []);
-  console.log(wishlist)
+  console.log(wishlist);
   return (
     <>
       <Nav />
