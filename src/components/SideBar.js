@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useCart } from "../cart-context/CartContext";
 import { getProducts } from "./Product/helper";
 
 function SideBar() {
   const { state, dispatch } = useCart();
-  const { stock, delivery } = state;
+  const { products, stock, delivery } = state;
   const sortByPrice = (e) => {
     e.target.value === "highToLow" && dispatch({ type: "SORT_DES" });
     e.target.value === "lowToHigh" && dispatch({ type: "SORT_ASC" });
@@ -18,20 +18,11 @@ function SideBar() {
     await getProducts()
       .then((data) => dispatch({ type: "PRODUCT", payload: data }))
       .catch((err) => console.log(err));
+    dispatch({ type: "FINALPRODUCT", payload: products });
+    dispatch({ type: "FASTDELIVERY_OFF" });
+    dispatch({ type: "INSTOCK_ON" });
   };
 
-  useEffect(() => {
-    if (state.fastDelivery) {
-      const filteredProducts = state.products.filter(
-        (a) => a.delivery === "Fast delivery"
-      );
-      dispatch({ type: "PRODUCT", payload: filteredProducts });
-    } else {
-      getProducts()
-        .then((data) => dispatch({ type: "PRODUCT", payload: data }))
-        .catch((err) => console.log(err));
-    }
-  }, []);
   return (
     <form className="sidebar p-1">
       <div className="mr-4">

@@ -6,10 +6,12 @@ import { getWishlistItems } from "./../components/Wishlist/helper";
 const cartProvider = createContext();
 export function CartContext({ children }) {
   const reducerFunction = (state, action) => {
-    
     switch (action.type) {
       case "PRODUCT":
         return { ...state, products: action.payload };
+
+      case "FINALPRODUCT":
+        return { ...state, finalProducts: action.payload };
 
       case "CART":
         return { ...state, cart: action.payload };
@@ -20,7 +22,7 @@ export function CartContext({ children }) {
       case "SORT_ASC":
         return {
           ...state,
-          products: state.products.sort(
+          finalProducts: state.finalProducts.sort(
             (a, b) => parseFloat(a.price) - parseFloat(b.price)
           ),
         };
@@ -28,7 +30,7 @@ export function CartContext({ children }) {
       case "SORT_DES":
         return {
           ...state,
-          products: state.products.sort(
+          finalProducts: state.finalProducts.sort(
             (a, b) => parseFloat(b.price) - parseFloat(a.price)
           ),
         };
@@ -38,6 +40,22 @@ export function CartContext({ children }) {
           ...state,
           fastDelivery: !state.fastDelivery,
         };
+      case "FILTER_STOCK":
+        return {
+          ...state,
+          stock: !state.stock,
+        };
+      case "FASTDELIVERY":
+        return { ...state, finalProducts: action.payload };
+
+        case "FASTDELIVERY_OFF":         
+        return { ...state, fastDelivery: false };
+
+        case "INSTOCK_ON":         
+        return { ...state, stock: true };
+
+      case "INSTOCK":
+        return { ...state, finalProducts: action.payload };
       default:
         throw new Error();
     }
@@ -45,12 +63,13 @@ export function CartContext({ children }) {
 
   const [state, dispatch] = useReducer(reducerFunction, {
     products: [],
+    finalProducts: [],
     cart: [],
     wishlist: [],
     stock: true,
     fastDelivery: false,
   });
-
+  const { products, stock, fastDelivery } = state;
   useEffect(() => {
     (async () => {
       await getProducts()
@@ -68,6 +87,22 @@ export function CartContext({ children }) {
         .catch((err) => console.log(err));
     })();
   }, []);
+
+  useEffect(() => {
+    const fastDeliveryProducts = products.filter(
+      (a) => a.delivery === "Fast delivery"
+    );
+    
+    const inStockProducts = products.filter((a) => a.stock === "In stock");
+
+    if (fastDelivery) {
+      dispatch({ type: "FASTDELIVERY", payload: fastDeliveryProducts });
+    } else if (!stock) {
+      dispatch({ type: "INSTOCK", payload: inStockProducts });
+    } else {
+      dispatch({ type: "FINALPRODUCT", payload: products });
+    }
+  }, [products, fastDelivery, stock]);
 
   return (
     <cartProvider.Provider value={{ state, dispatch }}>
