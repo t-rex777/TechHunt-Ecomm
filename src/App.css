@@ -24,22 +24,23 @@ body {
 
 .products {
   display: flex;
+  justify-content: space-evenly;
   flex-wrap: wrap;
 }
 .card {
   display: flex;
   flex-direction: column;
   margin: 1rem 1.5rem;
-  padding: 2rem;
+  padding: 1.5rem;
   height: 410px;
   background-color: #fff;
   border: solid 2px #fff;
   border-radius: 12px;
 }
 .card-image {
- max-height: 200px;
+  max-height: 200px;
   border: none;
-  object-fit:contain;
+  object-fit: contain;
 }
 .card-header {
   margin-top: 1rem;
@@ -79,7 +80,7 @@ body {
   height: 30px;
   outline: none;
 }
-.quant-btn>p{
+.quant-btn > p {
   font-size: 1.2rem;
 }
 .place-btn {
@@ -103,10 +104,27 @@ body {
   left: -10px;
 }
 
-.sidebar{
- background-color: #fff;
- display: flex;
- justify-content: flex-end;
- border-radius: 0 0 15px 0;
+.sidebar {
+  background-color: #fff;
+  display: flex;
+  justify-content: flex-end;
+  border-radius: 0 0 15px 0;
 }
+.clear-btn {
+  height: 40px;
+  align-self: flex-end;
+  font-size: 1rem;
+}
+@media screen and (max-width: 768px) {
+  .sidebar > div > h1 {
+    font-size: 0.9rem;
+  }
+  .sidebar > div > label {
+    font-size: 0.7rem;
+  }
+  .clear-btn {
+    height: 25px;
+    font-size: 0.5rem;
+  }
 
+}
