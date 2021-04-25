@@ -6,9 +6,8 @@ import { getWishlistItems } from "./../components/Wishlist/helper";
 const cartProvider = createContext();
 export function CartContext({ children }) {
   const reducerFunction = (state, action) => {
-
+    
     switch (action.type) {
-
       case "PRODUCT":
         return { ...state, products: action.payload };
 
@@ -34,6 +33,11 @@ export function CartContext({ children }) {
           ),
         };
 
+      case "FILTER_DELIVERY":
+        return {
+          ...state,
+          fastDelivery: !state.fastDelivery,
+        };
       default:
         throw new Error();
     }
@@ -43,8 +47,8 @@ export function CartContext({ children }) {
     products: [],
     cart: [],
     wishlist: [],
-    stock : "true",
-    delivery : ""
+    stock: true,
+    fastDelivery: false,
   });
 
   useEffect(() => {

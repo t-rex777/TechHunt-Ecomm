@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useCart } from "../cart-context/CartContext";
 import { getProducts } from "./Product/helper";
 
 function SideBar() {
   const { state, dispatch } = useCart();
- const {stock,delivery} = state;
+  const { stock, delivery } = state;
   const sortByPrice = (e) => {
     e.target.value === "highToLow" && dispatch({ type: "SORT_DES" });
     e.target.value === "lowToHigh" && dispatch({ type: "SORT_ASC" });
@@ -20,6 +20,18 @@ function SideBar() {
       .catch((err) => console.log(err));
   };
 
+  useEffect(() => {
+    if (state.fastDelivery) {
+      const filteredProducts = state.products.filter(
+        (a) => a.delivery === "Fast delivery"
+      );
+      dispatch({ type: "PRODUCT", payload: filteredProducts });
+    } else {
+      getProducts()
+        .then((data) => dispatch({ type: "PRODUCT", payload: data }))
+        .catch((err) => console.log(err));
+    }
+  }, []);
   return (
     <form className="sidebar p-1">
       <div className="mr-4">
@@ -52,7 +64,7 @@ function SideBar() {
           type="checkbox"
           id="outOfStock"
           value="outOfStock"
-          onClick={filterProducts}
+          onChange={filterProducts}
           checked={stock}
         />
         <label htmlFor="outOfStock" className="text-md ml-1">
@@ -63,7 +75,7 @@ function SideBar() {
           type="checkbox"
           id="fastDelivery"
           value="fastDelivery"
-          onClick={filterProducts}
+          onChange={filterProducts}
           checked={delivery}
         />
         <label htmlFor="fastDelivery" className="text-md ml-1">
