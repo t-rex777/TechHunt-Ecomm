@@ -2,6 +2,7 @@ import React from "react";
 import { useCart } from "../../cart-context/CartContext";
 import Nav from "./../Nav";
 import ProductCard from "./ProductCard";
+import SideBar from "./../SideBar";
 
 function Product() {
   const { state } = useCart();
@@ -10,6 +11,7 @@ function Product() {
   return (
     <>
       <Nav />
+      <SideBar/>
       <div className="products">
         {products.map((item) => {
           return (

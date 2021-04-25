@@ -6,13 +6,34 @@ import { getWishlistItems } from "./../components/Wishlist/helper";
 const cartProvider = createContext();
 export function CartContext({ children }) {
   const reducerFunction = (state, action) => {
+
     switch (action.type) {
+
       case "PRODUCT":
         return { ...state, products: action.payload };
+
       case "CART":
         return { ...state, cart: action.payload };
+
       case "WISHLIST":
         return { ...state, wishlist: action.payload };
+
+      case "SORT_ASC":
+        return {
+          ...state,
+          products: state.products.sort(
+            (a, b) => parseFloat(a.price) - parseFloat(b.price)
+          ),
+        };
+
+      case "SORT_DES":
+        return {
+          ...state,
+          products: state.products.sort(
+            (a, b) => parseFloat(b.price) - parseFloat(a.price)
+          ),
+        };
+
       default:
         throw new Error();
     }
@@ -22,6 +43,8 @@ export function CartContext({ children }) {
     products: [],
     cart: [],
     wishlist: [],
+    stock : "true",
+    delivery : ""
   });
 
   useEffect(() => {
