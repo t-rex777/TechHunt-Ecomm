@@ -150,10 +150,10 @@ body {
 
 @media screen and (max-width: 768px) {
   .sidebar > div > h1 {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
   .sidebar > div > label {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
   }
   .clear-btn {
     height: 25px;
