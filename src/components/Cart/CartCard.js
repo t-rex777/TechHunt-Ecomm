@@ -69,7 +69,7 @@ const CartCard = ({ title, img, price, item, quantity }) => {
         </div>
         <span
           className="content-center place-btn"
-          onClick={addProductToWishlist}
+          onClick={addProductToWishlist} 
         >
           <p>Add to wishlist</p>
         </span>

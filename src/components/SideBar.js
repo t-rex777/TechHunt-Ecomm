@@ -74,8 +74,7 @@ function SideBar() {
         </label>
       </div>
       <button
-        className="btn btn-secondary"
-        style={{ height: "40px", fontSize: "1rem", alignSelf: "flex-end" }}
+        className="btn btn-secondary clear-btn"
         type="reset"
         onClick={clearAll}
       >

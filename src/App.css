@@ -30,7 +30,8 @@ body {
 .card {
   display: flex;
   flex-direction: column;
-  margin: 1rem 1.5rem;
+  width: 300px;
+  margin:10px 5px;
   padding: 1.5rem;
   height: 410px;
   background-color: #fff;
@@ -38,7 +39,7 @@ body {
   border-radius: 12px;
 }
 .card-image {
-  max-height: 200px;
+  max-height: 220px;
   border: none;
   object-fit: contain;
 }
@@ -115,6 +116,35 @@ body {
   align-self: flex-end;
   font-size: 1rem;
 }
+.hamBurger {
+  display: none;
+}
+.dropdown {
+  display: block;
+}
+.stacked-list {
+  display: none;
+  margin: 0 auto;
+}
+.stacked-list-item {
+  color: white;
+
+  background-color: #140a22;
+  border-bottom: solid 1px #2f0c61;
+}
+.stacked-list-item > h3 {
+  text-decoration: underline #140a22;
+  font-weight: 400;
+}
+
+.stacked-list-item:hover {
+  color: #fbbf24;
+  background-color: #220f3b;
+}
+.stacked-list-item > h3:hover {
+  text-decoration: underline #220f3b;
+}
+
 @media screen and (max-width: 768px) {
   .sidebar > div > h1 {
     font-size: 0.9rem;
@@ -127,4 +157,13 @@ body {
     font-size: 0.5rem;
   }
 
+  .hamBurger {
+    display: block;
+  }
+  .dropdown {
+    display: none;
+  }
+  .stacked-list {
+    display: block;
+  }
 }
