@@ -31,29 +31,32 @@ body {
   display: flex;
   flex-direction: column;
   width: 300px;
-  margin:10px 5px;
+  margin: 10px 5px;
   padding: 1.5rem;
-  height: 410px;
+  height: 320px;
   background-color: #fff;
   border: solid 2px #fff;
   border-radius: 12px;
 }
 .card-image {
-  max-height: 220px;
+  max-height: 200px;
   border: none;
   object-fit: contain;
 }
 .card-header {
-  margin-top: 1rem;
-  font-size: 1.5rem;
+  /* margin-top: 1rem; */
+  font-size: 1.3rem;
 }
 .card-body {
   flex-grow: 1;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   font-size: 1.2rem;
 }
-
+.btn-secondary {
+  font-size: 1rem;
+}
 .wishlist {
+  margin-top: -20px;
   display: flex;
   justify-content: flex-end;
   font-size: 2rem;
@@ -155,6 +158,9 @@ body {
   .clear-btn {
     height: 25px;
     font-size: 0.5rem;
+  }
+  .card {
+    width: 250px;
   }
 
   .hamBurger {
