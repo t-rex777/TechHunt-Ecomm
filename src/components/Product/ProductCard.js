@@ -4,8 +4,9 @@ import { addCartItem } from "../Cart/helper";
 import { addWishlistItem } from "../Wishlist/helper";
 import { getWishlistItems } from "./../Wishlist/helper";
 import { getCartItems } from "./../Cart/helper";
+import { useEffect } from "react";
 const ProductCard = ({ title, img, price, item, quantity }) => {
-  const { dispatch } = useCart();
+  const { state, dispatch } = useCart();
   const addProductToCart = async () => {
     let { _id, __v, ...cartItem } = item;
     cartItem = JSON.stringify(cartItem);

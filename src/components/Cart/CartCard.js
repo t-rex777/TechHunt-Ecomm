@@ -2,7 +2,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { useCart } from "../../cart-context/CartContext";
 import { addWishlistItem } from "../Wishlist/helper";
 import { deleteCartItem, getCartItems, updateCartItem } from "./helper";
-import { getWishlistItems } from './../Wishlist/helper';
+import { getWishlistItems } from "./../Wishlist/helper";
 
 const CartCard = ({ title, img, price, item, quantity }) => {
   const { dispatch } = useCart();
@@ -52,30 +52,49 @@ const CartCard = ({ title, img, price, item, quantity }) => {
     await addWishlistItem(wishlistItem)
       .then((data) => console.log("item added successfully!", data))
       .catch((err) => console.log(err));
-      await getWishlistItems()
+    await getWishlistItems()
       .then((data) => dispatch({ type: "WISHLIST", payload: data }))
       .catch((err) => console.log(err));
   };
   return (
     <div>
-      <div className="card" style={{height:"470px"}}>
-        <img className="card-image" src={img} alt="oneplus" />
-        <h1 className="card-header">{title}</h1>
-        <p className="card-body">₹ {price}</p>
-        <div className="quant-btn mt-1">
-          <button onClick={increaseItem}>+</button>
-          <p>Quantity : {quantity}</p>
-          <button onClick={decreaseItem}>-</button>
+      <div className="cart-card">
+        <img
+          className="card-image mr-2"
+          src={img}
+          alt="oneplus"
+          style={{ width: "150px", height:"250px" }}
+        />
+        <div className="card-main ">
+          <div className="card-main-info mr-1">
+            <h1 className="card-header">{title}</h1>
+            <p className="card-body">₹ {price}</p>
+            <div className="quant-btn">
+              <button onClick={increaseItem}>+</button>
+              <p>{quantity}</p>
+              <button onClick={decreaseItem}>-</button>
+            </div>
+          </div>
+
+          <span
+            className="content-center place-btn mr-2"
+            onClick={addProductToWishlist}
+            style={{
+              height: "fit-content",
+              marginTop: "0px",
+              alignSelf: "flex-end",
+            }}
+          >
+            <p>Add to wishlist</p>
+          </span>
+          <span
+            className="content-center remove-btn mb-1"
+            onClick={deleteItem}
+            style={{alignSelf: "flex-end" }}
+          >
+            <AiFillDelete />
+          </span>
         </div>
-        <span
-          className="content-center place-btn"
-          onClick={addProductToWishlist} 
-        >
-          <p>Add to wishlist</p>
-        </span>
-        <span className="content-center remove-btn" onClick={deleteItem}>
-          <AiFillDelete />
-        </span>
       </div>
     </div>
   );

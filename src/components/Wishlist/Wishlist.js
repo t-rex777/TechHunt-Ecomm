@@ -2,6 +2,7 @@ import React from "react";
 import { useCart } from "../../cart-context/CartContext";
 import Nav from "../Nav";
 import WishlistCard from "./WishlistCard";
+import emptyWishlist from "../../images/emptywishlist.svg"
 
 function Wishlist() {
   const { state } = useCart();
@@ -11,7 +12,9 @@ function Wishlist() {
   return (
     <>
       <Nav />
-      <div className="products">
+      <h1 className="text-l text-center mb-4">Wishlist</h1>
+      {wishlist.length !== 0 ? (
+        <div className="products">
         {wishlist.map((item) => {
           return (
             <WishlistCard
@@ -25,6 +28,13 @@ function Wishlist() {
           );
         })}
       </div>
+      ) : (
+        <div className="empty-img mt-4">
+          <img className="responsive" src={emptyWishlist}  alt="emptywishlist" />
+          <h1 className="mt-4">You can wish more ...</h1>
+        </div>
+      )}
+      
     </>
   );
 }

@@ -12,10 +12,10 @@ import { useCart } from "../cart-context/CartContext";
 
 const Nav = () => {
   const { state } = useCart();
-  const [toggle,setToggle] = useState(false);
+  const [toggle, setToggle] = useState(false);
   const toggleChange = (e) => {
-    setToggle(!toggle)
-  }
+    setToggle(!toggle);
+  };
   return (
     <div>
       <nav className="nav dark text-white">
@@ -50,49 +50,47 @@ const Nav = () => {
               <AiOutlineSearch />
             </li>
           </Link>
-        
-            <li className="nav-item ml-3 mr-3 hamBurger" onClick={toggleChange}>
-              <GiHamburgerMenu />
-            </li>
-       
+
+          <li className="nav-item ml-3 mr-3 hamBurger" onClick={toggleChange}>
+            <GiHamburgerMenu />
+          </li>
         </ul>
       </nav>
       {toggle && (
         <ul className="stacked-list">
-        <Link to="/">
-          <li className="stacked-list-item">
-            <h3>
-              <AiFillHome /> Home
-            </h3>
-          </li>
-        </Link>
+          <Link to="/">
+            <li className="stacked-list-item">
+              <h3>
+                <AiFillHome /> Home
+              </h3>
+            </li>
+          </Link>
 
-        <Link to="/wishlist">
-          <li className="stacked-list-item">
-            <h3>
-              <AiTwotoneHeart /> Wishlist
-            </h3>
-          </li>
-        </Link>
+          <Link to="/wishlist">
+            <li className="stacked-list-item">
+              <h3>
+                <AiTwotoneHeart /> Wishlist
+              </h3>
+            </li>
+          </Link>
 
-        <Link to="/cart">
-          <li className="stacked-list-item">
-            <h3>
-              <AiOutlineShoppingCart /> Cart
-            </h3>
-          </li>
-        </Link>
-
-        <Link to="/search">
-          <li className="stacked-list-item">
-            <h3>
-              <AiOutlineSearch /> Search
-            </h3>
-          </li>
-        </Link>
-      </ul>
+          <Link to="/cart">
+            <li className="stacked-list-item">
+              <h3>
+                <AiOutlineShoppingCart /> Cart
+              </h3>
+            </li>
+          </Link>
+          
+          <Link to="/search">
+            <li className="stacked-list-item">
+              <h3>
+                <AiOutlineSearch /> Search
+              </h3>
+            </li>
+          </Link>
+        </ul>
       )}
-      
     </div>
   );
 };

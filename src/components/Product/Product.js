@@ -7,7 +7,6 @@ import SideBar from "./../SideBar";
 function Product() {
   const { state } = useCart();
   const {finalProducts} = state;
-  
   return (
     <>
       <Nav />

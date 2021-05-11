@@ -48,14 +48,24 @@ export function CartContext({ children }) {
       case "FASTDELIVERY":
         return { ...state, finalProducts: action.payload };
 
-        case "FASTDELIVERY_OFF":         
+      case "FASTDELIVERY_OFF":
         return { ...state, fastDelivery: false };
 
-        case "INSTOCK_ON":         
+      case "INSTOCK_ON":
         return { ...state, stock: true };
 
       case "INSTOCK":
         return { ...state, finalProducts: action.payload };
+      case "PRICE_DETAILS":
+        return {
+          ...state,
+          priceDetails: {
+            price: action.payload.initialPrice,
+            deliveryCharges: action.payload.isFastDelivery * 100,
+            discount: Math.floor(action.payload.initialPrice * 0.1),
+            totalAmount: action.payload.finalPrice,
+          },
+        };
       default:
         throw new Error();
     }
@@ -65,6 +75,12 @@ export function CartContext({ children }) {
     products: [],
     finalProducts: [],
     cart: [],
+    priceDetails: {
+      price: 0,
+      discount: 0,
+      deliveryCharges: 0,
+      totalAmount: 0,
+    },
     wishlist: [],
     stock: true,
     fastDelivery: false,
@@ -92,7 +108,7 @@ export function CartContext({ children }) {
     const fastDeliveryProducts = products.filter(
       (a) => a.delivery === "Fast delivery"
     );
-    
+
     const inStockProducts = products.filter((a) => a.stock === "In stock");
 
     if (fastDelivery) {
@@ -103,6 +119,21 @@ export function CartContext({ children }) {
       dispatch({ type: "FINALPRODUCT", payload: products });
     }
   }, [products, fastDelivery, stock]);
+
+  useEffect(() => {
+    let initialPrice = 0;
+    let isFastDelivery = 0;
+    state.cart.forEach((item) => {
+      initialPrice += item.price*item.quantity;
+      item.delivery === "Fast delivery" && (isFastDelivery += 1);
+    });
+    console.log(initialPrice, isFastDelivery);
+    let finalPrice = initialPrice + isFastDelivery * 100 - Math.floor(initialPrice * 0.1);
+    dispatch({
+      type: "PRICE_DETAILS",
+      payload: { initialPrice, isFastDelivery, finalPrice },
+    });
+  }, [state.cart]);
 
   return (
     <cartProvider.Provider value={{ state, dispatch }}>
