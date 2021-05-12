@@ -2,10 +2,11 @@ import { AiTwotoneHeart } from "react-icons/ai";
 import { RiTruckFill } from "react-icons/ri";
 import { useCart } from "../../cart-context/CartContext";
 import { addCartItem } from "../Cart/helper";
-import { addWishlistItem } from "../Wishlist/helper";
+import { addWishlistItem, deleteWishlistItem } from "../Wishlist/helper";
 import { getWishlistItems } from "./../Wishlist/helper";
 import { getCartItems } from "./../Cart/helper";
-const ProductCard = ({ title, img, price, item }) => {
+import { Link } from "react-router-dom";
+const ProductCard = ({ title, img, price, item, isInCart, isInWishlist }) => {
   const { dispatch } = useCart();
   const addProductToCart = async () => {
     let { _id, __v, ...cartItem } = item;
@@ -31,12 +32,50 @@ const ProductCard = ({ title, img, price, item }) => {
       .then((data) => dispatch({ type: "WISHLIST", payload: data }))
       .catch((err) => console.log(err));
   };
+
+  const deleteProductFromWishlist = async () => {
+    await deleteWishlistItem(isInWishlist)
+      .then(async (data) => {
+        console.log("item deleted successfully!", data);
+        await getWishlistItems()
+          .then((data) => dispatch({ type: "WISHLIST", payload: data }))
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
+   await console.log(isInWishlist)
+  };
+
+  const cartButton = () => {
+    if (isInCart === undefined) {
+      return (
+        <button className="card-btn btn-secondary" onClick={addProductToCart}>
+          Add to cart
+        </button>
+      );
+    }
+    return (
+      <Link to="/cart">
+        <button className="card-btn btn-secondary">Go to cart</button>
+      </Link>
+    );
+  };
   return (
     <div>
       <div className="card">
-        <span className="wishlist" onClick={addProductToWishlist}>
-          <AiTwotoneHeart />
-        </span>
+        {isInWishlist === undefined ? (
+          <span className="wishlist" onClick={addProductToWishlist}>
+            <AiTwotoneHeart />
+          </span>
+        ) : (
+          <span
+            className="wishlist"
+            onClick={deleteProductFromWishlist}
+            style={{ color: "red" }}
+          >
+            <AiTwotoneHeart />
+          </span>
+        )}
+
         <img className="card-image" src={img} alt="oneplus" />
         <h1 className="card-header">{title}</h1>
         <p className="card-body">₹ {price}</p>
@@ -51,9 +90,7 @@ const ProductCard = ({ title, img, price, item }) => {
           <RiTruckFill />
         </p>
         {item.stock === "In stock" ? (
-          <button className="card-btn btn-secondary" onClick={addProductToCart}>
-            Add to cart
-          </button>
+          cartButton()
         ) : (
           <button className="card-btn" disabled>
             Add to cart

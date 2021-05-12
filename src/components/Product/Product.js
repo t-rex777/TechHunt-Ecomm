@@ -6,13 +6,28 @@ import SideBar from "./../SideBar";
 
 function Product() {
   const { state } = useCart();
-  const {finalProducts} = state;
+  const { finalProducts } = state;
+  const isInCart = (productName) =>
+    state.cart.find((cartItem) => cartItem.name === productName);
+
+  const isInWishlist = (productName) =>{
+    let wishlistId;
+    state.wishlist.find((cartItem) => {
+      if(cartItem.name === productName){
+        wishlistId = cartItem._id;
+      }
+      return undefined;
+    });
+    return wishlistId;
+  }
+    
   return (
     <>
       <Nav />
       <SideBar />
       <div className="products">
         {finalProducts.map((item) => {
+          isInCart(item.name);
           return (
             <ProductCard
               key={item._id}
@@ -21,6 +36,8 @@ function Product() {
               img={item.img}
               price={item.price}
               quantity={item.quantity}
+              isInCart={isInCart(item.name)}
+              isInWishlist={isInWishlist(item.name)}
             />
           );
         })}
