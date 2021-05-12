@@ -1,12 +1,12 @@
 import { AiTwotoneHeart } from "react-icons/ai";
+import { RiTruckFill } from "react-icons/ri";
 import { useCart } from "../../cart-context/CartContext";
 import { addCartItem } from "../Cart/helper";
 import { addWishlistItem } from "../Wishlist/helper";
 import { getWishlistItems } from "./../Wishlist/helper";
 import { getCartItems } from "./../Cart/helper";
-import { useEffect } from "react";
-const ProductCard = ({ title, img, price, item, quantity }) => {
-  const { state, dispatch } = useCart();
+const ProductCard = ({ title, img, price, item }) => {
+  const { dispatch } = useCart();
   const addProductToCart = async () => {
     let { _id, __v, ...cartItem } = item;
     cartItem = JSON.stringify(cartItem);
@@ -26,7 +26,7 @@ const ProductCard = ({ title, img, price, item, quantity }) => {
     await addWishlistItem(wishlistItem)
       .then((data) => console.log("item added successfully!", data))
       .catch((err) => console.log(err));
-      
+
     await getWishlistItems()
       .then((data) => dispatch({ type: "WISHLIST", payload: data }))
       .catch((err) => console.log(err));
@@ -40,9 +40,25 @@ const ProductCard = ({ title, img, price, item, quantity }) => {
         <img className="card-image" src={img} alt="oneplus" />
         <h1 className="card-header">{title}</h1>
         <p className="card-body">₹ {price}</p>
-        <button className="card-btn btn-secondary" onClick={addProductToCart}>
-          Add to cart
-        </button>
+        {item.stock === "In stock" ? (
+          <p className="card-body text-success">{item.stock}</p>
+        ) : (
+          <p className="card-body text-gray">{item.stock}</p>
+        )}
+
+        <p className="card-body">
+          {item.delivery}
+          <RiTruckFill />
+        </p>
+        {item.stock === "In stock" ? (
+          <button className="card-btn btn-secondary" onClick={addProductToCart}>
+            Add to cart
+          </button>
+        ) : (
+          <button className="card-btn" disabled>
+            Add to cart
+          </button>
+        )}
       </div>
     </div>
   );

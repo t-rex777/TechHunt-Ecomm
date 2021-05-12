@@ -127,7 +127,6 @@ export function CartContext({ children }) {
       initialPrice += item.price*item.quantity;
       item.delivery === "Fast delivery" && (isFastDelivery += 1);
     });
-    console.log(initialPrice, isFastDelivery);
     let finalPrice = initialPrice + isFastDelivery * 100 - Math.floor(initialPrice * 0.1);
     dispatch({
       type: "PRICE_DETAILS",

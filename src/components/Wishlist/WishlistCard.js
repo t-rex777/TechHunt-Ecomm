@@ -65,19 +65,19 @@ const WishlistCard = ({ title, img, price, item, quantity }) => {
 
   return (
     <div>
-      <div className="card" style={{ height: "470px" }}>
+      <div className="card" style={{ height: "400px" }}>
         <img className="card-image" src={img} alt="oneplus" />
-        <h1 className="card-header">{title}</h1>
-        <p className="card-body">₹ {price}</p>
-        <div className="quant-btn mt-1">
+        <h1 className="card-header mt-1 text-center">{title}</h1>
+        <p className="card-body text-center">₹ {price}</p>
+        <div className="quant-btn content-center">
           <button onClick={increaseItem}>+</button>
           <p>{quantity}</p>
           <button onClick={decreaseItem}>-</button>
         </div>
-        <span className="content-center place-btn" onClick={addProductToCart}>
+        <span className=" place-btn" onClick={addProductToCart} style={{alignSelf:"center"}}>
           <p>Add to cart</p>
         </span>
-        <span className="content-center remove-btn" onClick={deleteItem}>
+        <span className="remove-btn" onClick={deleteItem} style={{alignSelf:"center"}}>
           <AiFillDelete />
         </span>
       </div>

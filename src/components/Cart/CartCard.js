@@ -1,4 +1,5 @@
 import { AiFillDelete } from "react-icons/ai";
+import { RiTruckFill } from "react-icons/ri";
 import { useCart } from "../../cart-context/CartContext";
 import { addWishlistItem } from "../Wishlist/helper";
 import { deleteCartItem, getCartItems, updateCartItem } from "./helper";
@@ -14,7 +15,6 @@ const CartCard = ({ title, img, price, item, quantity }) => {
         await getCartItems()
           .then((data) => {
             dispatch({ type: "CART", payload: data });
-            console.log(data);
           })
           .catch((err) => console.log(err));
       })
@@ -69,6 +69,7 @@ const CartCard = ({ title, img, price, item, quantity }) => {
           <div className="card-main-info mr-1">
             <h1 className="card-header">{title}</h1>
             <p className="card-body">₹ {price}</p>
+            <p className="card-body mt-1">{item.delivery} <RiTruckFill/></p>
             <div className="quant-btn">
               <button onClick={increaseItem}>+</button>
               <p>{quantity}</p>

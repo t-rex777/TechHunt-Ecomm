@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useCart } from "../../cart-context/CartContext";
 import Nav from "../Nav";
 import CartCard from "./CartCard";
@@ -11,7 +11,6 @@ function Cart() {
   
   return (
     <>
-    {console.log(cart)}
       <Nav />
       <h1 className="text-center text-xl">Cart</h1>
       {cart.length !== 0 ? (
