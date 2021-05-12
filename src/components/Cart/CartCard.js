@@ -86,6 +86,7 @@ const CartCard = ({ title, img, price, item, quantity }) => {
           <span
             className="content-center remove-btn mb-1 ml-2"
             onClick={deleteItem}
+            style={{fontSize:"2.5rem"}}
           >
             <AiFillDelete />
           </span>

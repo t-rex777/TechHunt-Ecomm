@@ -171,6 +171,17 @@ body {
 .dropdown {
   display: block;
 }
+.mobile-icon{
+  position: relative;
+}
+.mobile-badge-nav{
+  margin-left: 1rem;
+  position: absolute;
+  background-color: red;
+  width: 40px;
+  height: 25px;
+  border-radius: 5px;
+}
 .stacked-list {
   display: none;
   margin: 0 auto;
@@ -193,7 +204,6 @@ body {
 .stacked-list-item > h3:hover {
   text-decoration: underline #220f3b;
 }
-
 .empty-img {
   display: flex;
   flex-direction: column;
@@ -205,6 +215,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 10px 2rem;
+
   }
   .place-btn {
     align-self: center;
@@ -228,9 +240,12 @@ body {
   }
   .cartpage {
     flex-direction: column;
+
   }
   .checkout {
     width: auto;
+    margin: 10px 2rem;
+
   }
   .checkout > p {
     font-size: 1rem;
