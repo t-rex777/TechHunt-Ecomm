@@ -71,7 +71,7 @@ const WishlistCard = ({ title, img, price, item, quantity }) => {
         <p className="card-body">₹ {price}</p>
         <div className="quant-btn mt-1">
           <button onClick={increaseItem}>+</button>
-          <p>Quantity : {quantity}</p>
+          <p>{quantity}</p>
           <button onClick={decreaseItem}>-</button>
         </div>
         <span className="content-center place-btn" onClick={addProductToCart}>

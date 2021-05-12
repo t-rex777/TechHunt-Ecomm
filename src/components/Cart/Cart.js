@@ -16,7 +16,7 @@ function Cart() {
       <h1 className="text-center text-xl">Cart</h1>
       {cart.length !== 0 ? (
         <div className="cartpage">
-          <div className="">
+          <div className="cartitems">
             {cart.map((item) => {
               return (
                 <CartCard
@@ -31,16 +31,21 @@ function Cart() {
             })}
           </div>
           <div className="checkout">
-            <h1>Price Details</h1>
-            <p className="mt-1 text-md p-1">Price : ₹{priceDetails.price}</p>
-            <p className="mt-1 text-md p-1">Discount : ₹{priceDetails.discount}</p>
-            <p className="mt-1 text-md p-1">
-              Delivery Charges : ₹{priceDetails.deliveryCharges}
+            <h3>Price Details</h3>
+            <hr className="line-separator"/>
+            <p className="mt-1 text-s p-1" style={{}} >Price : ₹{priceDetails.price.toLocaleString()}</p>
+            <p className="mt-1 text-s p-1 ">Discount : ₹{priceDetails.discount.toLocaleString()}</p>
+            <p className="mt-1 text-s p-1 ">
+              Delivery Charges : ₹{priceDetails.deliveryCharges.toLocaleString()}
             </p>
-            <h3 className="mt-1 text-md p-1">
-              Total Amount : ₹{priceDetails.totalAmount}
+            <h3 className="mt-1  p-1">
+              Total Amount : ₹{priceDetails.totalAmount.toLocaleString()}
             </h3>
+            <div style={{display:"flex",justifyContent:"center"}}>
+            <button className="btn btn-danger mt-1" style={{width:"100%"}}>PAY</button>
+            </div>
           </div>
+          
         </div>
       ) : (
         <div className="empty-img mt-4">

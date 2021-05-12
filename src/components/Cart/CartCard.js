@@ -79,18 +79,12 @@ const CartCard = ({ title, img, price, item, quantity }) => {
           <span
             className="content-center place-btn mr-2"
             onClick={addProductToWishlist}
-            style={{
-              height: "fit-content",
-              marginTop: "0px",
-              alignSelf: "flex-end",
-            }}
           >
             <p>Add to wishlist</p>
           </span>
           <span
-            className="content-center remove-btn mb-1"
+            className="content-center remove-btn mb-1 ml-2"
             onClick={deleteItem}
-            style={{alignSelf: "flex-end" }}
           >
             <AiFillDelete />
           </span>

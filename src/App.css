@@ -1,5 +1,5 @@
 @import url("https://glitchpop-css.herokuapp.com/library/styles.css");
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -7,8 +7,7 @@
 
 body {
   background: #d5d6da;
-  font-family: 'Raleway', sans-serif;
-  
+  font-family: "Raleway", sans-serif;
 }
 .nav-items {
   justify-content: flex-end;
@@ -39,7 +38,7 @@ body {
   border: solid 2px #fff;
   border-radius: 12px;
 }
-.cartpage{
+.cartpage {
   display: flex;
   justify-content: center;
 }
@@ -47,19 +46,19 @@ body {
   display: flex;
   margin: 10px 5px;
   padding: 1.5rem;
-  width: 70vw;
+  width: auto;
   /* justify-content: space-between; */
   /* height: 300px; */
   background-color: #fff;
   border: solid 2px #fff;
   border-radius: 12px;
 }
-.card-main{
+.card-main {
   display: flex;
   /* align-items:center ; */
   justify-content: space-between;
 }
-.card-main-info{
+.card-main-info {
   display: flex;
   flex-direction: column;
 }
@@ -95,6 +94,7 @@ body {
 }
 .remove-btn {
   font-size: 1.8rem;
+  align-self: flex-end;
 }
 .remove-btn:hover {
   color: rgb(226, 25, 25);
@@ -117,6 +117,9 @@ body {
   border-radius: 5px;
   padding: 0.5rem 0.8rem;
   margin: 0.8rem 0;
+  height: fit-content;
+  margin-top: 0px;
+  align-self: flex-end;
 }
 .place-btn:hover {
   background-color: rgb(226, 25, 25);
@@ -124,15 +127,22 @@ body {
   border: solid 1px red;
   opacity: 0.8;
 }
-
-
-.checkout{
+.line-separator {
+  border: solid 1px #d5d6da;
+  background-color: #d5d6da;
+  border-radius: 5px;
+}
+.cartitems {
+  width: 100%;
+}
+.checkout {
   height: 100%;
   width: 30vw;
   background-color: #fff;
   padding: 1.5rem;
   margin-top: 0.7rem;
   border-radius: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .badge-circle-s {
@@ -184,14 +194,48 @@ body {
   text-decoration: underline #220f3b;
 }
 
-.empty-img{
- display: flex;
- flex-direction: column;
- align-items: center; 
+.empty-img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-
 @media screen and (max-width: 768px) {
+  .cart-card {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .place-btn {
+    align-self: center;
+  }
+  .remove-btn {
+    align-self: center;
+    margin-left: -5px;
+    margin-bottom: -1rem;
+  }
+  .quant-btn {
+    margin-top: 1rem;
+  }
+  .card-main {
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .card-main-info {
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .cartpage {
+    flex-direction: column;
+  }
+  .checkout {
+    width: auto;
+  }
+  .checkout > p {
+    font-size: 1rem;
+    font-weight: 500;
+  }
   .sidebar > div > h1 {
     font-size: 1rem;
   }
