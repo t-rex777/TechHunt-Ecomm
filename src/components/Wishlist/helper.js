@@ -1,41 +1,41 @@
-import { API } from "./../../API";
-export const getWishlistItems = () => {
-  return fetch(`${API}/wishlist`, {
-    method: "GET",
-  })
-    .then((res) => res.json())
-    .catch((err) => console.log(err));
+import { techHuntAPI } from "../../utils";
+
+export const getWishlistItems = async () => {
+  try {
+    const response = await techHuntAPI.get("/wishlist");
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export const addWishlistItem = (wishlist) => {
-  return fetch(`${API}/wishlist`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    },
-    body : wishlist
-  })
-    .then((res) => res.json())
-    .catch((err) => console.log(err));
+export const addWishlistItem = async (wishlist) => {
+  try {
+    const response = await techHuntAPI.post("wishlist", {
+      ...wishlist,
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export const updateWishlistItem = (wishlistItemId,updatedValue) => {
-return fetch(`${API}/wishlist/${wishlistItemId}`,{
-  method : "POST",
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json"
-  },
-  body : updatedValue
-}).then(res=>res.json())
-.catch(err=>console.log(err))
-}
+export const updateWishlistItem = async (wishlistItemId, updatedValue) => {
+  try {
+    const response = await techHuntAPI.post(`/wishlist/${wishlistItemId}`, {
+      ...updatedValue,
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-export const deleteWishlistItem = (wishlistId) => {
-  return fetch(`${API}/wishlist/${wishlistId}`, {
-    method: "DELETE",
-  })
-    .then((res) => res.json())
-    .catch((err) => console.log(err));
+export const deleteWishlistItem = async (wishlistId) => {
+  try {
+    const response = await techHuntAPI.delete(`/wishlist/${wishlistId}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };

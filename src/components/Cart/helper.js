@@ -1,42 +1,41 @@
-import { API } from "./../../API";
-export const getCartItems = () => {
-  return fetch(`${API}/cart`, {
-    method: "GET",
-  })
-    .then((res) => res.json())
-    .catch((err) => console.log(err));
+import { techHuntAPI } from "../../utils";
+
+export const getCartItems = async () => {
+  try {
+    const response = await techHuntAPI.get("/cart");
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export const addCartItem = (cart) => {
-  return fetch(`${API}/cart`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: cart,
-  })
-    .then((res) => res.json())
-    .catch((err) => console.log(err));
+export const addCartItem = async (cart) => {
+  try {
+    const response = await techHuntAPI.post("/cart", {
+      ...cart,
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export const updateCartItem = (cartItemId, updatedValue) => {
-  return fetch(`${API}/cart/${cartItemId}`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: updatedValue,
-  })
-    .then((res) => res.json())
-    .catch((err) => console.log(err));
+export const updateCartItem = async (cartItemId, updatedValue) => {
+  try {
+    const response = await techHuntAPI.post(`/cart/${cartItemId}`, {
+      ...updatedValue,
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export const deleteCartItem = (cartId) => {
-  return fetch(`${API}/cart/${cartId}`, {
-    method: "DELETE",
-  })
-    .then((res) => res.json())
-    .catch((err) => console.log(err));
+export const deleteCartItem = async (cartId) => {
+  try {
+    const response = await techHuntAPI.delete(`cart/${cartId}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };

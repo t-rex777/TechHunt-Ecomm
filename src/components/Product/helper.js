@@ -1,9 +1,10 @@
-import { API } from './../../API';
+import { techHuntAPI } from "../../utils";
 
-export const getProducts = () => {
-  return fetch(`${API}/product`, {
-    method: "GET",
-  })
-    .then((res) => res.json())
-    .catch((err) => console.log(err));
+export const getProducts = async () => {
+  try {
+    const response = await techHuntAPI.get("/product");
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };

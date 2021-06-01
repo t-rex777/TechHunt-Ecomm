@@ -66,6 +66,7 @@ export function CartContext({ children }) {
             totalAmount: action.payload.finalPrice,
           },
         };
+        case "LOADING" : return {...state, loading:!state.loading}
       default:
         throw new Error();
     }
@@ -84,6 +85,7 @@ export function CartContext({ children }) {
     wishlist: [],
     stock: true,
     fastDelivery: false,
+    loading: false,
   });
   const { products, stock, fastDelivery } = state;
   useEffect(() => {
@@ -124,10 +126,11 @@ export function CartContext({ children }) {
     let initialPrice = 0;
     let isFastDelivery = 0;
     state.cart.forEach((item) => {
-      initialPrice += item.price*item.quantity;
+      initialPrice += item.price * item.quantity;
       item.delivery === "Fast delivery" && (isFastDelivery += 1);
     });
-    let finalPrice = initialPrice + isFastDelivery * 100 - Math.floor(initialPrice * 0.1);
+    let finalPrice =
+      initialPrice + isFastDelivery * 100 - Math.floor(initialPrice * 0.1);
     dispatch({
       type: "PRICE_DETAILS",
       payload: { initialPrice, isFastDelivery, finalPrice },
