@@ -1,23 +1,71 @@
-import './App.css';
-import Nav from './components/Nav';
-
+import React, { useEffect, useState } from "react";
+import Nav from "./components/Nav";
+import appleImg from "./images/apple.png";
+import samsungImg from "./images/samsung.png";
+import oneplusImg from "./images/oneplus.png";
 function App() {
+  const [slideCounter, setSlideCounter] = useState(0);
+  const [slideStyle, setSlideStyle] = useState({
+    slide1: { display: "flex" },
+    slide2: { display: "none" },
+    slide3: { display: "none" },
+  });
+
+  useEffect(() => {
+    if (slideCounter % 3 === 0) {
+      setSlideStyle({
+        slide1: { display: "flex" },
+        slide2: { display: "none" },
+        slide3: { display: "none" },
+      });
+    } else if (slideCounter % 3 === 1) {
+      setSlideStyle({
+        slide1: { display: "none" },
+        slide2: { display: "flex" },
+        slide3: { display: "none" },
+      });
+    } else if (slideCounter % 3 === 2) {
+      setSlideStyle({
+        slide1: { display: "none" },
+        slide2: { display: "none" },
+        slide3: { display: "flex" },
+      });
+    }
+  }, [slideCounter]);
+
   return (
-    <div className="App">
-      <Nav/>
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div>
+      <Nav />
+      <div className="banner">
+        <div className={`slide`} style={slideStyle.slide1}>
+          <img src={samsungImg} alt="" />
+        </div>
+        <div className={`slide`} style={slideStyle.slide2}>
+          <img src={appleImg} alt="" />
+        </div>
+        <div className={`slide`} style={slideStyle.slide3}>
+          <img src={oneplusImg} alt="" />
+        </div>
+        {/* <div className="slide">
+          <img src="" alt="" />
+        </div> */}
+        <div
+          className="prev"
+          onClick={() => {
+            setSlideCounter(slideCounter - 1);
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          &#10094;
+        </div>
+        <div
+          className="next"
+          onClick={() => {
+            setSlideCounter(slideCounter + 1);
+          }}
+        >
+          &#10095;
+        </div>
+      </div>
     </div>
   );
 }
