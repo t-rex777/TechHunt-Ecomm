@@ -1,1 +1,1 @@
-export const API = "https://techhuntapi.manishksahu007.repl.co/api";
+export const API = "http://localhost:4000/api";

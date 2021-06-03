@@ -36,14 +36,14 @@ const Nav = () => {
             </li>
           </Link>
           <p className="badge-circle-s danger dropdown">
-            {state.wishlist.length}
+            {/* {state.wishlist.length} */}
           </p>
           <Link to="/cart">
             <li className="nav-item  ml-3 dropdown">
               <AiOutlineShoppingCart />
             </li>
           </Link>
-          <p className="badge-circle-s danger dropdown">{state.cart.length}</p>
+          {/* <p className="badge-circle-s danger dropdown">{state.cart.length}</p> */}
           <Link to="">
             <li className="nav-item ml-3 mr-3 dropdown">
               <AiOutlineSearch />
@@ -69,7 +69,7 @@ const Nav = () => {
             <li className="stacked-list-item">
               <h3 className="mobile-icon">
                 <AiTwotoneHeart /> Wishlist
-                <span className="mobile-badge-nav">{state.wishlist.length}</span>
+                {/* <span className="mobile-badge-nav">{state.wishlist.length}</span> */}
               </h3>
             </li>
           </Link>
@@ -77,7 +77,8 @@ const Nav = () => {
           <Link to="/cart">
             <li className="stacked-list-item">
               <h3>
-                <AiOutlineShoppingCart /> Cart <span className="mobile-badge-nav">{state.cart.length}</span>
+                <AiOutlineShoppingCart /> Cart 
+                {/* <span className="mobile-badge-nav">{state.cart.length}</span> */}
               </h3>
             </li>
           </Link>

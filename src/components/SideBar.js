@@ -15,9 +15,12 @@ function SideBar() {
     e.target.value === "fastDelivery" && dispatch({ type: "FILTER_DELIVERY" });
   };
   const clearAll = async () => {
-    await getProducts()
-      .then((data) => dispatch({ type: "PRODUCT", payload: data }))
-      .catch((err) => console.log(err));
+    try {
+      const data = await getProducts();
+      dispatch({ type: "PRODUCT", payload: data })
+    } catch (error) {
+      console.log(error)
+    }
     dispatch({ type: "FINALPRODUCT", payload: products });
     dispatch({ type: "FASTDELIVERY_OFF" });
     dispatch({ type: "INSTOCK_ON" });

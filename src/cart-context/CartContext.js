@@ -7,7 +7,7 @@ const cartProvider = createContext();
 export function CartContext({ children }) {
   const reducerFunction = (state, action) => {
     switch (action.type) {
-      case "PRODUCT":
+      case "SET_PRODUCTS":
         return { ...state, products: action.payload };
 
       case "FINALPRODUCT":
@@ -66,7 +66,8 @@ export function CartContext({ children }) {
             totalAmount: action.payload.finalPrice,
           },
         };
-        case "LOADING" : return {...state, loading:!state.loading}
+      case "LOADING":
+        return { ...state, loading: !state.loading };
       default:
         throw new Error();
     }
@@ -90,52 +91,60 @@ export function CartContext({ children }) {
   const { products, stock, fastDelivery } = state;
   useEffect(() => {
     (async () => {
-      await getProducts()
-        .then((data) => dispatch({ type: "PRODUCT", payload: data }))
-        .catch((err) => console.log(err));
+      try {
+        const data = await getProducts();
+        console.log(data);
+        dispatch({ type: "SET_PRODUCTS", payload: data });
+      } catch (error) {
+        console.log(error);
+      }
     })();
     (async () => {
-      await getCartItems()
-        .then((data) => dispatch({ type: "CART", payload: data }))
-        .catch((err) => console.log(err));
+      try {
+        const data = await getCartItems();
+        dispatch({ type: "CART", payload: data });
+      } catch (error) {
+        console.log(error);
+      }
     })();
     (async () => {
-      await getWishlistItems()
-        .then((data) => dispatch({ type: "WISHLIST", payload: data }))
-        .catch((err) => console.log(err));
+      try {
+        const data = await getWishlistItems();
+        dispatch({ type: "WISHLIST", payload: data });
+      } catch (error) {
+        console.log(error);
+      }
     })();
   }, []);
 
-  useEffect(() => {
-    const fastDeliveryProducts = products.filter(
-      (a) => a.delivery === "Fast delivery"
-    );
+  // useEffect(() => {
+  //   const fastDeliveryProducts = products.filter(
+  //     (a) => a.delivery === "Fast delivery"
+  //   );
+  //   const inStockProducts = products.filter((a) => a.stock === "In stock");
+  //   if (fastDelivery) {
+  //     dispatch({ type: "FASTDELIVERY", payload: fastDeliveryProducts });
+  //   } else if (!stock) {
+  //     dispatch({ type: "INSTOCK", payload: inStockProducts });
+  //   } else {
+  //     dispatch({ type: "FINALPRODUCT", payload: products });
+  //   }
+  // }, [products, fastDelivery, stock]);
 
-    const inStockProducts = products.filter((a) => a.stock === "In stock");
-
-    if (fastDelivery) {
-      dispatch({ type: "FASTDELIVERY", payload: fastDeliveryProducts });
-    } else if (!stock) {
-      dispatch({ type: "INSTOCK", payload: inStockProducts });
-    } else {
-      dispatch({ type: "FINALPRODUCT", payload: products });
-    }
-  }, [products, fastDelivery, stock]);
-
-  useEffect(() => {
-    let initialPrice = 0;
-    let isFastDelivery = 0;
-    state.cart.forEach((item) => {
-      initialPrice += item.price * item.quantity;
-      item.delivery === "Fast delivery" && (isFastDelivery += 1);
-    });
-    let finalPrice =
-      initialPrice + isFastDelivery * 100 - Math.floor(initialPrice * 0.1);
-    dispatch({
-      type: "PRICE_DETAILS",
-      payload: { initialPrice, isFastDelivery, finalPrice },
-    });
-  }, [state.cart]);
+  // useEffect(() => {
+  //   let initialPrice = 0;
+  //   let isFastDelivery = 0;
+  //   state.cart.forEach((item) => {
+  //     initialPrice += item.price * item.quantity;
+  //     item.delivery === "Fast delivery" && (isFastDelivery += 1);
+  //   });
+  //   let finalPrice =
+  //     initialPrice + isFastDelivery * 100 - Math.floor(initialPrice * 0.1);
+  //   dispatch({
+  //     type: "PRICE_DETAILS",
+  //     payload: { initialPrice, isFastDelivery, finalPrice },
+  //   });
+  // }, [state.cart]);
 
   return (
     <cartProvider.Provider value={{ state, dispatch }}>
