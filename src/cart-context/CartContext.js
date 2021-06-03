@@ -1,6 +1,5 @@
 import React, { useEffect, createContext, useContext, useReducer } from "react";
 import { getProducts } from "../components/Product/helper";
-import { isAuthenticated } from "../components/User/helper";
 import { getCartItems } from "./../components/Cart/helper";
 import { getWishlistItems } from "./../components/Wishlist/helper";
 import { getUserDetails } from "./../components/User/helper";
@@ -89,23 +88,25 @@ export function CartContext({ children }) {
     products: [],
     finalProducts: [],
     cart: [],
+    wishlist: [],
+    stock: true,
+    fastDelivery: false,
+    loading: false,
     priceDetails: {
       price: 0,
       discount: 0,
       deliveryCharges: 0,
       totalAmount: 0,
     },
-    wishlist: [],
-    stock: true,
-    fastDelivery: false,
-    loading: false,
   });
   const { products, stock, fastDelivery } = state;
+
   useEffect(() => {
     (async () => {
       try {
         const data = await getProducts();
         dispatch({ type: "SET_FINALPRODUCTS", payload: data });
+        dispatch({ type: "SET_PRODUCTS", payload: data });
       } catch (error) {
         console.log(error);
       }
@@ -162,10 +163,15 @@ export function CartContext({ children }) {
       (a) => a.delivery === "Fast delivery"
     );
     const inStockProducts = products.filter((a) => a.stock === "In stock");
-    if (fastDelivery) {
-      dispatch({ type: "FASTDELIVERY", payload: fastDeliveryProducts });
+    if (stock && fastDelivery) {
+      dispatch({ type: "SET_FINALPRODUCTS", payload: fastDeliveryProducts });
+    } else if (fastDelivery) {
+      const fastDeliveryInStock = fastDeliveryProducts.filter(
+        (a) => a.stock === "In stock"
+      );
+      dispatch({ type: "SET_FINALPRODUCTS", payload: fastDeliveryInStock });
     } else if (!stock) {
-      dispatch({ type: "INSTOCK", payload: inStockProducts });
+      dispatch({ type: "SET_FINALPRODUCTS", payload: inStockProducts });
     } else {
       dispatch({ type: "SET_FINALPRODUCTS", payload: products });
     }
