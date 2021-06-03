@@ -43,20 +43,20 @@
   right: 10%;
 }
 
-@media screen and (max-width:680px){
+@media screen and (max-width:380px){
   .prev,.next{
-    top:35%
+    top:25%
   }
 }
 @media screen and (max-width:500px){
   .prev,.next{
     top:30%
   }
-}
-@media screen and (max-width:380px){
+@media screen and (max-width:680px){
   .prev,.next{
-    top:25%
+    top:35%
   }
+}
 }
 
 body {
