@@ -6,18 +6,23 @@ import {
   AiFillHome,
 } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
-
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useCart } from "../cart-context/CartContext";
 
 const Nav = () => {
-  const { state } = useCart();
+  const { state, dispatch } = useCart();
+  const [shouldRedirect, setRedirect] = useState(false);
   const [toggle, setToggle] = useState(false);
   const toggleChange = (e) => {
     setToggle(!toggle);
   };
+  const signOut = () => {
+    dispatch({ type: "SIGN_OUT" });
+    setRedirect(true);
+  };
   return (
     <div>
+      {shouldRedirect && <Redirect to="/" />}
       <nav className="nav dark text-white">
         <ul className="nav-items">
           <li className="nav-item">
@@ -44,11 +49,16 @@ const Nav = () => {
             </li>
           </Link>
           {/* <p className="badge-circle-s danger dropdown">{state.cart.length}</p> */}
-          <Link to="">
-            <li className="nav-item ml-3 mr-3 dropdown">
-              <AiOutlineSearch />
-            </li>
-          </Link>
+
+          {state.user._id ? (
+            <Link to="" onClick={signOut}>
+              <li className="nav-item ml-3 mr-3 dropdown">Sign Out</li>
+            </Link>
+          ) : (
+            <Link to="/signin">
+              <li className="nav-item ml-3 mr-3 dropdown">Sign In</li>
+            </Link>
+          )}
 
           <li className="nav-item ml-3 mr-3 hamBurger" onClick={toggleChange}>
             <GiHamburgerMenu />
@@ -77,19 +87,24 @@ const Nav = () => {
           <Link to="/cart">
             <li className="stacked-list-item">
               <h3>
-                <AiOutlineShoppingCart /> Cart 
+                <AiOutlineShoppingCart /> Cart
                 {/* <span className="mobile-badge-nav">{state.cart.length}</span> */}
               </h3>
             </li>
           </Link>
-
-          <Link to="/search">
-            <li className="stacked-list-item">
-              <h3>
-                <AiOutlineSearch /> Search
-              </h3>
-            </li>
-          </Link>
+          {state.user._id ? (
+            <Link to="">
+              <li className="stacked-list-item" onClick={signOut}>
+                <h3>Sign Out</h3>
+              </li>
+            </Link>
+          ) : (
+            <Link to="/signin">
+              <li className="stacked-list-item" onClick={signOut}>
+                <h3>Sign In</h3>
+              </li>
+            </Link>
+          )}
         </ul>
       )}
     </div>

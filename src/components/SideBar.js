@@ -17,11 +17,11 @@ function SideBar() {
   const clearAll = async () => {
     try {
       const data = await getProducts();
-      dispatch({ type: "PRODUCT", payload: data })
+      dispatch({ type: "SET_PRODUCTS", payload: data })
     } catch (error) {
       console.log(error)
     }
-    dispatch({ type: "FINALPRODUCT", payload: products });
+    dispatch({ type: "SET_FINALPRODUCTS", payload: products });
     dispatch({ type: "FASTDELIVERY_OFF" });
     dispatch({ type: "INSTOCK_ON" });
   };
