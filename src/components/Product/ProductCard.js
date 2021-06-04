@@ -18,28 +18,23 @@ const ProductCard = ({ title, img, price, item, isInCart, isInWishlist }) => {
     }
   };
   const addProductToWishlist = async () => {
-    let { _id, __v, ...wishlistItem } = item;
-    wishlistItem = JSON.stringify(wishlistItem);
-    console.log(wishlistItem);
-    await addWishlistItem(wishlistItem)
-      .then((data) => console.log("item added successfully!", data))
-      .catch((err) => console.log(err));
-
-    await getWishlistItems()
-      .then((data) => dispatch({ type: "WISHLIST", payload: data }))
-      .catch((err) => console.log(err));
+    await addWishlistItem(item._id);
+    try {
+      const wishlistData = await getWishlistItems();
+      dispatch({ type: "SET_WISHLIST", payload: wishlistData });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const deleteProductFromWishlist = async () => {
-    await deleteWishlistItem(isInWishlist)
-      .then(async (data) => {
-        console.log("item deleted successfully!", data);
-        await getWishlistItems()
-          .then((data) => dispatch({ type: "WISHLIST", payload: data }))
-          .catch((err) => console.log(err));
-      })
-      .catch((err) => console.log(err));
-    await console.log(isInWishlist);
+    await deleteWishlistItem(isInWishlist);
+    try {
+      const wishlistItems = await getWishlistItems();
+      dispatch({ type: "SET_WISHLIST", payload: wishlistItems });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const cartButton = () => {

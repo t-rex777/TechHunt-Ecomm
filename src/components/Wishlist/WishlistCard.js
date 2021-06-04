@@ -5,62 +5,28 @@ import { getCartItems } from "./../Cart/helper";
 import {
   deleteWishlistItem,
   getWishlistItems,
-  updateWishlistItem,
 } from "./helper";
 
-const WishlistCard = ({ title, img, price, item, quantity }) => {
+const WishlistCard = ({ title, img, price, item }) => {
   const { dispatch } = useCart();
-  const increaseItem = async () => {
-    item.quantity += 1;
-    const updatedQuantity = { quantity: item.quantity };
-    await updateWishlistItem(item._id, JSON.stringify(updatedQuantity))
-      .then(async (data) => {
-        await getWishlistItems()
-          .then((data) => {
-            dispatch({ type: "WISHLIST", payload: data });
-            console.log(data);
-          })
-          .catch((err) => console.log(err));
-      })
-      .catch((err) => console.log(err));
-  };
-  const decreaseItem = async () => {
-    item.quantity -= 1;
-    const updatedQuantity = { quantity: item.quantity };
-    await updateWishlistItem(item._id, JSON.stringify(updatedQuantity))
-      .then(async (data) => {
-        await getWishlistItems()
-          .then((data) => {
-            dispatch({ type: "WISHLIST", payload: data });
-            console.log(data);
-          })
-          .catch((err) => console.log(err));
-      })
-      .catch((err) => console.log(err));
-  };
-  const deleteItem = async () => {
-    await deleteWishlistItem(item._id)
-      .then(async (data) => {
-        console.log("item deleted successfully!", data);
 
-        await getWishlistItems()
-          .then((data) => dispatch({ type: "WISHLIST", payload: data }))
-          .catch((err) => console.log(err));
-      })
-      .catch((err) => console.log(err));
+  const deleteProductFromWishlist = async () => {
+    await deleteWishlistItem(item._id);
+    try {
+      const wishlistItems = await getWishlistItems();
+      dispatch({ type: "SET_WISHLIST", payload: wishlistItems });
+    } catch (error) {
+      console.log(error);
+    }
   };
   const addProductToCart = async () => {
-    let { _id, __v, ...cartItem } = item;
-    cartItem = JSON.stringify(cartItem);
-    console.log(cartItem);
-    await addCartItem(cartItem)
-      .then(
-        async (data) =>
-          await getCartItems()
-            .then((data) => dispatch({ type: "CART", payload: data }))
-            .catch((err) => console.log(err))
-      )
-      .catch((err) => console.log(err));
+    await addCartItem(item._id);
+    try {
+      const cartData = await getCartItems();
+      dispatch({ type: "SET_CART", payload: cartData });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -69,15 +35,10 @@ const WishlistCard = ({ title, img, price, item, quantity }) => {
         <img className="card-image" src={img} alt="oneplus" />
         <h1 className="card-header mt-1 text-center">{title}</h1>
         <p className="card-body text-center">₹ {price}</p>
-        <div className="quant-btn content-center">
-          <button onClick={increaseItem}>+</button>
-          <p>{quantity}</p>
-          <button onClick={decreaseItem}>-</button>
-        </div>
         <span className=" place-btn" onClick={addProductToCart} style={{alignSelf:"center"}}>
           <p>Add to cart</p>
         </span>
-        <span className="remove-btn" onClick={deleteItem} style={{alignSelf:"center"}}>
+        <span className="remove-btn" onClick={deleteProductFromWishlist} style={{alignSelf:"center"}}>
           <AiFillDelete />
         </span>
       </div>

@@ -159,6 +159,7 @@ body {
   display: flex;
   justify-content: flex-end;
   font-size: 2rem;
+  cursor: pointer;
 }
 .wishlist > p {
   font-size: 1.5rem;
@@ -168,6 +169,7 @@ body {
   color: red;
 }
 .remove-btn {
+  cursor: pointer;
   font-size: 1.8rem;
   align-self: flex-end;
 }
@@ -195,6 +197,7 @@ body {
   height: fit-content;
   margin-top: 0px;
   align-self: flex-end;
+  cursor: pointer;
 }
 .place-btn:hover {
   background-color: rgb(226, 25, 25);

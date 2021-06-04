@@ -58,13 +58,12 @@ export function CartContext({ children }) {
           ...state,
           fastDelivery: !state.fastDelivery,
         };
+
       case "FILTER_STOCK":
         return {
           ...state,
           stock: !state.stock,
         };
-      case "FASTDELIVERY":
-        return { ...state, finalProducts: action.payload };
 
       case "FASTDELIVERY_OFF":
         return { ...state, fastDelivery: false };
@@ -72,8 +71,6 @@ export function CartContext({ children }) {
       case "INSTOCK_ON":
         return { ...state, stock: true };
 
-      case "INSTOCK":
-        return { ...state, finalProducts: action.payload };
       case "PRICE_DETAILS":
         return {
           ...state,
@@ -84,6 +81,7 @@ export function CartContext({ children }) {
             totalAmount: action.payload.finalPrice,
           },
         };
+
       case "LOADING":
         return { ...state, loading: !state.loading };
       default:
@@ -138,28 +136,19 @@ export function CartContext({ children }) {
           const { accessToken, refreshToken } = newAccessTokenRequest.data;
           localStorage.setItem("_rtoken", refreshToken);
           setTechHuntHeader(accessToken);
+
+          // setting user
           const userData = await getUserDetails();
           dispatch({ type: "SET_USER", payload: userData });
 
           // setting cart
-          (async () => {
-            try {
-              const data = await getCartItems();
-              dispatch({ type: "SET_CART", payload: data });
-            } catch (error) {
-              console.log(error);
-            }
-          })();
+          const cartData = await getCartItems();
+          dispatch({ type: "SET_CART", payload: cartData }); //is not updating on signin, but works on reload.
 
           // setting wishlist
-          (async () => {
-            try {
-              const data = await getWishlistItems();
-              dispatch({ type: "SET_WISHLIST", payload: data });
-            } catch (error) {
-              console.log(error);
-            }
-          })();
+          const wishlistData = await getWishlistItems();
+          dispatch({ type: "SET_WISHLIST", payload: wishlistData });
+
         } catch (error) {
           console.log(error);
           localStorage.removeItem("_rtoken");

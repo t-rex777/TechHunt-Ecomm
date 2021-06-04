@@ -16,7 +16,7 @@ function Myroutes() {
         <Route path="/signin" exact component={SignIn} />
         <PrivateRoute path="/app" exact component={App} />
         <PrivateRoute path="/cart" exact component={Cart} />
-        {/* <Route path="/wishlist" exact component={Wishlist} /> */}
+        <PrivateRoute path="/wishlist" exact component={Wishlist} />
       </Switch>
     </BrowserRouter>
   );

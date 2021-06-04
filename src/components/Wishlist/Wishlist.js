@@ -7,8 +7,6 @@ import emptyWishlist from "../../images/emptywishlist.svg"
 function Wishlist() {
   const { state } = useCart();
   const { wishlist } = state;
-
-  console.log(wishlist);
   return (
     <>
       <Nav />
@@ -23,7 +21,6 @@ function Wishlist() {
               title={item.name}
               img={item.img}
               price={item.price}
-              quantity={item.quantity}
             />
           );
         })}
