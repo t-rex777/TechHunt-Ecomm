@@ -46,7 +46,7 @@ function SignIn() {
     <>
       <Nav />
       {shouldRedirect && <Redirect to="/" />}
-      <div className="content-center">
+      <div className="signin">
         <h1 className="text-center mb-2">Sign In</h1>
         <form className="form-validation" onSubmit={formSubmit}>
           <div className="row">

@@ -15,7 +15,15 @@ export function CartContext({ children }) {
         return { ...state, user: action.payload };
       case "SIGN_OUT": {
         localStorage.removeItem("_rtoken");
-        return { ...state, user: {}, cart: [], wishlist: [] };
+        return {
+          ...state,
+          user: {
+            cart: [],
+            wishlist: [],
+          },
+          cart: [],
+          wishlist: [],
+        };
       }
       case "SET_PRODUCTS":
         return { ...state, products: action.payload };
@@ -84,7 +92,10 @@ export function CartContext({ children }) {
   };
 
   const [state, dispatch] = useReducer(reducerFunction, {
-    user: {},
+    user: {
+      cart: [],
+      wishlist: [],
+    },
     products: [],
     finalProducts: [],
     cart: [],
@@ -180,8 +191,8 @@ export function CartContext({ children }) {
   useEffect(() => {
     let initialPrice = 0;
     let isFastDelivery = 0;
-    state.cart.forEach((item) => {
-      initialPrice += item.price * item.quantity;
+    state.cart.forEach(({ item, quantity }) => {
+      initialPrice += item.price * quantity;
       item.delivery === "Fast delivery" && (isFastDelivery += 1);
     });
     let finalPrice =

@@ -62,34 +62,37 @@ const CartCard = ({ title, img, price, item, quantity }) => {
         <img
           className="card-image mr-2"
           src={img}
-          alt="oneplus"
-          style={{ width: "150px", height:"250px" }}
+          alt="product"
+          style={{ width: "150px", height: "250px" }}
         />
         <div className="card-main ">
           <div className="card-main-info mr-1">
             <h1 className="card-header">{title}</h1>
             <p className="card-body">₹ {price}</p>
-            <p className="card-body mt-1">{item.delivery} <RiTruckFill/></p>
+            <p className="card-body mt-1">
+              {item.delivery} <RiTruckFill />
+            </p>
             <div className="quant-btn">
               <button onClick={increaseItem}>+</button>
               <p>{quantity}</p>
               <button onClick={decreaseItem}>-</button>
             </div>
           </div>
-
-          <span
-            className="content-center place-btn mr-2"
-            onClick={addProductToWishlist}
-          >
-            <p>Add to wishlist</p>
-          </span>
-          <span
-            className="content-center remove-btn mb-1 ml-2"
-            onClick={deleteItem}
-            style={{fontSize:"2.5rem"}}
-          >
-            <AiFillDelete />
-          </span>
+          <div className="interactions">
+            <span
+              className="content-center place-btn mr-2"
+              onClick={addProductToWishlist}
+            >
+              <p>Add to wishlist</p>
+            </span>
+            <span
+              className="content-center remove-btn mb-1 ml-2"
+              onClick={deleteItem}
+              style={{ fontSize: "2.5rem" }}
+            >
+              <AiFillDelete />
+            </span>
+          </div>
         </div>
       </div>
     </div>

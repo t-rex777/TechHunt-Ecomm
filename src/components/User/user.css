@@ -1,4 +1,6 @@
-.content-center {
+.signin {
+  display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   height: 80vh;
   align-content: center;
