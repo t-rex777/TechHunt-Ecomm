@@ -9,11 +9,9 @@ export const getCartItems = async () => {
   }
 };
 
-export const addCartItem = async (cart) => {
+export const addCartItem = async (cartItemId) => {
   try {
-    const response = await techHuntAPI.post("/cart", {
-      ...cart,
-    });
+    const response = await techHuntAPI.post(`/cart/create/${cartItemId}`);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -22,7 +20,7 @@ export const addCartItem = async (cart) => {
 
 export const updateCartItem = async (cartItemId, updatedValue) => {
   try {
-    const response = await techHuntAPI.post(`/cart/${cartItemId}`, {
+    const response = await techHuntAPI.post(`/cart/update/${cartItemId}`, {
       ...updatedValue,
     });
     return response.data;
@@ -31,9 +29,9 @@ export const updateCartItem = async (cartItemId, updatedValue) => {
   }
 };
 
-export const deleteCartItem = async (cartId) => {
+export const deleteCartItem = async (cartItemId) => {
   try {
-    const response = await techHuntAPI.delete(`cart/${cartId}`);
+    const response = await techHuntAPI.post(`cart/delete/${cartItemId}`);
     return response.data;
   } catch (error) {
     console.log(error);

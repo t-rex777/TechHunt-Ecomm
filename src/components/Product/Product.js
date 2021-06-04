@@ -10,7 +10,7 @@ function Product() {
   const { state } = useCart();
   const { finalProducts } = state;
   const isInCart = (productName) =>
-    state.cart.find((cartItem) => cartItem.name === productName);
+    state.cart.find(({item}) => item.name === productName);
 
   const isInWishlist = (productName) => {
     let wishlistId;
@@ -34,7 +34,7 @@ function Product() {
           display: "flex",
           justifyContent: "flex-end",
           fontSize: "2rem",
-          cursor:"pointer"
+          cursor: "pointer",
         }}
         onClick={() => {
           setFilter(!viewFilter);
@@ -61,7 +61,6 @@ function Product() {
           );
         })}
       </div>
-  
     </>
   );
 }

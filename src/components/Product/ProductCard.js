@@ -9,16 +9,13 @@ import { Link } from "react-router-dom";
 const ProductCard = ({ title, img, price, item, isInCart, isInWishlist }) => {
   const { dispatch } = useCart();
   const addProductToCart = async () => {
-    let { _id, __v, ...cartItem } = item;
-    cartItem = JSON.stringify(cartItem);
-    console.log(cartItem);
-    await addCartItem(cartItem)
-      .then((data) => console.log("item added successfully!", data))
-      .catch((err) => console.log(err));
-
-    await getCartItems()
-      .then((data) => dispatch({ type: "CART", payload: data }))
-      .catch((err) => console.log(err));
+    await addCartItem(item._id);
+    try {
+      const cartData = await getCartItems();
+      dispatch({ type: "SET_CART", payload: cartData });
+    } catch (error) {
+      console.log(error);
+    }
   };
   const addProductToWishlist = async () => {
     let { _id, __v, ...wishlistItem } = item;
@@ -42,7 +39,7 @@ const ProductCard = ({ title, img, price, item, isInCart, isInWishlist }) => {
           .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
-   await console.log(isInWishlist)
+    await console.log(isInWishlist);
   };
 
   const cartButton = () => {

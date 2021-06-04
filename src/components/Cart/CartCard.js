@@ -7,43 +7,31 @@ import { getWishlistItems } from "./../Wishlist/helper";
 
 const CartCard = ({ title, img, price, item, quantity }) => {
   const { dispatch } = useCart();
-  const increaseItem = async () => {
-    item.quantity += 1;
-    const updatedQuantity = { quantity: item.quantity };
-    await updateCartItem(item._id, JSON.stringify(updatedQuantity))
-      .then(async (data) => {
-        await getCartItems()
-          .then((data) => {
-            dispatch({ type: "CART", payload: data });
-          })
-          .catch((err) => console.log(err));
-      })
-      .catch((err) => console.log(err));
-  };
-  const decreaseItem = async () => {
-    item.quantity -= 1;
-    const updatedQuantity = { quantity: item.quantity };
-    await updateCartItem(item._id, JSON.stringify(updatedQuantity))
-      .then(async (data) => {
-        await getCartItems()
-          .then((data) => {
-            dispatch({ type: "CART", payload: data });
-            console.log(data);
-          })
-          .catch((err) => console.log(err));
-      })
-      .catch((err) => console.log(err));
+
+  const changeQuantity = async (change) => {
+    if (change === "increase") {
+      quantity += 1;
+    } else if (change === "decrease") {
+      quantity -= 1;
+    }
+    const updatedQuantity = { quantity: quantity };
+    await updateCartItem(item._id, updatedQuantity);
+    try {
+      const cartItems = await getCartItems();
+      dispatch({ type: "SET_CART", payload: cartItems });
+    } catch (error) {
+      console.log(error);
+    }
   };
   const deleteItem = async () => {
-    await deleteCartItem(item._id)
-      .then(async (data) => {
-        console.log("item deleted successfully!", data);
-
-        await getCartItems()
-          .then((data) => dispatch({ type: "CART", payload: data }))
-          .catch((err) => console.log(err));
-      })
-      .catch((err) => console.log(err));
+    await deleteCartItem(item._id);
+    try {
+      console.log("item deleted successfully!");
+      const cartItems = await getCartItems();
+      dispatch({ type: "SET_CART", payload: cartItems });
+    } catch (error) {
+      console.log(error);
+    }
   };
   const addProductToWishlist = async () => {
     let { _id, __v, ...wishlistItem } = item;
@@ -73,9 +61,21 @@ const CartCard = ({ title, img, price, item, quantity }) => {
               {item.delivery} <RiTruckFill />
             </p>
             <div className="quant-btn">
-              <button onClick={increaseItem}>+</button>
+              <button
+                onClick={() => {
+                  changeQuantity("increase");
+                }}
+              >
+                +
+              </button>
               <p>{quantity}</p>
-              <button onClick={decreaseItem}>-</button>
+              <button
+                onClick={() => {
+                  changeQuantity("decrease");
+                }}
+              >
+                -
+              </button>
             </div>
           </div>
           <div className="interactions">
