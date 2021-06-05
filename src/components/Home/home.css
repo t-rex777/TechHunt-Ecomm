@@ -8,12 +8,12 @@
     flex-wrap: wrap;
   }
   .homeCard {
-    background: url("https://onuir.com/wp-content/uploads/2019/09/11black1.jpg")
+    background: 
     center center no-repeat;
     background-size: contain;
-    filter: brightness(0.5);
-    height: 300px;
-    width: 240px;
+    filter: brightness(0.7);
+    height: 200px;
+    width: 200px;
     display: flex;
     justify-content: center;
     transition: 500ms;
@@ -22,10 +22,13 @@
   .homeCard:hover{
     transition: 500ms;
     filter: brightness(1);
+    transform:scale(1.1)
   }
   .homeCard-text {
     align-self: center;
     color: #fff;
+    background-color: rgba(0, 0, 0, 0.678);
+    width: 100%;
   }
   
   .banner {

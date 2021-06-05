@@ -6,15 +6,14 @@ import { deleteCartItem, getCartItems, updateCartItem } from "./helper";
 import { getWishlistItems } from "./../Wishlist/helper";
 
 const CartCard = ({ title, img, price, item, quantity }) => {
-  const { dispatch } = useCart();
+  const { state, dispatch } = useCart();
 
   const changeQuantity = async (change) => {
-
     if (change === "increase") {
       quantity += 1;
     } else if (change === "decrease") {
-      if(quantity === 1){
-       return deleteItem();
+      if (quantity === 1) {
+        return deleteItem();
       }
       quantity -= 1;
     }
@@ -27,6 +26,7 @@ const CartCard = ({ title, img, price, item, quantity }) => {
       console.log(error);
     }
   };
+  
   const deleteItem = async () => {
     await deleteCartItem(item._id);
     try {
@@ -37,16 +37,20 @@ const CartCard = ({ title, img, price, item, quantity }) => {
       console.log(error);
     }
   };
+
   const addProductToWishlist = async () => {
-    let { _id, __v, ...wishlistItem } = item;
-    wishlistItem = JSON.stringify(wishlistItem);
-    console.log(wishlistItem);
-    await addWishlistItem(wishlistItem)
-      .then((data) => console.log("item added successfully!", data))
-      .catch((err) => console.log(err));
-    await getWishlistItems()
-      .then((data) => dispatch({ type: "WISHLIST", payload: data }))
-      .catch((err) => console.log(err));
+    const isInWishlist = state.wishlist.find(
+      (wishlistItem) => wishlistItem._id === item._id
+    );
+    if (!isInWishlist) {
+      await addWishlistItem(item._id);
+      try {
+        const wishlistData = await getWishlistItems();
+        dispatch({ type: "SET_WISHLIST", payload: wishlistData });
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
   return (
     <div>
