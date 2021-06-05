@@ -2,13 +2,13 @@ import { AiFillDelete } from "react-icons/ai";
 import { useCart } from "../../cart-context/CartContext";
 import { addCartItem } from "../Cart/helper";
 import { getCartItems } from "./../Cart/helper";
-import {
-  deleteWishlistItem,
-  getWishlistItems,
-} from "./helper";
+import { deleteWishlistItem, getWishlistItems } from "./helper";
 
 const WishlistCard = ({ title, img, price, item }) => {
-  const { dispatch } = useCart();
+  const { state, dispatch } = useCart();
+
+  const isInCart = (productName) =>
+    state.cart.find(({ item }) => item.name === productName);
 
   const deleteProductFromWishlist = async () => {
     await deleteWishlistItem(item._id);
@@ -20,12 +20,14 @@ const WishlistCard = ({ title, img, price, item }) => {
     }
   };
   const addProductToCart = async () => {
-    await addCartItem(item._id);
-    try {
-      const cartData = await getCartItems();
-      dispatch({ type: "SET_CART", payload: cartData });
-    } catch (error) {
-      console.log(error);
+    if (!isInCart(title)) {
+      await addCartItem(item._id);
+      try {
+        const cartData = await getCartItems();
+        dispatch({ type: "SET_CART", payload: cartData });
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -35,10 +37,18 @@ const WishlistCard = ({ title, img, price, item }) => {
         <img className="card-image" src={img} alt="oneplus" />
         <h1 className="card-header mt-1 text-center">{title}</h1>
         <p className="card-body text-center">₹ {price}</p>
-        <span className=" place-btn" onClick={addProductToCart} style={{alignSelf:"center"}}>
+        <span
+          className=" place-btn"
+          onClick={addProductToCart}
+          style={{ alignSelf: "center" }}
+        >
           <p>Add to cart</p>
         </span>
-        <span className="remove-btn" onClick={deleteProductFromWishlist} style={{alignSelf:"center"}}>
+        <span
+          className="remove-btn"
+          onClick={deleteProductFromWishlist}
+          style={{ alignSelf: "center" }}
+        >
           <AiFillDelete />
         </span>
       </div>

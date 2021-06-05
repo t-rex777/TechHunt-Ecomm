@@ -3,6 +3,7 @@ import Nav from "./components/Nav";
 import appleImg from "./images/apple.png";
 import samsungImg from "./images/samsung.png";
 import oneplusImg from "./images/oneplus.png";
+import HomeCard from "./HomeCard";
 function App() {
   const [slideCounter, setSlideCounter] = useState(0);
   const [slideStyle, setSlideStyle] = useState({
@@ -36,35 +37,35 @@ function App() {
   return (
     <div>
       <Nav />
-      <div className="banner">
-        <div className={`slide`} style={slideStyle.slide1}>
-          <img src={samsungImg} alt="" />
+      <div className="home">
+        <div className="banner">
+          <div className="slide" style={slideStyle.slide1}>
+            <img src={samsungImg} alt="" />
+          </div>
+          <div className="slide" style={slideStyle.slide2}>
+            <img src={appleImg} alt="" />
+          </div>
+          <div className="slide" style={slideStyle.slide3}>
+            <img src={oneplusImg} alt="" />
+          </div>
+          <div
+            className="prev"
+            onClick={() => {
+              setSlideCounter(slideCounter - 1);
+            }}
+          >
+            &#10094;
+          </div>
+          <div
+            className="next"
+            onClick={() => {
+              setSlideCounter(slideCounter + 1);
+            }}
+          >
+            &#10095;
+          </div>
         </div>
-        <div className={`slide`} style={slideStyle.slide2}>
-          <img src={appleImg} alt="" />
-        </div>
-        <div className={`slide`} style={slideStyle.slide3}>
-          <img src={oneplusImg} alt="" />
-        </div>
-        {/* <div className="slide">
-          <img src="" alt="" />
-        </div> */}
-        <div
-          className="prev"
-          onClick={() => {
-            setSlideCounter(slideCounter - 1);
-          }}
-        >
-          &#10094;
-        </div>
-        <div
-          className="next"
-          onClick={() => {
-            setSlideCounter(slideCounter + 1);
-          }}
-        >
-          &#10095;
-        </div>
+        <HomeCard />
       </div>
     </div>
   );

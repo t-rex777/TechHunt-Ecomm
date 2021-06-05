@@ -9,9 +9,13 @@ const CartCard = ({ title, img, price, item, quantity }) => {
   const { dispatch } = useCart();
 
   const changeQuantity = async (change) => {
+
     if (change === "increase") {
       quantity += 1;
     } else if (change === "decrease") {
+      if(quantity === 1){
+       return deleteItem();
+      }
       quantity -= 1;
     }
     const updatedQuantity = { quantity: quantity };
