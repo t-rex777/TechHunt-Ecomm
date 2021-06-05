@@ -4,109 +4,13 @@
   margin: 0;
   padding: 0;
 }
-.home {
-  display: flex;
-  flex-direction: column;
-}
-.homeCards {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-}
-.homeCard {
-  background: url("https://onuir.com/wp-content/uploads/2019/09/11black1.jpg")
-  center center no-repeat;
-  background-size: contain;
-  filter: brightness(0.5);
-  height: 300px;
-  width: 240px;
-  display: flex;
-  justify-content: center;
-  transition: 500ms;
-
-}
-.homeCard:hover{
-  transition: 500ms;
-  filter: brightness(1);
-}
-.homeCard-text {
-  align-self: center;
-  color: #fff;
-}
-
-.banner {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  background-color: #000;
-}
-.slide {
-  position: relative;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  background-color: #000;
-}
-
-.slide > img {
-  width: 100%;
-  max-width: 500px;
-  height: auto;
-  max-height: 60vh;
-}
-.prev,
-.next {
-  position: absolute;
-  top: 40%;
-  font-size: 2rem;
-  transform: translateY(-50%);
-  color: #fff;
-  cursor: pointer;
-}
-.prev {
-  left: 10%;
-}
-.next {
-  right: 10%;
-}
-
-@media screen and (max-width: 380px) {
-  .prev,
-  .next {
-    top: 25%;
-  }
-}
-@media screen and (max-width: 500px) {
-  .prev,
-  .next {
-    top: 30%;
-  }
-  @media screen and (max-width: 680px) {
-    .prev,
-    .next {
-      top: 35%;
-    }
-  }
-}
 
 body {
   background: #d5d6da;
   font-family: "Raleway", sans-serif;
 }
-.nav-items {
-  justify-content: flex-end;
-}
 
-.nav-logo {
-  font-family: "Raleway", sans-serif;
-  font-weight: 800;
-  position: absolute;
-  left: 1rem;
-  top: 1.6rem;
-  font-size: 2rem;
-}
-
+/* products */
 .products {
   display: flex;
   justify-content: space-evenly;
@@ -123,6 +27,8 @@ body {
   border: solid 2px #fff;
   border-radius: 12px;
 }
+
+/* cart */
 .cartpage {
   display: flex;
   justify-content: center;
@@ -133,15 +39,12 @@ body {
   margin: 10px 5px;
   padding: 1.5rem;
   width: auto;
-  /* justify-content: space-between; */
-  /* height: 300px; */
   background-color: #fff;
   border: solid 2px #fff;
   border-radius: 12px;
 }
 .card-main {
   display: flex;
-  /* align-items:center ; */
   justify-content: space-between;
 }
 .card-main-info {
@@ -154,12 +57,10 @@ body {
   object-fit: contain;
 }
 .card-header {
-  /* margin-top: 1rem; */
   font-size: 1.3rem;
 }
 .card-body {
   flex-grow: 1;
-  /* margin-top: 1rem; */
   font-size: 1.2rem;
 }
 .interactions {
@@ -168,33 +69,10 @@ body {
   justify-content: flex-end;
   right: 0;
   bottom: 20px;
-  /* width:100%; */
-}
-
-@media screen and (max-width: 768px) {
-  .interactions {
-    position: static;
-    justify-content: center;
-    flex-direction: column;
-  }
 }
 
 .btn-secondary {
   font-size: 1rem;
-}
-.wishlist {
-  margin-top: -20px;
-  display: flex;
-  justify-content: flex-end;
-  font-size: 2rem;
-  cursor: pointer;
-}
-.wishlist > p {
-  font-size: 1.5rem;
-  margin-right: 0.5rem;
-}
-.wishlist:hover {
-  color: red;
 }
 .remove-btn {
   cursor: pointer;
@@ -251,69 +129,25 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.badge-circle-s {
-  font-size: 15px;
-  height: fit-content;
-  text-decoration: none;
-  position: relative;
-  top: 15px;
-  left: -10px;
-}
-
-.sidebar {
-  background-color: #fff;
-  display: flex;
-  justify-content: flex-end;
-  border-radius: 0 0 15px 0;
-}
-.clear-btn {
-  height: 40px;
-  align-self: flex-end;
-  font-size: 1rem;
-}
-.hamBurger {
-  display: none;
-}
-.dropdown {
-  display: block;
-}
-.mobile-icon {
-  position: relative;
-}
-.mobile-badge-nav {
-  margin-left: 1rem;
-  position: absolute;
-  background-color: red;
-  width: 40px;
-  height: 25px;
-  border-radius: 5px;
-}
-.stacked-list {
-  display: none;
-  margin: 0 auto;
-}
-.stacked-list-item {
-  color: white;
-
-  background-color: #140a22;
-  border-bottom: none;
-}
-.stacked-list-item > h3 {
-  text-decoration: underline #140a22;
-  font-weight: 400;
-}
-
-.stacked-list-item:hover {
-  color: #fbbf24;
-  background-color: #220f3b;
-}
-.stacked-list-item > h3:hover {
-  text-decoration: underline #220f3b;
-}
 .empty-img {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+/* wishlist */
+.wishlist {
+  margin-top: -20px;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 2rem;
+  cursor: pointer;
+}
+.wishlist > p {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+.wishlist:hover {
+  color: red;
 }
 
 @media screen and (max-width: 768px) {
@@ -354,27 +188,12 @@ body {
     font-size: 1rem;
     font-weight: 500;
   }
-  .sidebar > div > h1 {
-    font-size: 1rem;
-  }
-  .sidebar > div > label {
-    font-size: 0.9rem;
-  }
-  .clear-btn {
-    height: 25px;
-    font-size: 0.5rem;
-  }
   .card {
     width: 250px;
   }
-
-  .hamBurger {
-    display: block;
-  }
-  .dropdown {
-    display: none;
-  }
-  .stacked-list {
-    display: block;
+  .interactions {
+    position: static;
+    justify-content: center;
+    flex-direction: column;
   }
 }

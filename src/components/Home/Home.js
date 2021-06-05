@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Nav from "./components/Nav";
-import appleImg from "./images/apple.png";
-import samsungImg from "./images/samsung.png";
-import oneplusImg from "./images/oneplus.png";
+import appleImg from "../../images/apple.png";
+import samsungImg from "../../images/samsung.png";
+import oneplusImg from "../../images/oneplus.png";
 import HomeCard from "./HomeCard";
+import "./home.css"
+import Nav from './../../Nav/Nav';
+
 function App() {
   const [slideCounter, setSlideCounter] = useState(0);
   const [slideStyle, setSlideStyle] = useState({

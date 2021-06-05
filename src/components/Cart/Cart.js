@@ -1,8 +1,8 @@
 import React from "react";
 import { useCart } from "../../cart-context/CartContext";
-import Nav from "../Nav";
 import CartCard from "./CartCard";
 import emptyCart from "../../images/emptycart.svg";
+import Nav from './../../Nav/Nav';
 
 function Cart() {
   const { state } = useCart();

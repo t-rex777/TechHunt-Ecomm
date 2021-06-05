@@ -1,8 +1,8 @@
 import React from "react";
 import { useCart } from "../../cart-context/CartContext";
-import Nav from "../Nav";
 import WishlistCard from "./WishlistCard";
 import emptyWishlist from "../../images/emptywishlist.svg"
+import Nav from './../../Nav/Nav';
 
 function Wishlist() {
   const { state } = useCart();

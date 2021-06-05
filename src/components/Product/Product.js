@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useCart } from "../../cart-context/CartContext";
-import Nav from "./../Nav";
 import ProductCard from "./ProductCard";
-import SideBar from "./../SideBar";
 import { BsFilterRight } from "react-icons/bs";
 // import Loading from "../Loading/Loading";
+import Nav from "../../Nav/Nav";
+import SideBar from "./../../Nav/SideBar";
 
 function Product() {
-  const { state } = useCart();
-  const { finalProducts } = state;
+  const { state, dispatch } = useCart();
+  const { products, finalProducts, category } = state;
   const isInCart = (productName) =>
-    state.cart.find(({item}) => item.name === productName);
+    state.cart.find(({ item }) => item.name === productName);
 
   const isInWishlist = (productName) => {
     let wishlistId;
@@ -24,6 +24,32 @@ function Product() {
   };
 
   const [viewFilter, setFilter] = useState(false);
+  useEffect(() => {
+    console.log(category);
+    if (category === "phone") {
+      const filteredProducts = products.filter(
+        (product) => product.category === "phone"
+      );
+      dispatch({ type: "SET_FINALPRODUCTS", payload: filteredProducts });
+    } else if (category === "earphone") {
+      const filteredProducts = products.filter(
+        (product) => product.category === "earphone"
+      );
+      dispatch({ type: "SET_FINALPRODUCTS", payload: filteredProducts });
+    } else if (category === "tv") {
+      const filteredProducts = products.filter(
+        (product) => product.category === "tv"
+      );
+      dispatch({ type: "SET_FINALPRODUCTS", payload: filteredProducts });
+    } else if (category === "watch") {
+      const filteredProducts = products.filter(
+        (product) => product.category === "watch"
+      );
+      dispatch({ type: "SET_FINALPRODUCTS", payload: filteredProducts });
+    } else if (category === "all") {
+      dispatch({ type: "SET_FINALPRODUCTS", payload: products });
+    }
+  }, []);
 
   return (
     <>

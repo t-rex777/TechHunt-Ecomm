@@ -1,6 +1,7 @@
 import React from "react";
 import { useCart } from "../cart-context/CartContext";
-import { getProducts } from "./Product/helper";
+import { getProducts } from "./../components/Product/helper";
+import "./nav.css";
 
 function SideBar() {
   const { state, dispatch } = useCart();
@@ -17,9 +18,9 @@ function SideBar() {
   const clearAll = async () => {
     try {
       const data = await getProducts();
-      dispatch({ type: "SET_PRODUCTS", payload: data })
+      dispatch({ type: "SET_PRODUCTS", payload: data });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
     dispatch({ type: "SET_FINALPRODUCTS", payload: products });
     dispatch({ type: "FASTDELIVERY_OFF" });

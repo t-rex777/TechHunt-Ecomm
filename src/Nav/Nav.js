@@ -8,6 +8,7 @@ import {
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, Redirect } from "react-router-dom";
 import { useCart } from "../cart-context/CartContext";
+import "./nav.css"
 
 const Nav = () => {
   const { state, dispatch } = useCart();

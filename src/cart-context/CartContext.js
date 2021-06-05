@@ -36,6 +36,9 @@ export function CartContext({ children }) {
 
       case "SET_WISHLIST":
         return { ...state, wishlist: action.payload };
+        
+      case "SET_CATEGORY":
+        return { ...state, category: action.payload };
 
       case "SORT_ASC":
         return {
@@ -98,6 +101,7 @@ export function CartContext({ children }) {
     finalProducts: [],
     cart: [],
     wishlist: [],
+    category: "all",
     stock: true,
     fastDelivery: false,
     loading: false,
@@ -148,7 +152,6 @@ export function CartContext({ children }) {
           // setting wishlist
           const wishlistData = await getWishlistItems();
           dispatch({ type: "SET_WISHLIST", payload: wishlistData });
-
         } catch (error) {
           console.log(error);
           localStorage.removeItem("_rtoken");

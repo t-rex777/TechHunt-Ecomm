@@ -3,9 +3,8 @@ import { signin } from "./helper";
 import { useCart } from "../../cart-context/CartContext";
 import { setTechHuntHeader } from "../../utils";
 import { Redirect } from "react-router-dom";
-import Nav from "../Nav";
 import "./user.css";
-import { techHuntAPI } from './../../utils';
+import Nav from './../../Nav/Nav';
 
 function SignIn() {
   const { dispatch } = useCart();

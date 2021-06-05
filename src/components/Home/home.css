@@ -1,0 +1,85 @@
+.home {
+    display: flex;
+    flex-direction: column;
+  }
+  .homeCards {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+  .homeCard {
+    background: url("https://onuir.com/wp-content/uploads/2019/09/11black1.jpg")
+    center center no-repeat;
+    background-size: contain;
+    filter: brightness(0.5);
+    height: 300px;
+    width: 240px;
+    display: flex;
+    justify-content: center;
+    transition: 500ms;
+  
+  }
+  .homeCard:hover{
+    transition: 500ms;
+    filter: brightness(1);
+  }
+  .homeCard-text {
+    align-self: center;
+    color: #fff;
+  }
+  
+  .banner {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background-color: #000;
+  }
+  .slide {
+    position: relative;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    background-color: #000;
+  }
+  
+  .slide > img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    max-height: 60vh;
+  }
+  .prev,
+  .next {
+    position: absolute;
+    top: 40%;
+    font-size: 2rem;
+    transform: translateY(-50%);
+    color: #fff;
+    cursor: pointer;
+  }
+  .prev {
+    left: 10%;
+  }
+  .next {
+    right: 10%;
+  }
+  
+  @media screen and (max-width: 380px) {
+    .prev,
+    .next {
+      top: 25%;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .prev,
+    .next {
+      top: 30%;
+    }
+    @media screen and (max-width: 680px) {
+      .prev,
+      .next {
+        top: 35%;
+      }
+    }
+  }
