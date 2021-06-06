@@ -27,6 +27,12 @@ body {
   border: solid 2px #fff;
   border-radius: 12px;
 }
+.filter {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
 
 /* cart */
 .cartpage {
@@ -151,6 +157,9 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+  .filter{
+    font-size: 1rem;
+  }
   .cart-card {
     flex-direction: column;
     justify-content: center;

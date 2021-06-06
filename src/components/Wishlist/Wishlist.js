@@ -10,9 +10,9 @@ function Wishlist() {
   return (
     <>
       <Nav />
-      <h1 className="text-l text-center mb-4">Wishlist</h1>
+      <h1 className="text-center text-xl">Wishlist</h1>
       {wishlist.length !== 0 ? (
-        <div className="products">
+        <div className="products" style={{justifyContent:"center"}}>
         {wishlist.map((item) => {
           return (
             <WishlistCard

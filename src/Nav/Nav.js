@@ -8,7 +8,7 @@ import {
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, Redirect } from "react-router-dom";
 import { useCart } from "../cart-context/CartContext";
-import "./nav.css"
+import "./nav.css";
 
 const Nav = () => {
   const { state, dispatch } = useCart();
@@ -52,11 +52,11 @@ const Nav = () => {
           <p className="badge-circle-s danger dropdown">{state.cart.length}</p>
 
           {state.user._id ? (
-            <Link to="" onClick={signOut}>
+            <Link to="" onClick={signOut} style={{ textDecoration: "none" }}>
               <li className="nav-item ml-3 mr-3 dropdown">Sign Out</li>
             </Link>
           ) : (
-            <Link to="/signin">
+            <Link to="/signin" style={{ textDecoration: "none" }}>
               <li className="nav-item ml-3 mr-3 dropdown">Sign In</li>
             </Link>
           )}
@@ -66,6 +66,7 @@ const Nav = () => {
           </li>
         </ul>
       </nav>
+      
       {toggle && (
         <ul className="stacked-list">
           <Link to="/">
@@ -80,7 +81,9 @@ const Nav = () => {
             <li className="stacked-list-item">
               <h3 className="mobile-icon">
                 <AiTwotoneHeart /> Wishlist
-                <span className="mobile-badge-nav">{state.wishlist.length}</span>
+                <span className="mobile-badge-nav">
+                  {state.wishlist.length}
+                </span>
               </h3>
             </li>
           </Link>
@@ -94,13 +97,13 @@ const Nav = () => {
             </li>
           </Link>
           {state.user._id ? (
-            <Link to="">
+            <Link to="" style={{ textDecoration: "none" }}>
               <li className="stacked-list-item" onClick={signOut}>
                 <h3>Sign Out</h3>
               </li>
             </Link>
           ) : (
-            <Link to="/signin">
+            <Link to="/signin" style={{ textDecoration: "none" }}>
               <li className="stacked-list-item" onClick={signOut}>
                 <h3>Sign In</h3>
               </li>

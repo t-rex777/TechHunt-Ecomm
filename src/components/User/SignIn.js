@@ -4,7 +4,9 @@ import { useCart } from "../../cart-context/CartContext";
 import { setTechHuntHeader } from "../../utils";
 import { Redirect } from "react-router-dom";
 import "./user.css";
-import Nav from './../../Nav/Nav';
+import Nav from "./../../Nav/Nav";
+import { getCartItems } from "../Cart/helper";
+import { getWishlistItems } from "./../Wishlist/helper";
 
 function SignIn() {
   const { dispatch } = useCart();
@@ -36,6 +38,15 @@ function SignIn() {
       dispatch({ type: "SET_USER", payload: userData });
       setTechHuntHeader(accessToken);
       localStorage.setItem("_rtoken", refreshToken);
+
+      // setting cart
+      const cartData = await getCartItems();
+      dispatch({ type: "SET_CART", payload: cartData }); //is not updating on signin, but works on reload.
+
+      // setting wishlist
+      const wishlistData = await getWishlistItems();
+      dispatch({ type: "SET_WISHLIST", payload: wishlistData });
+
       setRedirect(true);
     } catch (error) {
       console.log(error);

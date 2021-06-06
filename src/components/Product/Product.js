@@ -55,22 +55,18 @@ function Product() {
     <>
       <Nav />
       <span
-        className="filter mr-1"
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          fontSize: "2rem",
-          cursor: "pointer",
-        }}
+        className="filter mr-1 "
         onClick={() => {
           setFilter(!viewFilter);
         }}
       >
-        <BsFilterRight size={30} />
+        <BsFilterRight size={20} />
         Filter
       </span>
       {viewFilter && <SideBar />}
+      <h1 className="text-center mb-2">{category}</h1>
       <div className="products">
+        
         {finalProducts.map((item) => {
           isInCart(item.name);
           return (

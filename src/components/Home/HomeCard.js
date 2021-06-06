@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../../cart-context/CartContext";
 import EarphoneImg from "../../images/earphone.png"
+import tvImg from "../../images/tv.png"
 function HomeCard() {
   const { dispatch } = useCart();
 
@@ -25,7 +26,7 @@ function HomeCard() {
   );
 
   return (
-    <div className="homeCards mt-4">
+    <div className="homeCards">
       {customCard(
         "phone",
         "https://pngimg.com/uploads/iphone_12/iphone_12_PNG23.png"
@@ -36,7 +37,7 @@ function HomeCard() {
       )}
       {customCard(
         "tv",
-        "https://lh3.googleusercontent.com/proxy/MimzQ9c14-jb7HoW-n789czUYQ2YilyLTXhpJSaFuXNZ7A81K_Sg1Vx1HMrbzdEbiSU5ejoCujlScev6ZpnvnbwFRre63M8tAe6Bmo24ND6MzQqy4w"
+        tvImg
       )}
       {customCard(
         "watch",

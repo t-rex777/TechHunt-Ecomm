@@ -29,8 +29,8 @@ function SideBar() {
 
   return (
     <form className="sidebar p-1">
-      <div className="mr-4">
-        <h1>Sort By</h1>
+      <div className="mr-4 mb-2">
+        <h1 className="text-md">Sort By</h1>
         <input
           type="radio"
           id="highToLow"
@@ -54,7 +54,7 @@ function SideBar() {
         </label>
       </div>
       <div className="mr-4">
-        <h1>Filter</h1>
+        <h1 className="text-md">Filter</h1>
         <input
           type="checkbox"
           id="outOfStock"
