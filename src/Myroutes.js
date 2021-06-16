@@ -7,6 +7,7 @@ import "./App.css";
 import SignIn from "./components/User/SignIn";
 import PrivateRoute from "./components/User/PrivateRoute";
 import Home from "./components/Home/Home";
+import SignUp from './components/User/SIgnUp';
 
 function Myroutes() {
   return (
@@ -14,6 +15,7 @@ function Myroutes() {
       <Switch>
         <Route path="/products" exact component={Product} />
         <Route path="/signin" exact component={SignIn} />
+        <Route path="/signup" exact component={SignUp} />
         <Route path="/" exact component={Home} />
         <PrivateRoute path="/cart" exact component={Cart} />
         <PrivateRoute path="/wishlist" exact component={Wishlist} />

@@ -1,5 +1,16 @@
 import { techHuntAPI } from "./../../utils";
 
+export const signup = async (user) => {
+  try {
+    const response = await techHuntAPI.post("/signup", {
+      ...user,
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const signin = async (user) => {
   try {
     const response = await techHuntAPI.post("/signin", {

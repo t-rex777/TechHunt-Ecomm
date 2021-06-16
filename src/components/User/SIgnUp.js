@@ -1,20 +1,16 @@
 import React, { useState } from "react";
-import { signin } from "./helper";
-import { useCart } from "../../cart-context/CartContext";
-import { setTechHuntHeader } from "../../utils";
+import { signup } from "./helper";
 import { Redirect, Link } from "react-router-dom";
-import { getCartItems } from "../Cart/helper";
-import { getWishlistItems } from "./../Wishlist/helper";
 import Nav from "./../../Nav/Nav";
 import "./user.css";
 
-function SignIn() {
-  const { dispatch } = useCart();
+function SignUp() {
   const [shouldRedirect, setRedirect] = useState(false);
   const [user, setUser] = useState({
-    email: "admin@gmail.com",
-    password: "admin@gmail.com",
-    re_password: "admin@gmail.com",
+    name: "",
+    email: "",
+    password: "",
+    re_password: "",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,20 +29,7 @@ function SignIn() {
         alert("Both passwords does not match!!");
         return "";
       }
-      const data = await signin(user);
-      const { userData, accessToken, refreshToken } = data;
-      dispatch({ type: "SET_USER", payload: userData });
-      setTechHuntHeader(accessToken);
-      localStorage.setItem("_rtoken", refreshToken);
-
-      // setting cart
-      const cartData = await getCartItems();
-      dispatch({ type: "SET_CART", payload: cartData }); //is not updating on signin, but works on reload.
-
-      // setting wishlist
-      const wishlistData = await getWishlistItems();
-      dispatch({ type: "SET_WISHLIST", payload: wishlistData });
-
+      await signup(user);
       setRedirect(true);
     } catch (error) {
       console.log(error);
@@ -55,10 +38,22 @@ function SignIn() {
   return (
     <>
       <Nav />
-      {shouldRedirect && <Redirect to="/" />}
+      {shouldRedirect && <Redirect to="/signin" />}
       <div className="signin">
-        <h1 className="text-center mb-2">Sign In</h1>
+        <h1 className="text-center mb-2">Sign Up</h1>
         <form className="form-validation" onSubmit={formSubmit}>
+          <div className="row">
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              className="form-input"
+              value={user.name}
+              onChange={handleChange}
+            />
+            <br />
+          </div>
           <div className="row">
             <label htmlFor="email">Email</label>
             <input
@@ -71,6 +66,7 @@ function SignIn() {
             />
             <br />
           </div>
+
           <div className="row">
             <label htmlFor="password">Password</label>
             <input
@@ -102,11 +98,11 @@ function SignIn() {
           </div>
         </form>
         <p className="text-center mt-2">
-          Don't have an account ? <Link to="/signup">Sign Up</Link>
+          Already have an account ? <Link to="/signin">Sign In</Link>
         </p>
       </div>
     </>
   );
 }
 
-export default SignIn;
+export default SignUp;
