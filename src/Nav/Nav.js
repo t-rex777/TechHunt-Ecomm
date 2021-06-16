@@ -66,50 +66,52 @@ const Nav = () => {
           </li>
         </ul>
       </nav>
-      
+
       {toggle && (
-        <ul className="stacked-list">
-          <Link to="/">
-            <li className="stacked-list-item">
-              <h3>
-                <AiFillHome /> Home
-              </h3>
-            </li>
-          </Link>
-
-          <Link to="/wishlist">
-            <li className="stacked-list-item">
-              <h3 className="mobile-icon">
-                <AiTwotoneHeart /> Wishlist
-                <span className="mobile-badge-nav">
-                  {state.wishlist.length}
-                </span>
-              </h3>
-            </li>
-          </Link>
-
-          <Link to="/cart">
-            <li className="stacked-list-item">
-              <h3>
-                <AiOutlineShoppingCart /> Cart
-                <span className="mobile-badge-nav">{state.cart.length}</span>
-              </h3>
-            </li>
-          </Link>
-          {state.user._id ? (
-            <Link to="" style={{ textDecoration: "none" }}>
-              <li className="stacked-list-item" onClick={signOut}>
-                <h3>Sign Out</h3>
+        <div className="mobileNav">
+          <ul className="stacked-list">
+            <Link to="/">
+              <li className="stacked-list-item">
+                <h3>
+                  <AiFillHome /> Home
+                </h3>
               </li>
             </Link>
-          ) : (
-            <Link to="/signin" style={{ textDecoration: "none" }}>
-              <li className="stacked-list-item" onClick={signOut}>
-                <h3>Sign In</h3>
+
+            <Link to="/wishlist">
+              <li className="stacked-list-item">
+                <h3 className="mobile-icon">
+                  <AiTwotoneHeart /> Wishlist
+                  <span className="mobile-badge-nav">
+                    {state.wishlist.length}
+                  </span>
+                </h3>
               </li>
             </Link>
-          )}
-        </ul>
+
+            <Link to="/cart">
+              <li className="stacked-list-item">
+                <h3>
+                  <AiOutlineShoppingCart /> Cart
+                  <span className="mobile-badge-nav">{state.cart.length}</span>
+                </h3>
+              </li>
+            </Link>
+            {state.user._id ? (
+              <Link to="" style={{ textDecoration: "none" }}>
+                <li className="stacked-list-item" onClick={signOut}>
+                  <h3>Sign Out</h3>
+                </li>
+              </Link>
+            ) : (
+              <Link to="/signin" style={{ textDecoration: "none" }}>
+                <li className="stacked-list-item" onClick={signOut}>
+                  <h3>Sign In</h3>
+                </li>
+              </Link>
+            )}
+          </ul>
+        </div>
       )}
     </div>
   );

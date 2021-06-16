@@ -50,9 +50,14 @@
   height: 25px;
   border-radius: 5px;
 }
+
+.mobileNav{
+  background-color: #140a22;
+}
 .stacked-list {
   display: none;
   margin: 0 auto;
+  width: fit-content !important;
 }
 .stacked-list-item {
   color: white;
@@ -60,7 +65,7 @@
   border-bottom: none !important;
   padding: 10px 10px !important;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .stacked-list-item > h3 {
   text-decoration: underline #140a22;
@@ -69,7 +74,7 @@
 
 .stacked-list-item:hover {
   color: #fbbf24;
-  background-color: #220f3b !important;
+  background-color: #140a22 !important;
 }
 .stacked-list-item > h3:hover {
   text-decoration: underline #220f3b;
