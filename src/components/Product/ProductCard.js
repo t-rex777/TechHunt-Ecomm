@@ -8,32 +8,44 @@ import { getCartItems } from "./../Cart/helper";
 import { Link } from "react-router-dom";
 const ProductCard = ({ title, img, price, item, isInCart, isInWishlist }) => {
   const { dispatch } = useCart();
+
   const addProductToCart = async () => {
+    dispatch({ type: "LOADING", payload: true });
     await addCartItem(item._id);
     try {
       const cartData = await getCartItems();
       dispatch({ type: "SET_CART", payload: cartData });
+      dispatch({ type: "LOADING", payload: false });
     } catch (error) {
       console.log(error);
+      dispatch({ type: "LOADING", payload: false });
     }
   };
   const addProductToWishlist = async () => {
+    dispatch({ type: "LOADING", payload: true });
+
     await addWishlistItem(item._id);
     try {
       const wishlistData = await getWishlistItems();
       dispatch({ type: "SET_WISHLIST", payload: wishlistData });
+      dispatch({ type: "LOADING", payload: false });
     } catch (error) {
       console.log(error);
+      dispatch({ type: "LOADING", payload: false });
     }
   };
 
   const deleteProductFromWishlist = async () => {
+    dispatch({ type: "LOADING", payload: true });
+
     await deleteWishlistItem(isInWishlist);
     try {
       const wishlistItems = await getWishlistItems();
       dispatch({ type: "SET_WISHLIST", payload: wishlistItems });
+      dispatch({ type: "LOADING", payload: false });
     } catch (error) {
       console.log(error);
+      dispatch({ type: "LOADING", payload: false });
     }
   };
 

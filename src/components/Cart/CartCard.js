@@ -9,6 +9,7 @@ const CartCard = ({ title, img, price, item, quantity }) => {
   const { state, dispatch } = useCart();
 
   const changeQuantity = async (change) => {
+    dispatch({ type: "LOADING", payload: true });
     if (change === "increase") {
       quantity += 1;
     } else if (change === "decrease") {
@@ -18,27 +19,32 @@ const CartCard = ({ title, img, price, item, quantity }) => {
       quantity -= 1;
     }
     const updatedQuantity = { quantity: quantity };
-    await updateCartItem(item._id, updatedQuantity);
     try {
+      await updateCartItem(item._id, updatedQuantity);
       const cartItems = await getCartItems();
       dispatch({ type: "SET_CART", payload: cartItems });
+      dispatch({ type: "LOADING", payload: false });
     } catch (error) {
       console.log(error);
     }
   };
-  
+
   const deleteItem = async () => {
+    dispatch({ type: "LOADING", payload: true });
     await deleteCartItem(item._id);
     try {
       console.log("item deleted successfully!");
       const cartItems = await getCartItems();
       dispatch({ type: "SET_CART", payload: cartItems });
+      dispatch({ type: "LOADING", payload: false });
     } catch (error) {
       console.log(error);
     }
   };
 
   const addProductToWishlist = async () => {
+    dispatch({ type: "LOADING", payload: true });
+
     const isInWishlist = state.wishlist.find(
       (wishlistItem) => wishlistItem._id === item._id
     );
@@ -47,9 +53,12 @@ const CartCard = ({ title, img, price, item, quantity }) => {
       try {
         const wishlistData = await getWishlistItems();
         dispatch({ type: "SET_WISHLIST", payload: wishlistData });
+        dispatch({ type: "LOADING", payload: false });
       } catch (error) {
         console.log(error);
       }
+    } else {
+      dispatch({ type: "LOADING", payload: false });
     }
   };
   return (

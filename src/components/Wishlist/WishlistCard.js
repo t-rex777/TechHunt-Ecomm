@@ -11,22 +11,30 @@ const WishlistCard = ({ title, img, price, item }) => {
     state.cart.find(({ item }) => item.name === productName);
 
   const deleteProductFromWishlist = async () => {
+    dispatch({ type: "LOADING", payload: true });
+
     await deleteWishlistItem(item._id);
     try {
       const wishlistItems = await getWishlistItems();
       dispatch({ type: "SET_WISHLIST", payload: wishlistItems });
+      dispatch({ type: "LOADING", payload: false });
     } catch (error) {
       console.log(error);
+      dispatch({ type: "LOADING", payload: false });
     }
   };
   const addProductToCart = async () => {
     if (!isInCart(title)) {
+      dispatch({ type: "LOADING", payload: true });
+
       await addCartItem(item._id);
       try {
         const cartData = await getCartItems();
         dispatch({ type: "SET_CART", payload: cartData });
+        dispatch({ type: "LOADING", payload: false });
       } catch (error) {
         console.log(error);
+        dispatch({ type: "LOADING", payload: false });
       }
     }
   };

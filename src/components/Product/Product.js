@@ -5,6 +5,7 @@ import { BsFilterRight } from "react-icons/bs";
 // import Loading from "../Loading/Loading";
 import Nav from "../../Nav/Nav";
 import SideBar from "./../../Nav/SideBar";
+import LoaderPage from './../LoaderPage/LoaderPage';
 
 function Product() {
   const { state, dispatch } = useCart();
@@ -54,6 +55,7 @@ function Product() {
   return (
     <>
       <Nav />
+      {state.loading && <LoaderPage />}
       <span
         className="filter mr-1 "
         onClick={() => {

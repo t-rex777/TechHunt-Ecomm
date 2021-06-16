@@ -2,7 +2,8 @@ import React from "react";
 import { useCart } from "../../cart-context/CartContext";
 import CartCard from "./CartCard";
 import emptyCart from "../../images/emptycart.svg";
-import Nav from './../../Nav/Nav';
+import Nav from "./../../Nav/Nav";
+import LoaderPage from "./../LoaderPage/LoaderPage";
 
 function Cart() {
   const { state } = useCart();
@@ -12,10 +13,11 @@ function Cart() {
     <>
       <Nav />
       <h1 className="text-center text-xl">Cart</h1>
+      {state.loading && <LoaderPage />}
       {cart.length !== 0 ? (
         <div className="cartpage">
           <div className="cartitems">
-            {cart.map(({item,quantity}) => {
+            {cart.map(({ item, quantity }) => {
               return (
                 <CartCard
                   key={item._id}

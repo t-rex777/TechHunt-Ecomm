@@ -86,7 +86,7 @@ export function CartContext({ children }) {
         };
 
       case "LOADING":
-        return { ...state, loading: !state.loading };
+        return { ...state, loading: action.payload };
       default:
         throw new Error();
     }

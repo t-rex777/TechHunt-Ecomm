@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../../cart-context/CartContext";
-import EarphoneImg from "../../images/earphone.png"
-import tvImg from "../../images/tv.png"
+import EarphoneImg from "../../images/earphone.png";
+import tvImg from "../../images/tv.png";
 function HomeCard() {
   const { dispatch } = useCart();
 
@@ -31,14 +31,8 @@ function HomeCard() {
         "phone",
         "https://pngimg.com/uploads/iphone_12/iphone_12_PNG23.png"
       )}
-      {customCard(
-        "earphone",
-        EarphoneImg
-      )}
-      {customCard(
-        "tv",
-        tvImg
-      )}
+      {customCard("earphone", EarphoneImg)}
+      {customCard("tv", tvImg)}
       {customCard(
         "watch",
         "https://pngimg.com/uploads/watches/watches_PNG9899.png"
@@ -47,8 +41,6 @@ function HomeCard() {
         "all",
         "https://freepngimg.com/download/technology/41392-4-gadgets-free-download-png-hd.png"
       )}
-
-      
     </div>
   );
 }
