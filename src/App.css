@@ -1,38 +1,208 @@
-.App {
-  text-align: center;
+@import url("https://glitchpop-css.herokuapp.com/library/styles.css");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600&display=swap");
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background: #d5d6da;
+  font-family: "Raleway", sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* products */
+.products {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  margin: 10px 5px;
+  padding: 1.5rem;
+  height: 400px;
+  background-color: #fff;
+  border: solid 2px #fff;
+  border-radius: 12px;
+}
+.filter {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* cart */
+.cartpage {
+  display: flex;
+  justify-content: center;
+}
+.cart-card {
+  display: flex;
+  position: relative;
+  margin: 10px 5px;
+  padding: 1.5rem;
+  width: auto;
+  background-color: #fff;
+  border: solid 2px #fff;
+  border-radius: 12px;
+}
+.card-main {
+  display: flex;
+  justify-content: space-between;
+}
+.card-main-info {
+  display: flex;
+  flex-direction: column;
+}
+.card-image {
+  max-height: 200px;
+  border: none;
+  object-fit: contain;
+}
+.card-header {
+  font-size: 1.3rem;
+}
+.card-body {
+  flex-grow: 1;
+  font-size: 1.2rem;
+}
+.interactions {
+  display: flex;
+  position: absolute;
+  justify-content: flex-end;
+  right: 0;
+  bottom: 20px;
+}
+
+.btn-secondary {
+  font-size: 1rem;
+}
+.remove-btn {
+  cursor: pointer;
+  font-size: 1.8rem;
+  align-self: flex-end;
+}
+.remove-btn:hover {
+  color: rgb(226, 25, 25);
+}
+.quant-btn {
+  display: flex;
+  margin-bottom: 1rem;
+}
+.quant-btn > button {
+  width: 20px;
+  height: 20px;
+  outline: none;
+  margin: 0 2rem;
+}
+.quant-btn > p {
+  font-size: 1.2rem;
+}
+.place-btn {
+  border: solid 1px rgb(214, 210, 210);
+  border-radius: 5px;
+  padding: 0.5rem 0.8rem;
+  margin: 0.8rem 0;
+  height: fit-content;
+  margin-top: 0px;
+  align-self: flex-end;
+  cursor: pointer;
+}
+.place-btn:hover {
+  background-color: rgb(226, 25, 25);
+  color: white;
+  border: solid 1px red;
+  opacity: 0.8;
+}
+.line-separator {
+  border: solid 1px #d5d6da;
+  background-color: #d5d6da;
+  border-radius: 5px;
+}
+.cartitems {
+  width: 100%;
+}
+.checkout {
+  height: 100%;
+  width: 30vw;
+  background-color: #fff;
+  padding: 1.5rem;
+  margin-top: 0.7rem;
+  border-radius: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.empty-img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+/* wishlist */
+.wishlist {
+  margin-top: -20px;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 2rem;
+  cursor: pointer;
+}
+.wishlist > p {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+.wishlist:hover {
+  color: red;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media screen and (max-width: 768px) {
+  .filter{
+    font-size: 1rem;
   }
-  to {
-    transform: rotate(360deg);
+  .cart-card {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 2rem;
+  }
+  .place-btn {
+    align-self: center;
+  }
+  .remove-btn {
+    align-self: center;
+    margin-left: -5px;
+    margin-bottom: -1rem;
+  }
+  .quant-btn {
+    margin-top: 1rem;
+  }
+  .card-main {
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .card-main-info {
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .cartpage {
+    flex-direction: column;
+  }
+  .checkout {
+    width: auto;
+    margin: 10px 2rem;
+  }
+  .checkout > p {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  .card {
+    width: 250px;
+  }
+  .interactions {
+    position: static;
+    justify-content: center;
+    flex-direction: column;
   }
 }

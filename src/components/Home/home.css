@@ -1,0 +1,106 @@
+.home {
+  display: flex;
+  flex-direction: column;
+}
+.homeCards {
+  display: flex;
+  justify-content: flex-start;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  background: url("../../images/wave.svg") center center no-repeat;
+  background-size: cover;
+  
+}
+.homeCard {
+  background: center center no-repeat;
+  background-size: contain;
+  /* filter: brightness(0.7); */
+  height: 200px;
+  width: 180px;
+  display: flex;
+  margin: 1rem 1.5rem;
+  justify-content: center;
+  transition: 500ms;
+}
+.homeCard:hover {
+  transition: 500ms;
+  /* filter: brightness(1); */
+  transform: scale(1.1);
+}
+.homeCard-text {
+  align-self: center;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.678);
+  width: 100%;
+}
+
+.banner {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: #000;
+}
+.slide {
+  position: relative;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  background-color: #000;
+}
+
+.slide > img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  max-height: 60vh;
+  background-size: contain;
+}
+.prev,
+.next {
+  position: absolute;
+  top: 40%;
+  font-size: 2rem;
+  transform: translateY(-50%);
+  color: #fff;
+  cursor: pointer;
+}
+.prev {
+  left: 10%;
+}
+.next {
+  right: 10%;
+}
+
+@media screen and (max-width: 380px) {
+  .prev,
+  .next {
+    top: 25%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .prev,
+  .next {
+    top: 30%;
+  }
+  @media screen and (max-width: 680px) {
+    .prev,
+    .next {
+      top: 35%;
+    }
+  }
+}
+
+/* panel */
+.panel {
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  background-color: #fff;
+}
+.panel-item {
+  margin: 1rem 2rem;
+}
+.panel-item>img{
+  width: 150px;
+}

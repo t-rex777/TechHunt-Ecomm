@@ -1,0 +1,207 @@
+import React, { useEffect, createContext, useContext, useReducer } from "react";
+import { getProducts } from "../components/Product/helper";
+import { getCartItems } from "./../components/Cart/helper";
+import { getWishlistItems } from "./../components/Wishlist/helper";
+import { getUserDetails } from "./../components/User/helper";
+import Axios from "axios";
+import { API } from "./../API";
+import { setTechHuntHeader } from "../utils";
+
+const cartProvider = createContext();
+export function CartContext({ children }) {
+  const reducerFunction = (state, action) => {
+    switch (action.type) {
+      case "SET_USER":
+        return { ...state, user: action.payload };
+      case "SIGN_OUT": {
+        localStorage.removeItem("_rtoken");
+        return {
+          ...state,
+          user: {
+            cart: [],
+            wishlist: [],
+          },
+          cart: [],
+          wishlist: [],
+        };
+      }
+      case "SET_PRODUCTS":
+        return { ...state, products: action.payload };
+
+      case "SET_FINALPRODUCTS":
+        return { ...state, finalProducts: action.payload };
+
+      case "SET_CART":
+        return { ...state, cart: action.payload };
+
+      case "SET_WISHLIST":
+        return { ...state, wishlist: action.payload };
+        
+      case "SET_CATEGORY":
+        return { ...state, category: action.payload };
+
+      case "SORT_ASC":
+        return {
+          ...state,
+          finalProducts: state.finalProducts.sort(
+            (a, b) => parseFloat(a.price) - parseFloat(b.price)
+          ),
+        };
+
+      case "SORT_DES":
+        return {
+          ...state,
+          finalProducts: state.finalProducts.sort(
+            (a, b) => parseFloat(b.price) - parseFloat(a.price)
+          ),
+        };
+
+      case "FILTER_DELIVERY":
+        return {
+          ...state,
+          fastDelivery: !state.fastDelivery,
+        };
+
+      case "FILTER_STOCK":
+        return {
+          ...state,
+          stock: !state.stock,
+        };
+
+      case "FASTDELIVERY_OFF":
+        return { ...state, fastDelivery: false };
+
+      case "INSTOCK_ON":
+        return { ...state, stock: true };
+
+      case "PRICE_DETAILS":
+        return {
+          ...state,
+          priceDetails: {
+            price: action.payload.initialPrice,
+            deliveryCharges: action.payload.isFastDelivery * 100,
+            discount: Math.floor(action.payload.initialPrice * 0.1),
+            totalAmount: action.payload.finalPrice,
+          },
+        };
+
+      case "LOADING":
+        return { ...state, loading: action.payload };
+      default:
+        throw new Error();
+    }
+  };
+
+  const [state, dispatch] = useReducer(reducerFunction, {
+    user: {
+      cart: [],
+      wishlist: [],
+    },
+    products: [],
+    finalProducts: [],
+    cart: [],
+    wishlist: [],
+    category: "all",
+    stock: true,
+    fastDelivery: false,
+    loading: false,
+    priceDetails: {
+      price: 0,
+      discount: 0,
+      deliveryCharges: 0,
+      totalAmount: 0,
+    },
+  });
+  const { products, stock, fastDelivery } = state;
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await getProducts();
+        dispatch({ type: "SET_FINALPRODUCTS", payload: data });
+        dispatch({ type: "SET_PRODUCTS", payload: data });
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+
+    const rToken = localStorage.getItem("_rtoken");
+    if (rToken && typeof rToken === "string") {
+      (async () => {
+        try {
+          const newAccessTokenRequest = await Axios({
+            baseURL: API,
+            method: "GET",
+            url: "/token/access",
+            headers: {
+              "refresh-token": `Bearer ${rToken}`,
+            },
+          });
+          const { accessToken, refreshToken } = newAccessTokenRequest.data;
+          localStorage.setItem("_rtoken", refreshToken);
+          setTechHuntHeader(accessToken);
+
+          // setting user
+          const userData = await getUserDetails();
+          dispatch({ type: "SET_USER", payload: userData });
+
+          // setting cart
+          const cartData = await getCartItems();
+          dispatch({ type: "SET_CART", payload: cartData }); //is not updating on signin, but works on reload.
+
+          // setting wishlist
+          const wishlistData = await getWishlistItems();
+          dispatch({ type: "SET_WISHLIST", payload: wishlistData });
+        } catch (error) {
+          console.log(error);
+          localStorage.removeItem("_rtoken");
+          dispatch({ type: "SIGN_OUT" });
+        }
+      })();
+    }
+  }, []);
+
+  useEffect(() => {
+    const fastDeliveryProducts = products.filter(
+      (a) => a.delivery === "Fast delivery"
+    );
+    const inStockProducts = products.filter((a) => a.stock === "In stock");
+    if (stock && fastDelivery) {
+      dispatch({ type: "SET_FINALPRODUCTS", payload: fastDeliveryProducts });
+    } else if (fastDelivery) {
+      const fastDeliveryInStock = fastDeliveryProducts.filter(
+        (a) => a.stock === "In stock"
+      );
+      dispatch({ type: "SET_FINALPRODUCTS", payload: fastDeliveryInStock });
+    } else if (!stock) {
+      dispatch({ type: "SET_FINALPRODUCTS", payload: inStockProducts });
+    } else {
+      dispatch({ type: "SET_FINALPRODUCTS", payload: products });
+    }
+  }, [products, fastDelivery, stock]);
+
+  useEffect(() => {
+    let initialPrice = 0;
+    let isFastDelivery = 0;
+    state.cart.forEach(({ item, quantity }) => {
+      initialPrice += item.price * quantity;
+      item.delivery === "Fast delivery" && (isFastDelivery += 1);
+    });
+    let finalPrice =
+      initialPrice + isFastDelivery * 100 - Math.floor(initialPrice * 0.1);
+    dispatch({
+      type: "PRICE_DETAILS",
+      payload: { initialPrice, isFastDelivery, finalPrice },
+    });
+  }, [state.cart]);
+
+  return (
+    <cartProvider.Provider value={{ state, dispatch }}>
+      {children}
+    </cartProvider.Provider>
+  );
+}
+
+export const useCart = () => {
+  return useContext(cartProvider);
+};

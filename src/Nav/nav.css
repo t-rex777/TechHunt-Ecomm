@@ -1,0 +1,109 @@
+/* top Nav */
+.nav-items {
+  justify-content: flex-end !important;
+}
+.nav-logo {
+  font-family: "Raleway", sans-serif !important;
+  font-weight: 800;
+  position: absolute;
+  left: 1rem;
+  top: 1.6rem;
+  font-size: 2rem !important;
+}
+.badge-circle-s {
+  font-size: 15px;
+  height: fit-content;
+  text-decoration: none;
+  position: relative;
+  top: 15px;
+  left: -10px;
+}
+
+/* sidebar */
+.sidebar {
+  background-color: #fff;
+  display: flex;
+  justify-content: flex-end;
+  border-radius: 0 0 15px 0;
+}
+.clear-btn {
+  height: 40px;
+  align-self: flex-end;
+  font-size: 1rem;
+}
+
+/* mobile view nav */
+.hamBurger {
+  display: none;
+}
+.dropdown {
+  display: block;
+}
+.mobile-icon {
+  position: relative;
+}
+.mobile-badge-nav {
+  margin-left: 1rem;
+  position: absolute;
+  background-color: red;
+  width: 40px;
+  height: 25px;
+  border-radius: 5px;
+}
+
+.mobileNav{
+  background-color: #140a22;
+}
+.stacked-list {
+  display: none;
+  margin: 0 auto;
+  width: fit-content !important;
+}
+.stacked-list-item {
+  color: white;
+  background-color: #140a22;
+  border-bottom: none !important;
+  padding: 10px 10px !important;
+  display: flex;
+  justify-content: flex-start;
+}
+.stacked-list-item > h3 {
+  text-decoration: underline #140a22;
+  font-weight: 400;
+}
+
+.stacked-list-item:hover {
+  color: #fbbf24;
+  background-color: #140a22 !important;
+}
+.stacked-list-item > h3:hover {
+  text-decoration: underline #220f3b;
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar > div > h1 {
+    font-size: 1rem;
+  }
+  .sidebar > div > label {
+    font-size: 0.9rem;
+  }
+  .clear-btn {
+    height: 25px;
+    font-size: 0.5rem;
+  }
+  .hamBurger {
+    display: block;
+  }
+  .dropdown {
+    display: none;
+  }
+  .stacked-list {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .sidebar {
+    flex-direction: column;
+  }
+}
