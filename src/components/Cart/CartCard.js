@@ -1,6 +1,6 @@
 import { AiFillDelete } from "react-icons/ai";
 import { RiTruckFill } from "react-icons/ri";
-import { useCart } from "../../cart-context/CartContext";
+import { useCart } from "../../cart-context/CartProvider";
 import { addWishlistItem } from "../Wishlist/helper";
 import { deleteCartItem, getCartItems, updateCartItem } from "./helper";
 import { getWishlistItems } from "./../Wishlist/helper";

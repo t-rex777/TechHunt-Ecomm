@@ -8,3 +8,12 @@ export const getProducts = async () => {
     console.log(error);
   }
 };
+
+export const getProductById = async (productId) => {
+  try {
+    const response = await techHuntAPI.get(`/product/${productId}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

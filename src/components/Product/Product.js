@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useCart } from "../../cart-context/CartContext";
+import { useCart } from "../../cart-context/CartProvider";
 import ProductCard from "./ProductCard";
 import { BsFilterRight } from "react-icons/bs";
 // import Loading from "../Loading/Loading";
 import Nav from "../../Nav/Nav";
 import SideBar from "./../../Nav/SideBar";
-import LoaderPage from './../LoaderPage/LoaderPage';
+import LoaderPage from "./../LoaderPage/LoaderPage";
 
 function Product() {
   const { state, dispatch } = useCart();
@@ -26,28 +26,32 @@ function Product() {
 
   const [viewFilter, setFilter] = useState(false);
   useEffect(() => {
-    console.log(category);
-    if (category === "phone") {
+    if (category === "Phone") {
       const filteredProducts = products.filter(
-        (product) => product.category === "phone"
+        (product) => product.category === "Phone"
       );
       dispatch({ type: "SET_FINALPRODUCTS", payload: filteredProducts });
-    } else if (category === "earphone") {
+    } else if (category === "Earphone") {
       const filteredProducts = products.filter(
-        (product) => product.category === "earphone"
+        (product) => product.category === "Earphone"
       );
       dispatch({ type: "SET_FINALPRODUCTS", payload: filteredProducts });
-    } else if (category === "tv") {
+    } else if (category === "TV") {
       const filteredProducts = products.filter(
-        (product) => product.category === "tv"
+        (product) => product.category === "TV"
       );
       dispatch({ type: "SET_FINALPRODUCTS", payload: filteredProducts });
-    } else if (category === "watch") {
+    } else if (category === "Watch") {
       const filteredProducts = products.filter(
-        (product) => product.category === "watch"
+        (product) => product.category === "Watch"
       );
       dispatch({ type: "SET_FINALPRODUCTS", payload: filteredProducts });
-    } else if (category === "all") {
+    } else if (category === "Storage") {
+      const filteredProducts = products.filter(
+        (product) => product.category === "Storage"
+      );
+      dispatch({ type: "SET_FINALPRODUCTS", payload: filteredProducts });
+    } else if (category === "All") {
       dispatch({ type: "SET_FINALPRODUCTS", payload: products });
     }
   }, []);
@@ -68,12 +72,12 @@ function Product() {
       {viewFilter && <SideBar />}
       <h1 className="text-center mb-2">{category}</h1>
       <div className="products">
-        
         {finalProducts.map((item) => {
           isInCart(item.name);
           return (
             <ProductCard
               key={item._id}
+              productId={item._id}
               item={item}
               title={item.name}
               img={item.img}

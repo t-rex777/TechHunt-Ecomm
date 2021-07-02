@@ -1,5 +1,5 @@
 import React from "react";
-import { useCart } from "../../cart-context/CartContext";
+import { useCart } from "../../cart-context/CartProvider";
 import CartCard from "./CartCard";
 import emptyCart from "../../images/emptycart.svg";
 import Nav from "./../../Nav/Nav";

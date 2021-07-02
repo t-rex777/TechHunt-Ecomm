@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { CartContext } from "./cart-context/CartContext";
-import Myroutes from "./Myroutes";
+import { CartProvider } from "./cart-context/CartProvider";
+import App from "./App";
 
 ReactDOM.render(
   <React.StrictMode>
-    <CartContext>
-      <Myroutes />
-    </CartContext>
+    <CartProvider>
+      <App />
+    </CartProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

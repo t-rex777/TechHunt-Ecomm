@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { signup } from "./helper";
 import { Redirect, Link } from "react-router-dom";
-import Nav from "./../../Nav/Nav";
+import Nav from "../../Nav/Nav";
 import "./user.css";
 
 function SignUp() {

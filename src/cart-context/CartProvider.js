@@ -1,14 +1,14 @@
 import React, { useEffect, createContext, useContext, useReducer } from "react";
 import { getProducts } from "../components/Product/helper";
-import { getCartItems } from "./../components/Cart/helper";
-import { getWishlistItems } from "./../components/Wishlist/helper";
-import { getUserDetails } from "./../components/User/helper";
+import { getCartItems } from "../components/Cart/helper";
+import { getWishlistItems } from "../components/Wishlist/helper";
+import { getUserDetails } from "../components/User/helper";
 import Axios from "axios";
-import { API } from "./../API";
+import { API } from "../API";
 import { setTechHuntHeader } from "../utils";
 
-const cartProvider = createContext();
-export function CartContext({ children }) {
+const cartContext = createContext();
+export function CartProvider({ children }) {
   const reducerFunction = (state, action) => {
     switch (action.type) {
       case "SET_USER":
@@ -27,6 +27,9 @@ export function CartContext({ children }) {
       }
       case "SET_PRODUCTS":
         return { ...state, products: action.payload };
+        
+      case "SET_SELECTED_PRODUCT":
+        return { ...state, selectedProduct: action.payload };
 
       case "SET_FINALPRODUCTS":
         return { ...state, finalProducts: action.payload };
@@ -36,7 +39,7 @@ export function CartContext({ children }) {
 
       case "SET_WISHLIST":
         return { ...state, wishlist: action.payload };
-        
+
       case "SET_CATEGORY":
         return { ...state, category: action.payload };
 
@@ -88,7 +91,7 @@ export function CartContext({ children }) {
       case "LOADING":
         return { ...state, loading: action.payload };
       default:
-        throw new Error();
+        return state;
     }
   };
 
@@ -98,10 +101,11 @@ export function CartContext({ children }) {
       wishlist: [],
     },
     products: [],
+    selectedProduct: {},
     finalProducts: [],
     cart: [],
     wishlist: [],
-    category: "all",
+    category: "All",
     stock: true,
     fastDelivery: false,
     loading: false,
@@ -116,10 +120,12 @@ export function CartContext({ children }) {
 
   useEffect(() => {
     (async () => {
+      dispatch({ type: "LOADING", payload: true });
       try {
         const data = await getProducts();
         dispatch({ type: "SET_FINALPRODUCTS", payload: data });
         dispatch({ type: "SET_PRODUCTS", payload: data });
+        dispatch({ type: "LOADING", payload: false });
       } catch (error) {
         console.log(error);
       }
@@ -129,6 +135,8 @@ export function CartContext({ children }) {
     if (rToken && typeof rToken === "string") {
       (async () => {
         try {
+          dispatch({ type: "LOADING", payload: true });
+
           const newAccessTokenRequest = await Axios({
             baseURL: API,
             method: "GET",
@@ -147,11 +155,14 @@ export function CartContext({ children }) {
 
           // setting cart
           const cartData = await getCartItems();
-          dispatch({ type: "SET_CART", payload: cartData }); //is not updating on signin, but works on reload.
+          dispatch({ type: "SET_CART", payload: cartData });
 
           // setting wishlist
           const wishlistData = await getWishlistItems();
           dispatch({ type: "SET_WISHLIST", payload: wishlistData });
+
+          // turning loader off
+          dispatch({ tyoe: "LOADING", payload: false });
         } catch (error) {
           console.log(error);
           localStorage.removeItem("_rtoken");
@@ -196,12 +207,12 @@ export function CartContext({ children }) {
   }, [state.cart]);
 
   return (
-    <cartProvider.Provider value={{ state, dispatch }}>
+    <cartContext.Provider value={{ state, dispatch }}>
       {children}
-    </cartProvider.Provider>
+    </cartContext.Provider>
   );
 }
 
 export const useCart = () => {
-  return useContext(cartProvider);
+  return useContext(cartContext);
 };

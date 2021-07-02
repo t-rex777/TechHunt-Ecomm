@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { signin } from "./helper";
-import { useCart } from "../../cart-context/CartContext";
+import { useCart } from "../../cart-context/CartProvider";
 import { setTechHuntHeader } from "../../utils";
 import { Redirect, Link } from "react-router-dom";
 import { getCartItems } from "../Cart/helper";

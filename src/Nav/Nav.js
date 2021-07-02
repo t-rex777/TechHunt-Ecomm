@@ -7,7 +7,7 @@ import {
 } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, Redirect } from "react-router-dom";
-import { useCart } from "../cart-context/CartContext";
+import { useCart } from "../cart-context/CartProvider";
 import "./nav.css";
 
 const Nav = () => {

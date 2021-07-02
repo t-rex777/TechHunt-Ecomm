@@ -1,12 +1,12 @@
 import { AiTwotoneHeart } from "react-icons/ai";
 import { RiTruckFill } from "react-icons/ri";
-import { useCart } from "../../cart-context/CartContext";
+import { useCart } from "../../cart-context/CartProvider";
 import { addCartItem } from "../Cart/helper";
 import { addWishlistItem, deleteWishlistItem } from "../Wishlist/helper";
 import { getWishlistItems } from "./../Wishlist/helper";
 import { getCartItems } from "./../Cart/helper";
 import { Link } from "react-router-dom";
-const ProductCard = ({ title, img, price, item, isInCart, isInWishlist }) => {
+const ProductCard = ({ productId,title, img, price, item, isInCart, isInWishlist }) => {
   const { dispatch } = useCart();
 
   const addProductToCart = async () => {
@@ -79,8 +79,9 @@ const ProductCard = ({ title, img, price, item, isInCart, isInWishlist }) => {
             <AiTwotoneHeart />
           </span>
         )}
-
-        <img className="card-image" src={img} alt="oneplus" />
+        <Link to={`product/${productId}`}>
+          <img className="card-image" src={img} alt="oneplus" />
+        </Link>
         <h1 className="card-header">{title}</h1>
         <p className="card-body">₹ {price}</p>
         {item.stock === "In stock" ? (
