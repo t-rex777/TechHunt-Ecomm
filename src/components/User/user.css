@@ -12,6 +12,7 @@
   border-radius: 10px;
 }
 .form-input {
+  
   border: none;
   background-color: #d5d6da;
   border-radius: 5px;
@@ -35,5 +36,18 @@
   .form-validation {
     width: 280px;
     padding: 2rem 0.8rem;
+  }
+  .form-input {
+    padding: 0.3rem 1rem;
+    margin: 0.7rem 0;
+  }
+}
+
+@media screen and (max-width:400px) {
+  .row>label{
+    width : 90px !important;
+  }
+  .form-input{
+    width:120px !important;
   }
 }

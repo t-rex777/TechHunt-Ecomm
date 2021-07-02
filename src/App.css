@@ -42,7 +42,7 @@ body {
 .cart-card {
   display: flex;
   position: relative;
-  margin: 10px 5px;
+  margin: 10px 30px;
   padding: 1.5rem;
   width: auto;
   background-color: #fff;
@@ -130,7 +130,7 @@ body {
   width: 30vw;
   background-color: #fff;
   padding: 1.5rem;
-  margin-top: 0.7rem;
+  margin : 0.7rem 30px;
   border-radius: 10px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }

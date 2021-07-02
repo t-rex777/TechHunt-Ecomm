@@ -9,12 +9,12 @@
   overflow-x: scroll;
   background: url("../../images/wave.svg") center center no-repeat;
   background-size: cover;
+  overflow-x: auto;
   
 }
 .homeCard {
   background: center center no-repeat;
   background-size: contain;
-  /* filter: brightness(0.7); */
   height: 200px;
   width: 180px;
   display: flex;
@@ -24,7 +24,6 @@
 }
 .homeCard:hover {
   transition: 500ms;
-  /* filter: brightness(1); */
   transform: scale(1.1);
 }
 .homeCard-text {
