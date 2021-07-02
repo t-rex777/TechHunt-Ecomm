@@ -7,7 +7,7 @@ import "./App.css";
 import SignIn from "./components/User/SignIn";
 import PrivateRoute from "./components/User/PrivateRoute";
 import Home from "./components/Home/Home";
-import SignUp from './components/User/SignUp';
+import SignUp from './components/User/SIgnUp';
 import ProductPage from './components/Product/ProductPage';
 
 function Myroutes() {
