@@ -6,116 +6,12 @@ import { getUserDetails } from "../components/User/helper";
 import Axios from "axios";
 import { API } from "../API";
 import { setTechHuntHeader } from "../utils";
+import { reducerFunction, initialState } from './CartReducers';
 
 const cartContext = createContext();
 export function CartProvider({ children }) {
-  const reducerFunction = (state, action) => {
-    switch (action.type) {
-      case "SET_USER":
-        return { ...state, user: action.payload };
-      case "SIGN_OUT": {
-        localStorage.removeItem("_rtoken");
-        return {
-          ...state,
-          user: {
-            cart: [],
-            wishlist: [],
-          },
-          cart: [],
-          wishlist: [],
-        };
-      }
-      case "SET_PRODUCTS":
-        return { ...state, products: action.payload };
-        
-      case "SET_SELECTED_PRODUCT":
-        return { ...state, selectedProduct: action.payload };
-
-      case "SET_FINALPRODUCTS":
-        return { ...state, finalProducts: action.payload };
-
-      case "SET_CART":
-        return { ...state, cart: action.payload };
-
-      case "SET_WISHLIST":
-        return { ...state, wishlist: action.payload };
-
-      case "SET_CATEGORY":
-        return { ...state, category: action.payload };
-
-      case "SORT_ASC":
-        return {
-          ...state,
-          finalProducts: state.finalProducts.sort(
-            (a, b) => parseFloat(a.price) - parseFloat(b.price)
-          ),
-        };
-
-      case "SORT_DES":
-        return {
-          ...state,
-          finalProducts: state.finalProducts.sort(
-            (a, b) => parseFloat(b.price) - parseFloat(a.price)
-          ),
-        };
-
-      case "FILTER_DELIVERY":
-        return {
-          ...state,
-          fastDelivery: !state.fastDelivery,
-        };
-
-      case "FILTER_STOCK":
-        return {
-          ...state,
-          stock: !state.stock,
-        };
-
-      case "FASTDELIVERY_OFF":
-        return { ...state, fastDelivery: false };
-
-      case "INSTOCK_ON":
-        return { ...state, stock: true };
-
-      case "PRICE_DETAILS":
-        return {
-          ...state,
-          priceDetails: {
-            price: action.payload.initialPrice,
-            deliveryCharges: action.payload.isFastDelivery * 100,
-            discount: Math.floor(action.payload.initialPrice * 0.1),
-            totalAmount: action.payload.finalPrice,
-          },
-        };
-
-      case "LOADING":
-        return { ...state, loading: action.payload };
-      default:
-        return state;
-    }
-  };
-
-  const [state, dispatch] = useReducer(reducerFunction, {
-    user: {
-      cart: [],
-      wishlist: [],
-    },
-    products: [],
-    selectedProduct: {},
-    finalProducts: [],
-    cart: [],
-    wishlist: [],
-    category: "All",
-    stock: true,
-    fastDelivery: false,
-    loading: false,
-    priceDetails: {
-      price: 0,
-      discount: 0,
-      deliveryCharges: 0,
-      totalAmount: 0,
-    },
-  });
+  
+  const [state, dispatch] = useReducer(reducerFunction, initialState);
   const { products, stock, fastDelivery } = state;
 
   useEffect(() => {

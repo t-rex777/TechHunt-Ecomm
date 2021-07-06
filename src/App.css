@@ -130,7 +130,7 @@ body {
   width: 30vw;
   background-color: #fff;
   padding: 1.5rem;
-  margin : 0.7rem 30px;
+  margin: 0.7rem 30px;
   border-radius: 10px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -155,17 +155,26 @@ body {
 .wishlist:hover {
   color: red;
 }
-
-@media screen and (max-width: 768px) {
-  .filter{
-    font-size: 1rem;
-  }
+@media screen and (max-width: 925px) {
   .cart-card {
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 10px 2rem;
   }
+  .card-body {
+    margin-top: 10px;
+  }
+  .quant-btn {
+    margin-top: 1rem;
+    margin-left: -2rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  .filter {
+    font-size: 1rem;
+  }
+
   .place-btn {
     align-self: center;
   }

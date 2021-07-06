@@ -9,36 +9,40 @@ const CartCard = ({ title, img, price, item, quantity }) => {
   const { state, dispatch } = useCart();
 
   const changeQuantity = async (change) => {
-    dispatch({ type: "LOADING", payload: true });
     if (change === "increase") {
       quantity += 1;
+      dispatch({ type: "INCREMENT_QNT", payload: item._id });
     } else if (change === "decrease") {
       if (quantity === 1) {
         return deleteItem();
       }
+      dispatch({ type: "DECREMENT_QNT", payload: item._id });
       quantity -= 1;
     }
-    const updatedQuantity = { quantity: quantity };
+    const updatedQuantity = { quantity };
     try {
       await updateCartItem(item._id, updatedQuantity);
-      const cartItems = await getCartItems();
-      dispatch({ type: "SET_CART", payload: cartItems });
-      dispatch({ type: "LOADING", payload: false });
     } catch (error) {
       console.log(error);
+      if (change === "increase") {
+        dispatch({ type: "DECREMENT_QNT", payload: item._id });
+      } else {
+        dispatch({ type: "INCREMENT_QNT", payload: item._id });
+      }
     }
   };
 
   const deleteItem = async () => {
     dispatch({ type: "LOADING", payload: true });
+
     await deleteCartItem(item._id);
     try {
-      console.log("item deleted successfully!");
-      const cartItems = await getCartItems();
-      dispatch({ type: "SET_CART", payload: cartItems });
+      dispatch({ type: "DELETE_FROM_CART", payload: item._id });
       dispatch({ type: "LOADING", payload: false });
+      console.log("item deleted successfully!");
     } catch (error) {
       console.log(error);
+      dispatch({ type: "LOADING", payload: false });
     }
   };
 
