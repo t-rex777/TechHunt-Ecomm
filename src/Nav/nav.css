@@ -1,14 +1,37 @@
 /* top Nav */
+.nav{
+  background: #ddd6f3; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #faaca8,
+    #ddd6f3
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #faaca8,
+    #ddd6f3
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 .nav-items {
   justify-content: flex-end !important;
 }
+.nav-item{
+  color: rgb(29, 28, 28) !important;
+}
+.nav-item:hover{
+  color:rgb(221, 41, 41) !important;
+}
 .nav-logo {
+  color: rgb(29, 28, 28) !important;
   font-family: "Raleway", sans-serif !important;
   font-weight: 800;
   position: absolute;
   left: 1rem;
   top: 1.6rem;
   font-size: 2rem !important;
+}
+.nav-logo:hover{
+  animation:none !important;
 }
 .badge-circle-s {
   font-size: 15px;
@@ -17,19 +40,6 @@
   position: relative;
   top: 15px;
   left: -10px;
-}
-
-/* sidebar */
-.sidebar {
-  background-color: #fff;
-  display: flex;
-  justify-content: flex-end;
-  border-radius: 0 0 15px 0;
-}
-.clear-btn {
-  height: 40px;
-  align-self: flex-end;
-  font-size: 1rem;
 }
 
 /* mobile view nav */
@@ -46,13 +56,15 @@
   margin-left: 1rem;
   position: absolute;
   background-color: red;
+  border:solid 1px #df6d67;
   width: 40px;
   height: 25px;
   border-radius: 5px;
 }
 
 .mobileNav{
-  background-color: #140a22;
+  background-color: #df6d67;
+  
 }
 .stacked-list {
   display: none;
@@ -60,24 +72,38 @@
   width: fit-content !important;
 }
 .stacked-list-item {
-  color: white;
-  background-color: #140a22;
+  
+  color: rgb(29, 28, 28);
+  background-color: #df6d67;
   border-bottom: none !important;
   padding: 10px 10px !important;
   display: flex;
   justify-content: flex-start;
 }
 .stacked-list-item > h3 {
-  text-decoration: underline #140a22;
-  font-weight: 400;
+  text-decoration: underline #df6d67;
+  font-weight: 800;
 }
 
 .stacked-list-item:hover {
-  color: #fbbf24;
-  background-color: #140a22 !important;
+  color: #000000;
+  background-color: #df6d67 !important;
 }
 .stacked-list-item > h3:hover {
-  text-decoration: underline #220f3b;
+  text-decoration: underline #df6d67;
+}
+
+/* sidebar */
+.sidebar {
+  background-color: #fff;
+  display: flex;
+  justify-content: flex-end;
+  border-radius: 0 0 15px 0;
+}
+.clear-btn {
+  height: 40px;
+  align-self: flex-end;
+  font-size: 1rem;
 }
 
 @media screen and (max-width: 768px) {

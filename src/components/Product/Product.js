@@ -69,7 +69,17 @@ function Product() {
         <BsFilterRight size={20} />
         Filter
       </span>
-      {viewFilter && <SideBar />}
+      {
+        <div
+          style={
+            viewFilter
+              ? { display: "block", transition: "all 1000ms" } //todo
+              : { display: "none", transition: "all 1000ms" }
+          }
+        >
+          <SideBar />
+        </div>
+      }
       <h1 className="text-center mb-2">{category}</h1>
       <div className="products">
         {finalProducts.map((item) => {

@@ -8,14 +8,14 @@
 .form-validation {
   background-color: #fff;
   padding: 3rem;
-  border: none;
+  border: solid 2px rgb(122, 121, 121);
   border-radius: 10px;
 }
 .form-input {
   
   border: none;
-  background-color: #d5d6da;
-  border-radius: 5px;
+  background: #f1c6c3;
+    border-radius: 5px;
   padding: 0.3rem 1rem;
   margin: 0.7rem;
 }

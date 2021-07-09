@@ -6,7 +6,7 @@
 }
 
 body {
-  background: #d5d6da;
+  background: #fff;
   font-family: "Raleway", sans-serif;
 }
 
@@ -22,10 +22,10 @@ body {
   width: 200px;
   margin: 10px 5px;
   padding: 1.5rem;
-  height: 400px;
+  height: 420px;
   background-color: #fff;
-  border: solid 2px #fff;
-  border-radius: 12px;
+  border: solid 2px rgb(122, 121, 121);
+  /* border-radius: 12px; */
 }
 .filter {
   display: flex;
@@ -46,8 +46,9 @@ body {
   padding: 1.5rem;
   width: auto;
   background-color: #fff;
-  border: solid 2px #fff;
-  border-radius: 12px;
+  border: solid 2px rgb(122, 121, 121);
+  /* border-radius: 12px; */
+
 }
 .card-main {
   display: flex;
@@ -131,7 +132,8 @@ body {
   background-color: #fff;
   padding: 1.5rem;
   margin: 0.7rem 30px;
-  border-radius: 10px;
+  border: solid 2px rgb(122, 121, 121);
+  /* border-radius: 10px; */
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 

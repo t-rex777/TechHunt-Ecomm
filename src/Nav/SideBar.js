@@ -28,7 +28,7 @@ function SideBar() {
   };
 
   return (
-    <form className="sidebar p-1">
+    <form className="sidebar p-1" style={{transition:"500ms"}}>
       <div className="mr-4 mb-2">
         <h1 className="text-md">Sort By</h1>
         <input

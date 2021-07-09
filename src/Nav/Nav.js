@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {
-  AiOutlineSearch,
+  AiOutlineLogin,
   AiOutlineShoppingCart,
   AiTwotoneHeart,
   AiFillHome,
@@ -9,6 +9,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, Redirect } from "react-router-dom";
 import { useCart } from "../cart-context/CartProvider";
 import "./nav.css";
+
+
 
 const Nav = () => {
   const { state, dispatch } = useCart();
@@ -21,11 +23,14 @@ const Nav = () => {
     dispatch({ type: "SIGN_OUT" });
     setRedirect(true);
   };
+  const navStyle = {
+    backgroundColor : toggle ? "#df6d67" : "",
+  }
   return (
     <div>
       {shouldRedirect && <Redirect to="/" />}
-      <nav className="nav dark text-white">
-        <ul className="nav-items">
+      <nav className="nav dark text-white" >
+        <ul className="nav-items" style={navStyle}>
           <li className="nav-item">
             <Link to="/" className="nav-logo ">
               TechHunt
@@ -100,13 +105,13 @@ const Nav = () => {
             {state.user._id ? (
               <Link to="" style={{ textDecoration: "none" }}>
                 <li className="stacked-list-item" onClick={signOut}>
-                  <h3>Sign Out</h3>
+                  <h3><AiOutlineLogin/> Sign Out</h3>
                 </li>
               </Link>
             ) : (
               <Link to="/signin" style={{ textDecoration: "none" }}>
                 <li className="stacked-list-item" onClick={signOut}>
-                  <h3>Sign In</h3>
+                  <h3><AiOutlineLogin/> Sign In</h3>
                 </li>
               </Link>
             )}
