@@ -1,8 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../../cart-context/CartProvider";
-import EarphoneImg from "../../images/earphone.png";
-import tvImg from "../../images/tv.png";
+
+import phones from "../../images/homepageImages/phones.webp";
+import earphones from "../../images/homepageImages/earphones.webp";
+import sd from "../../images/homepageImages/sd.webp";
+import tvs from "../../images/homepageImages/tvs.webp";
+import watches from "../../images/homepageImages/watches.webp";
+import all from "../../images/homepageImages/all.webp";
+
 function HomeCard() {
   const { dispatch } = useCart();
 
@@ -14,37 +20,26 @@ function HomeCard() {
         dispatch({ type: "SET_CATEGORY", payload: category });
       }}
     >
-      <div
-        className="homeCard"
-        style={{
-          backgroundImage: `url(${imageUrl})`,
-        }}
-      >
-        <h3 className="homeCard-text text-center">{category}</h3>
+      <div className="homeCard">
+        <div
+          className="homeCard-images"
+          style={{ backgroundImage: `url(${imageUrl})` }}
+          alt="products"
+        >
+          <h3 className="homeCard-text text-center">{category}</h3>
+        </div>
       </div>
     </Link>
   );
 
   return (
     <div className="homeCards">
-      {customCard(
-        "Phone",
-        "https://pngimg.com/uploads/iphone_12/iphone_12_PNG23.png"
-      )}
-      {customCard("Earphone", EarphoneImg)}
-      {customCard("TV", tvImg)}
-      {customCard(
-        "Watch",
-        "https://pngimg.com/uploads/watches/watches_PNG9899.png"
-      )}
-      {customCard(
-        "Storage",
-        "https://images-na.ssl-images-amazon.com/images/I/71-9vJst-lL._AC_SL1500_.jpg"
-      )}
-      {customCard(
-        "All",
-        "https://freepngimg.com/download/technology/41392-4-gadgets-free-download-png-hd.png"
-      )}
+      {customCard("Phone", phones)}
+      {customCard("Earphone", earphones)}
+      {customCard("TV", tvs)}
+      {customCard("Watch", watches)}
+      {customCard("Storage", sd)}
+      {customCard("All", all)}
     </div>
   );
 }
