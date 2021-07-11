@@ -3,14 +3,11 @@ import {
   AiOutlineLogin,
   AiOutlineShoppingCart,
   AiTwotoneHeart,
-  AiFillHome,
 } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, Redirect } from "react-router-dom";
 import { useCart } from "../cart-context/CartProvider";
 import "./nav.css";
-
-
 
 const Nav = () => {
   const { state, dispatch } = useCart();
@@ -23,24 +20,17 @@ const Nav = () => {
     dispatch({ type: "SIGN_OUT" });
     setRedirect(true);
   };
-  const navStyle = {
-    backgroundColor : toggle ? "#df6d67" : "",
-  }
+
   return (
     <div>
       {shouldRedirect && <Redirect to="/" />}
       <nav className="nav dark text-white" >
-        <ul className="nav-items" style={navStyle}>
+        <ul className="nav-items">
           <li className="nav-item">
             <Link to="/" className="nav-logo ">
               TechHunt
             </Link>
           </li>
-          <Link to="/">
-            <li className="nav-item dropdown">
-              <AiFillHome />
-            </li>
-          </Link>
           <Link to="/wishlist">
             <li className="nav-item  ml-3 dropdown">
               <AiTwotoneHeart />
@@ -68,20 +58,10 @@ const Nav = () => {
 
           <li className="nav-item ml-3 mr-3 hamBurger" onClick={toggleChange}>
             <GiHamburgerMenu />
-          </li>
-        </ul>
-      </nav>
-
-      {toggle && (
+            {toggle && (
         <div className="mobileNav">
           <ul className="stacked-list">
-            <Link to="/">
-              <li className="stacked-list-item">
-                <h3>
-                  <AiFillHome /> Home
-                </h3>
-              </li>
-            </Link>
+
 
             <Link to="/wishlist">
               <li className="stacked-list-item">
@@ -118,6 +98,11 @@ const Nav = () => {
           </ul>
         </div>
       )}
+          </li>
+        </ul>
+      </nav>
+
+      
     </div>
   );
 };

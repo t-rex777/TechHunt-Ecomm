@@ -38,7 +38,7 @@ function SideBar() {
           value="highToLow"
           onClick={sortByPrice}
         />
-        <label htmlFor="highToLow" className="text-md ml-1">
+        <label htmlFor="highToLow" className="text-sm ml-1">
           Price - High to low
         </label>
         <br />
@@ -49,7 +49,7 @@ function SideBar() {
           value="lowToHigh"
           onClick={sortByPrice}
         />
-        <label htmlFor="lowToHigh" className="text-md ml-1">
+        <label htmlFor="lowToHigh" className="text-sm ml-1">
           Price - Low to high
         </label>
       </div>
@@ -62,7 +62,7 @@ function SideBar() {
           onChange={filterProducts}
           checked={stock}
         />
-        <label htmlFor="outOfStock" className="text-md ml-1">
+        <label htmlFor="outOfStock" className="text-sm ml-1">
           Include Out Of Stock{" "}
         </label>
         <br />
@@ -73,7 +73,7 @@ function SideBar() {
           onChange={filterProducts}
           checked={delivery}
         />
-        <label htmlFor="fastDelivery" className="text-md ml-1">
+        <label htmlFor="fastDelivery" className="text-sm ml-1">
           Fast Delivery
         </label>
       </div>

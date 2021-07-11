@@ -57,14 +57,19 @@
   position: absolute;
   background-color: red;
   border:solid 1px #df6d67;
-  width: 40px;
-  height: 25px;
-  border-radius: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
 }
 
 .mobileNav{
-  background-color: #df6d67;
-  
+  background-color: #F87171;
+  position: absolute;
+  right: 0.5rem;
+  top:4.5rem;
+  width : 10.5rem;
+  border-radius: 8px;
+  z-index: 1;
 }
 .stacked-list {
   display: none;
@@ -72,25 +77,25 @@
   width: fit-content !important;
 }
 .stacked-list-item {
-  
-  color: rgb(29, 28, 28);
-  background-color: #df6d67;
+  color: #fff;
+  background-color: #F87171;
   border-bottom: none !important;
   padding: 10px 10px !important;
   display: flex;
   justify-content: flex-start;
 }
 .stacked-list-item > h3 {
-  text-decoration: underline #df6d67;
+  text-decoration: underline #F87171;
   font-weight: 800;
+  font-size: 1rem;
 }
 
 .stacked-list-item:hover {
   color: #000000;
-  background-color: #df6d67 !important;
+  background-color: #F87171 !important;
 }
 .stacked-list-item > h3:hover {
-  text-decoration: underline #df6d67;
+  text-decoration: underline #F87171;
 }
 
 /* sidebar */
@@ -98,7 +103,9 @@
   background-color: #fff;
   display: flex;
   justify-content: flex-end;
+  border-bottom: solid 5px rgb(223, 118, 118);
   border-radius: 0 0 15px 0;
+  margin-bottom: 1rem;
 }
 .clear-btn {
   height: 40px;
@@ -114,9 +121,12 @@
     font-size: 0.9rem;
   }
   .clear-btn {
-    height: 25px;
+    height: 30px;
     font-size: 0.5rem;
   }
+  /* .nav{
+    height : 4rem
+  } */
   .hamBurger {
     display: block;
   }
