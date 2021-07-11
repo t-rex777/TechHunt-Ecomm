@@ -55,8 +55,8 @@ function Cart() {
         </div>
       ) : (
         <div className="empty-img mt-4">
-          <img className="responsive" src={emptyCart} alt="emptycart" />
-          <h1 className="mt-4">Your cart is filled with air ...</h1>
+          <img className="responsive" src={emptyCart} alt="emptycart" style={{maxWidth : "300px"}}/>
+          <h3 className="mt-4 text-center">Your cart is filled with air ...</h3>
         </div>
       )}
     </>

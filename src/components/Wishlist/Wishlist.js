@@ -29,8 +29,8 @@ function Wishlist() {
         </div>
       ) : (
         <div className="empty-img mt-4">
-          <img className="responsive" src={emptyWishlist} alt="emptywishlist" />
-          <h1 className="mt-4">You can wish more ...</h1>
+          <img className="responsive" src={emptyWishlist} alt="emptywishlist" style={{maxWidth:"300px"}} />
+          <h3 className="mt-4">You can wish more ...</h3>
         </div>
       )}
     </>
