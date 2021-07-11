@@ -6,6 +6,7 @@ export const initialState = {
   products: [],
   selectedProduct: {},
   finalProducts: [],
+  categoryProducts: [],
   cart: [],
   wishlist: [],
   category: "All",
@@ -44,11 +45,14 @@ export const reducerFunction = (state, action) => {
 
     case "SET_FINALPRODUCTS":
       return { ...state, finalProducts: action.payload };
+      
+    case "SET_CATEGORYPRODUCTS":
+      return { ...state, categoryProducts: action.payload };
 
     case "SET_CART":
       return { ...state, cart: action.payload };
 
-     case "INCREMENT_QNT":
+    case "INCREMENT_QNT":
       return {
         ...state,
         cart: state.cart.map((data) => {

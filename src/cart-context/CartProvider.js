@@ -6,13 +6,12 @@ import { getUserDetails } from "../components/User/helper";
 import Axios from "axios";
 import { API } from "../API";
 import { setTechHuntHeader } from "../utils";
-import { reducerFunction, initialState } from './CartReducers';
+import { reducerFunction, initialState } from "./CartReducers";
 
 const cartContext = createContext();
 export function CartProvider({ children }) {
-  
   const [state, dispatch] = useReducer(reducerFunction, initialState);
-  const { products, stock, fastDelivery } = state;
+  const { categoryProducts, stock, fastDelivery } = state;
 
   useEffect(() => {
     (async () => {
@@ -21,6 +20,7 @@ export function CartProvider({ children }) {
         const data = await getProducts();
         dispatch({ type: "SET_FINALPRODUCTS", payload: data });
         dispatch({ type: "SET_PRODUCTS", payload: data });
+        dispatch({ type: "SET_CATEGORYPRODUCTS", payload: data });
         dispatch({ type: "LOADING", payload: false });
       } catch (error) {
         console.log(error);
@@ -69,23 +69,32 @@ export function CartProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    const fastDeliveryProducts = products.filter(
+    const fastDeliveryProducts = categoryProducts.filter(
       (a) => a.delivery === "Fast delivery"
     );
-    const inStockProducts = products.filter((a) => a.stock === "In stock");
-    if (stock && fastDelivery) {
+    const inStockProducts = categoryProducts.filter(
+      (a) => a.stock === "In stock"
+    );
+
+    if (stock === true && fastDelivery === true) {
       dispatch({ type: "SET_FINALPRODUCTS", payload: fastDeliveryProducts });
-    } else if (fastDelivery) {
-      const fastDeliveryInStock = fastDeliveryProducts.filter(
-        (a) => a.stock === "In stock"
-      );
-      dispatch({ type: "SET_FINALPRODUCTS", payload: fastDeliveryInStock });
-    } else if (!stock) {
+    } else if (stock === false && fastDelivery === false) {
       dispatch({ type: "SET_FINALPRODUCTS", payload: inStockProducts });
-    } else {
-      dispatch({ type: "SET_FINALPRODUCTS", payload: products });
+    } else if (stock === false && fastDelivery === true) {
+      const stockedFastdeliveryProducts = fastDeliveryProducts.filter(
+        (s) => s.stock === "In stock"
+      );
+      dispatch({
+        type: "SET_FINALPRODUCTS",
+        payload: stockedFastdeliveryProducts,
+      });
+    } else if (stock === true && fastDelivery === false) {
+      dispatch({
+        type: "SET_FINALPRODUCTS",
+        payload: categoryProducts,
+      });
     }
-  }, [products, fastDelivery, stock]);
+  }, [categoryProducts, fastDelivery, stock]);
 
   useEffect(() => {
     let initialPrice = 0;

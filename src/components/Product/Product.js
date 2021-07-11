@@ -31,29 +31,36 @@ function Product() {
         (product) => product.category === "Phone"
       );
       dispatch({ type: "SET_FINALPRODUCTS", payload: filteredProducts });
+      dispatch({ type: "SET_CATEGORYPRODUCTS", payload: filteredProducts });
     } else if (category === "Earphone") {
       const filteredProducts = products.filter(
         (product) => product.category === "Earphone"
       );
+      dispatch({ type: "SET_CATEGORYPRODUCTS", payload: filteredProducts });
       dispatch({ type: "SET_FINALPRODUCTS", payload: filteredProducts });
     } else if (category === "TV") {
       const filteredProducts = products.filter(
         (product) => product.category === "TV"
       );
+      dispatch({ type: "SET_CATEGORYPRODUCTS", payload: filteredProducts });
       dispatch({ type: "SET_FINALPRODUCTS", payload: filteredProducts });
     } else if (category === "Watch") {
       const filteredProducts = products.filter(
         (product) => product.category === "Watch"
       );
+      dispatch({ type: "SET_CATEGORYPRODUCTS", payload: filteredProducts });
       dispatch({ type: "SET_FINALPRODUCTS", payload: filteredProducts });
     } else if (category === "Storage") {
       const filteredProducts = products.filter(
         (product) => product.category === "Storage"
       );
+      dispatch({ type: "SET_CATEGORYPRODUCTS", payload: filteredProducts });
       dispatch({ type: "SET_FINALPRODUCTS", payload: filteredProducts });
     } else if (category === "All") {
+      dispatch({ type: "SET_CATEGORYPRODUCTS", payload: products });
       dispatch({ type: "SET_FINALPRODUCTS", payload: products });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -70,13 +77,7 @@ function Product() {
         Filter
       </span>
       {
-        <div
-          style={
-            viewFilter
-              ? { display: "block", transition: "all 1000ms" } //todo
-              : { display: "none", transition: "all 1000ms" }
-          }
-        >
+        <div style={viewFilter ? { display: "block" } : { display: "none" }}>
           <SideBar />
         </div>
       }
