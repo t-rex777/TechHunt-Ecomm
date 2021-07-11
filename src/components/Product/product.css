@@ -29,13 +29,17 @@
   flex-direction: column;
   line-height: 2rem;
 }
+.card-btn{
+  width: 200px;
+}
 .wishlistBtn {
-  max-width: 200px;
+  width: 200px;
   background-color: #fff;
   border: solid 1px var(--secondary);
   font-size: 0.8rem;
   border-radius: 5px;
   color: var(--secondary);
+  padding: 0.5rem;
   margin-top: 1rem;
 }
 .wishlistBtn:hover {

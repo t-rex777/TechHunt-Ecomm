@@ -8,6 +8,7 @@ function LoaderPage() {
       <div className="">
           <img src={loaderSvg} alt="" />
       </div>
+      <h3>Loading, please wait...</h3>
     </div>
   );
 }

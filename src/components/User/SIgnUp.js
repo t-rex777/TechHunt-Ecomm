@@ -3,8 +3,11 @@ import { signup } from "./helper";
 import { Redirect, Link } from "react-router-dom";
 import Nav from "../../Nav/Nav";
 import "./user.css";
+import LoaderPage from "./../LoaderPage/LoaderPage";
+import { useCart } from "../../cart-context/CartProvider";
 
 function SignUp() {
+  const { state, dispatch } = useCart();
   const [shouldRedirect, setRedirect] = useState(false);
   const [user, setUser] = useState({
     name: "",
@@ -23,6 +26,8 @@ function SignUp() {
   };
   const formSubmit = async (e) => {
     e.preventDefault();
+    dispatch({ type: "LOADING", payload: true });
+
     try {
       if (user.password !== user.re_password) {
         // show error
@@ -31,7 +36,10 @@ function SignUp() {
       }
       await signup(user);
       setRedirect(true);
+      dispatch({ type: "LOADING", payload: false });
     } catch (error) {
+      dispatch({ type: "LOADING", payload: false });
+
       console.log(error);
     }
   };
@@ -39,6 +47,8 @@ function SignUp() {
     <>
       <Nav />
       {shouldRedirect && <Redirect to="/signin" />}
+      {state.loading && <LoaderPage />}
+
       <div className="signin">
         <h1 className="text-center mb-2">Sign Up</h1>
         <form className="form-validation" onSubmit={formSubmit}>

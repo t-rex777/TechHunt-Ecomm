@@ -7,9 +7,10 @@ import { getCartItems } from "../Cart/helper";
 import { getWishlistItems } from "./../Wishlist/helper";
 import Nav from "./../../Nav/Nav";
 import "./user.css";
+import LoaderPage from './../LoaderPage/LoaderPage';
 
 function SignIn() {
-  const { dispatch } = useCart();
+  const { state, dispatch } = useCart();
   const [shouldRedirect, setRedirect] = useState(false);
   const [user, setUser] = useState({
     email: "",
@@ -27,6 +28,7 @@ function SignIn() {
   };
   const formSubmit = async (e) => {
     e.preventDefault();
+    dispatch({ type: "LOADING", payload: true });
     try {
       if (user.password !== user.re_password) {
         // show error
@@ -46,16 +48,20 @@ function SignIn() {
       // setting wishlist
       const wishlistData = await getWishlistItems();
       dispatch({ type: "SET_WISHLIST", payload: wishlistData });
+      dispatch({ type: "LOADING", payload: false });
 
       setRedirect(true);
     } catch (error) {
       console.log(error);
+    dispatch({ type: "LOADING", payload: false });
+
     }
   };
   return (
     <>
       <Nav />
       {shouldRedirect && <Redirect to="/" />}
+      {state.loading && <LoaderPage />}
       <div className="signin">
         <h1 className="text-center mb-2">Sign In</h1>
         <form className="form-validation" onSubmit={formSubmit}>

@@ -81,7 +81,7 @@ function ProductPage() {
     if (isInWishlist() === undefined) {
       return (
         <button
-          className={`btn wishlistBtn`}
+          className={`card-btn wishlistBtn`}
 
           onClick={addProductToWishlist}
         >
@@ -131,8 +131,8 @@ function ProductPage() {
   };
   return (
     <div>
-      {state.loading && <LoaderPage />}
       <Nav />
+      {state.loading && <LoaderPage />}
       <div className="wrapper">
         <div className="product-image">
           <img src={img} alt="product" />
