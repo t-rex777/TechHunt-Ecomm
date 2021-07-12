@@ -6,7 +6,7 @@ import { getProductById } from "./helper";
 import LoaderPage from "./../LoaderPage/LoaderPage";
 import { addCartItem, getCartItems } from "../Cart/helper";
 import "./product.css";
-import { throwToast } from './../../App';
+import { throwToast } from "./../../App";
 import {
   addWishlistItem,
   deleteWishlistItem,
@@ -41,6 +41,12 @@ function ProductPage() {
     return wishlistId;
   };
   const addProductToWishlist = async () => {
+    if (!state.user._id) {
+      return throwToast(dispatch, {
+        message: "please sign in first!",
+        color: "warning",
+      });
+    }
     dispatch({ type: "LOADING", payload: true });
 
     await addWishlistItem(_id);
@@ -64,8 +70,8 @@ function ProductPage() {
 
   const deleteProductFromWishlist = async () => {
     dispatch({ type: "LOADING", payload: true });
- await deleteWishlistItem(isInWishlist());
-   try {
+    await deleteWishlistItem(isInWishlist());
+    try {
       const wishlistItems = await getWishlistItems();
       dispatch({ type: "SET_WISHLIST", payload: wishlistItems });
       dispatch({ type: "LOADING", payload: false });
@@ -83,6 +89,12 @@ function ProductPage() {
     }
   };
   const addProductToCart = async () => {
+    if (!state.user._id) {
+      return throwToast(dispatch, {
+        message: "please sign in first!",
+        color: "warning",
+      });
+    }
     dispatch({ type: "LOADING", payload: true });
     await addCartItem(_id);
     try {
@@ -107,7 +119,6 @@ function ProductPage() {
       return (
         <button
           className={`card-btn wishlistBtn`}
-
           onClick={addProductToWishlist}
         >
           Add to wishlist

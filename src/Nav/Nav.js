@@ -8,6 +8,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, Redirect } from "react-router-dom";
 import { useCart } from "../cart-context/CartProvider";
 import "./nav.css";
+import { throwToast } from './../App';
 
 const Nav = () => {
   const { state, dispatch } = useCart();
@@ -19,6 +20,10 @@ const Nav = () => {
   const signOut = () => {
     dispatch({ type: "SIGN_OUT" });
     setRedirect(true);
+    throwToast(dispatch, {
+      message: "Signed out!",
+      color: "success",
+    });
   };
 
   return (
