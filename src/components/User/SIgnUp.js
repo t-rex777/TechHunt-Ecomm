@@ -5,6 +5,7 @@ import Nav from "../../Nav/Nav";
 import "./user.css";
 import LoaderPage from "./../LoaderPage/LoaderPage";
 import { useCart } from "../../cart-context/CartProvider";
+import { throwToast } from './../../App';
 
 function SignUp() {
   const { state, dispatch } = useCart();
@@ -37,8 +38,11 @@ function SignUp() {
       await signup(user);
       setRedirect(true);
       dispatch({ type: "LOADING", payload: false });
+      throwToast(dispatch, { message: "Welcome to TechHunt", color: "success" });
+
     } catch (error) {
       dispatch({ type: "LOADING", payload: false });
+      throwToast(dispatch, { message: "Something went wrong", color: "danger" });
 
       console.log(error);
     }

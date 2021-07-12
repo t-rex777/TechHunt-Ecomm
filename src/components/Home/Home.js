@@ -18,6 +18,7 @@ function App() {
         <h2 className="mt-2 ml-2 text-center">TechHunt's products</h2>
         <HomeCard />
       </div>
+
     </div>
   );
 }

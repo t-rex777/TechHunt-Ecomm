@@ -13,6 +13,8 @@ export const initialState = {
   stock: true,
   fastDelivery: false,
   loading: false,
+  toast: "",
+  toastStyle: { display: "none" },
   priceDetails: {
     price: 0,
     discount: 0,
@@ -45,7 +47,7 @@ export const reducerFunction = (state, action) => {
 
     case "SET_FINALPRODUCTS":
       return { ...state, finalProducts: action.payload };
-      
+
     case "SET_CATEGORYPRODUCTS":
       return { ...state, categoryProducts: action.payload };
 
@@ -130,9 +132,12 @@ export const reducerFunction = (state, action) => {
           totalAmount: action.payload.finalPrice,
         },
       };
-
     case "LOADING":
       return { ...state, loading: action.payload };
+    case "TOAST":
+      return { ...state, toast: action.payload };
+    case "TOAST_STYLE":
+      return { ...state, toastStyle: action.payload };
     default:
       return state;
   }

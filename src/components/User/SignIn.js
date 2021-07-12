@@ -7,7 +7,8 @@ import { getCartItems } from "../Cart/helper";
 import { getWishlistItems } from "./../Wishlist/helper";
 import Nav from "./../../Nav/Nav";
 import "./user.css";
-import LoaderPage from './../LoaderPage/LoaderPage';
+import LoaderPage from "./../LoaderPage/LoaderPage";
+import { throwToast } from "./../../App";
 
 function SignIn() {
   const { state, dispatch } = useCart();
@@ -49,12 +50,16 @@ function SignIn() {
       const wishlistData = await getWishlistItems();
       dispatch({ type: "SET_WISHLIST", payload: wishlistData });
       dispatch({ type: "LOADING", payload: false });
+      throwToast(dispatch, { message: "Signed in", color: "success" });
 
       setRedirect(true);
     } catch (error) {
       console.log(error);
-    dispatch({ type: "LOADING", payload: false });
-
+      dispatch({ type: "LOADING", payload: false });
+      throwToast(dispatch, {
+        message: "Wrong credentials!",
+        color: "danger",
+      });
     }
   };
   return (

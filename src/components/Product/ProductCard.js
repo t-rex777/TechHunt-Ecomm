@@ -6,32 +6,60 @@ import { addWishlistItem, deleteWishlistItem } from "../Wishlist/helper";
 import { getWishlistItems } from "./../Wishlist/helper";
 import { getCartItems } from "./../Cart/helper";
 import { Link } from "react-router-dom";
-const ProductCard = ({ productId,title, img, price, item, isInCart, isInWishlist }) => {
-  const { dispatch } = useCart();
+import { throwToast } from "../../App";
+const ProductCard = ({
+  productId,
+  title,
+  img,
+  price,
+  item,
+  isInCart,
+  isInWishlist,
+}) => {
+  const { state, dispatch } = useCart();
 
   const addProductToCart = async () => {
+    if (!state.user._id) {
+      return throwToast(dispatch, {
+        message: "please sign in first!",
+        color: "warning",
+      });
+    }
     dispatch({ type: "LOADING", payload: true });
     await addCartItem(item._id);
     try {
       const cartData = await getCartItems();
       dispatch({ type: "SET_CART", payload: cartData });
       dispatch({ type: "LOADING", payload: false });
+
+      throwToast(dispatch, { message: "Added to cart", color: "success" });
     } catch (error) {
       console.log(error);
       dispatch({ type: "LOADING", payload: false });
+      throwToast(dispatch, { message: "didn't add to cart", color: "danger" });
     }
   };
   const addProductToWishlist = async () => {
+    if (!state.user._id) {
+      return throwToast(dispatch, {
+        message: "please sign in first!",
+        color: "warning",
+      });
+    }
     dispatch({ type: "LOADING", payload: true });
-
     await addWishlistItem(item._id);
     try {
       const wishlistData = await getWishlistItems();
       dispatch({ type: "SET_WISHLIST", payload: wishlistData });
       dispatch({ type: "LOADING", payload: false });
+      throwToast(dispatch, { message: "Added to wishlist", color: "success" });
     } catch (error) {
       console.log(error);
       dispatch({ type: "LOADING", payload: false });
+      throwToast(dispatch, {
+        message: "didn't add to wishlist",
+        color: "danger",
+      });
     }
   };
 
@@ -43,9 +71,17 @@ const ProductCard = ({ productId,title, img, price, item, isInCart, isInWishlist
       const wishlistItems = await getWishlistItems();
       dispatch({ type: "SET_WISHLIST", payload: wishlistItems });
       dispatch({ type: "LOADING", payload: false });
+      throwToast(dispatch, {
+        message: "Removed from wishlist",
+        color: "success",
+      });
     } catch (error) {
       console.log(error);
       dispatch({ type: "LOADING", payload: false });
+      throwToast(dispatch, {
+        message: "din't remove from wishlist",
+        color: "danger",
+      });
     }
   };
 

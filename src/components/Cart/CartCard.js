@@ -2,8 +2,9 @@ import { AiFillDelete } from "react-icons/ai";
 import { RiTruckFill } from "react-icons/ri";
 import { useCart } from "../../cart-context/CartProvider";
 import { addWishlistItem } from "../Wishlist/helper";
-import { deleteCartItem, getCartItems, updateCartItem } from "./helper";
+import { deleteCartItem, updateCartItem } from "./helper";
 import { getWishlistItems } from "./../Wishlist/helper";
+import { throwToast } from './../../App';
 
 const CartCard = ({ title, img, price, item, quantity }) => {
   const { state, dispatch } = useCart();
@@ -39,10 +40,18 @@ const CartCard = ({ title, img, price, item, quantity }) => {
     try {
       dispatch({ type: "DELETE_FROM_CART", payload: item._id });
       dispatch({ type: "LOADING", payload: false });
-      console.log("item deleted successfully!");
+      throwToast(dispatch, {
+        message: "removed from cart!",
+        color: "success",
+      });
+     
     } catch (error) {
       console.log(error);
       dispatch({ type: "LOADING", payload: false });
+      throwToast(dispatch, {
+        message: "didn't remove from cart!",
+        color: "danger",
+      });
     }
   };
 
@@ -58,11 +67,23 @@ const CartCard = ({ title, img, price, item, quantity }) => {
         const wishlistData = await getWishlistItems();
         dispatch({ type: "SET_WISHLIST", payload: wishlistData });
         dispatch({ type: "LOADING", payload: false });
+        throwToast(dispatch, {
+          message: "added to wishlist!",
+          color: "success",
+        });
       } catch (error) {
         console.log(error);
+        throwToast(dispatch, {
+          message: "didn't add to wishlist!",
+          color: "danger",
+        });
       }
     } else {
       dispatch({ type: "LOADING", payload: false });
+      throwToast(dispatch, {
+        message: "already in wishlist!",
+        color: "warning",
+      });
     }
   };
   return (

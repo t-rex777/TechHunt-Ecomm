@@ -3,6 +3,7 @@ import { useCart } from "../../cart-context/CartProvider";
 import { addCartItem } from "../Cart/helper";
 import { getCartItems } from "./../Cart/helper";
 import { deleteWishlistItem, getWishlistItems } from "./helper";
+import { throwToast } from './../../App';
 
 const WishlistCard = ({ title, img, price, item }) => {
   const { state, dispatch } = useCart();
@@ -18,9 +19,17 @@ const WishlistCard = ({ title, img, price, item }) => {
       const wishlistItems = await getWishlistItems();
       dispatch({ type: "SET_WISHLIST", payload: wishlistItems });
       dispatch({ type: "LOADING", payload: false });
+      throwToast(dispatch, {
+        message: "removed from wishlist!",
+        color: "success",
+      });
     } catch (error) {
       console.log(error);
       dispatch({ type: "LOADING", payload: false });
+      throwToast(dispatch, {
+        message: "didn't remove from wishlist!",
+        color: "danger",
+      });
     }
   };
   const addProductToCart = async () => {
@@ -32,11 +41,23 @@ const WishlistCard = ({ title, img, price, item }) => {
         const cartData = await getCartItems();
         dispatch({ type: "SET_CART", payload: cartData });
         dispatch({ type: "LOADING", payload: false });
+        throwToast(dispatch, {
+          message: "added to cart!",
+          color: "success",
+        });
       } catch (error) {
         console.log(error);
         dispatch({ type: "LOADING", payload: false });
+        throwToast(dispatch, {
+          message: "didn't add to cart!",
+          color: "danger",
+        });
       }
     }
+    throwToast(dispatch, {
+      message: "Already in cart!",
+      color: "warning",
+    });
   };
 
   return (
