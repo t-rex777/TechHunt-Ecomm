@@ -3,7 +3,7 @@ import { useCart } from "../../cart-context/CartProvider";
 import { addCartItem } from "../Cart/helper";
 import { getCartItems } from "./../Cart/helper";
 import { deleteWishlistItem, getWishlistItems } from "./helper";
-import { throwToast } from './../../App';
+import { throwToast } from "./../../App";
 
 const WishlistCard = ({ title, img, price, item }) => {
   const { state, dispatch } = useCart();
@@ -53,11 +53,12 @@ const WishlistCard = ({ title, img, price, item }) => {
           color: "danger",
         });
       }
+    } else {
+      throwToast(dispatch, {
+        message: "Already in cart!",
+        color: "warning",
+      });
     }
-    throwToast(dispatch, {
-      message: "Already in cart!",
-      color: "warning",
-    });
   };
 
   return (

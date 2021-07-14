@@ -4,6 +4,7 @@ import CartCard from "./CartCard";
 import emptyCart from "../../images/emptycart.svg";
 import Nav from "./../../Nav/Nav";
 import LoaderPage from "./../LoaderPage/LoaderPage";
+import StripePayment from './StripePayment';
 
 function Cart() {
   const { state } = useCart();
@@ -47,15 +48,18 @@ function Cart() {
               Total Amount : ₹{priceDetails.totalAmount.toLocaleString()}
             </h3>
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <button className="btn btn-danger mt-1" style={{ width: "100%" }}>
-                PAY
-              </button>
+              <StripePayment />
             </div>
           </div>
         </div>
       ) : (
         <div className="empty-img mt-4">
-          <img className="responsive" src={emptyCart} alt="emptycart" style={{maxWidth : "300px"}}/>
+          <img
+            className="responsive"
+            src={emptyCart}
+            alt="emptycart"
+            style={{ maxWidth: "300px" }}
+          />
           <h3 className="mt-4 text-center">Your cart is filled with air ...</h3>
         </div>
       )}

@@ -69,30 +69,32 @@ export function CartProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    const fastDeliveryProducts = categoryProducts.filter(
-      (a) => a.delivery === "Fast delivery"
-    );
-    const inStockProducts = categoryProducts.filter(
-      (a) => a.stock === "In stock"
-    );
-
-    if (stock === true && fastDelivery === true) {
-      dispatch({ type: "SET_FINALPRODUCTS", payload: fastDeliveryProducts });
-    } else if (stock === false && fastDelivery === false) {
-      dispatch({ type: "SET_FINALPRODUCTS", payload: inStockProducts });
-    } else if (stock === false && fastDelivery === true) {
-      const stockedFastdeliveryProducts = fastDeliveryProducts.filter(
-        (s) => s.stock === "In stock"
+    if (categoryProducts) {
+      const fastDeliveryProducts = categoryProducts.filter(
+        (a) => a.delivery === "Fast delivery"
       );
-      dispatch({
-        type: "SET_FINALPRODUCTS",
-        payload: stockedFastdeliveryProducts,
-      });
-    } else if (stock === true && fastDelivery === false) {
-      dispatch({
-        type: "SET_FINALPRODUCTS",
-        payload: categoryProducts,
-      });
+      const inStockProducts = categoryProducts.filter(
+        (a) => a.stock === "In stock"
+      );
+
+      if (stock === true && fastDelivery === true) {
+        dispatch({ type: "SET_FINALPRODUCTS", payload: fastDeliveryProducts });
+      } else if (stock === false && fastDelivery === false) {
+        dispatch({ type: "SET_FINALPRODUCTS", payload: inStockProducts });
+      } else if (stock === false && fastDelivery === true) {
+        const stockedFastdeliveryProducts = fastDeliveryProducts.filter(
+          (s) => s.stock === "In stock"
+        );
+        dispatch({
+          type: "SET_FINALPRODUCTS",
+          payload: stockedFastdeliveryProducts,
+        });
+      } else if (stock === true && fastDelivery === false) {
+        dispatch({
+          type: "SET_FINALPRODUCTS",
+          payload: categoryProducts,
+        });
+      }
     }
   }, [categoryProducts, fastDelivery, stock]);
 

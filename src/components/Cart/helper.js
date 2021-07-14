@@ -31,9 +31,20 @@ export const updateCartItem = async (cartItemId, updatedValue) => {
 
 export const deleteCartItem = async (cartItemId) => {
   try {
-    const response = await techHuntAPI.post(`cart/delete/${cartItemId}`);
+    const response = await techHuntAPI.post(`/cart/delete/${cartItemId}`);
     return response.data;
   } catch (error) {
     console.log(error);
   }
 };
+
+export const clearCart = async () => {
+  try {
+    const response = await techHuntAPI.post(`/cart/clear`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
