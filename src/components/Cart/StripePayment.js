@@ -41,15 +41,18 @@ function StripePayment() {
 
   return (
     <StripeCheckOutButton
+      name="TechHunt"
+      description="Find your desired products"
+      currency="INR"
       stripeKey={process.env.REACT_APP_STRIPE_KEY}
       token={stripePaymentToken}
       amount={state.priceDetails.totalAmount * 100}
-      name="Buy products"
       billingAddress
       shippingAddress
     >
       <button className="btn btn-success mt-1" style={{ width: "100%" }}>
-        Stripe payment
+        Pay with
+        <span style={{ color: "#6058F7", fontWeight: "800" }}> STRIPE</span>
       </button>
     </StripeCheckOutButton>
   );
