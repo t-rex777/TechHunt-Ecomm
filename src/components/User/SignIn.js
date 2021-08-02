@@ -14,9 +14,9 @@ function SignIn() {
   const { state, dispatch } = useCart();
   const [shouldRedirect, setRedirect] = useState(false);
   const [user, setUser] = useState({
-    email: "",
-    password: "",
-    re_password: "",
+    email: "admin@gmail.com",
+    password: "admin@gmail.com",
+    re_password: "admin@gmail.com",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
