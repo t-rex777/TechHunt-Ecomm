@@ -33,7 +33,7 @@
   width: 200px;
 }
 .wishlistBtn {
-  width: 200px;
+  width: 200px !important;
   background-color: #fff;
   border: solid 1px var(--secondary);
   font-size: 0.8rem;

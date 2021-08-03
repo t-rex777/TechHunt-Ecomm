@@ -14,9 +14,9 @@ function SignIn() {
   const { state, dispatch } = useCart();
   const [shouldRedirect, setRedirect] = useState(false);
   const [user, setUser] = useState({
-    email: "admin@gmail.com",
-    password: "admin@gmail.com",
-    re_password: "admin@gmail.com",
+    email: "",
+    password: "",
+    re_password: "",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,7 +44,7 @@ function SignIn() {
 
       // setting cart
       const cartData = await getCartItems();
-      dispatch({ type: "SET_CART", payload: cartData }); //is not updating on signin, but works on reload.
+      dispatch({ type: "SET_CART", payload: cartData });
 
       // setting wishlist
       const wishlistData = await getWishlistItems();
@@ -60,6 +60,36 @@ function SignIn() {
         message: "Wrong credentials!",
         color: "danger",
       });
+    }
+  };
+
+  const loginAsGuest = async (e) => {
+    e.preventDefault();
+    dispatch({ type: "LOADING", payload: true });
+    try {
+      const data = await signin({
+        email: "admin@gmail.com",
+        password: "admin@gmail.com",
+        re_password: "admin@gmail.com",
+      });
+      const { userData, accessToken, refreshToken } = data;
+      dispatch({ type: "SET_USER", payload: userData });
+      setTechHuntHeader(accessToken);
+      localStorage.setItem("_rtoken", refreshToken);
+
+      // setting cart
+      const cartData = await getCartItems();
+      dispatch({ type: "SET_CART", payload: cartData });
+      // setting wishlist
+      const wishlistData = await getWishlistItems();
+      dispatch({ type: "SET_WISHLIST", payload: wishlistData });
+      dispatch({ type: "LOADING", payload: false });
+      throwToast(dispatch, { message: "Signed in", color: "success" });
+
+      setRedirect(true);
+    } catch (error) {
+      console.log(error);
+      dispatch({ type: "LOADING", payload: false });
     }
   };
   return (
@@ -112,6 +142,15 @@ function SignIn() {
             </button>
           </div>
         </form>
+        <div className="submit-btn">
+          <button
+            type="submit"
+            className="btn guest-login btn-primary mt-2"
+            onClick={loginAsGuest}
+          >
+            Login as Guest
+          </button>
+        </div>
         <p className="text-center mt-2">
           Don't have an account ? <Link to="/signup">Sign Up</Link>
         </p>
