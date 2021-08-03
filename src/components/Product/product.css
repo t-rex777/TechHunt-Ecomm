@@ -29,17 +29,17 @@
   flex-direction: column;
   line-height: 2rem;
 }
-.card-btn{
+.card-btn {
   width: 200px;
 }
 .wishlistBtn {
   width: 200px !important;
   background-color: #fff;
   border: solid 1px var(--secondary);
-  font-size: 0.8rem;
+  font-size: 1rem;
   border-radius: 5px;
   color: var(--secondary);
-  padding: 0.5rem;
+  padding: 0.4rem 0 !important;
   margin-top: 1rem;
 }
 .wishlistBtn:hover {
@@ -51,12 +51,28 @@
   line-height: 1.3rem;
   width: 80%;
 }
+
 .product-details > li {
   list-style-type: none;
   margin-top: 1rem;
-  /* border : solid 1px rgb(175, 172, 172); */
+  border: solid 3px #f5acac;
+  border-radius: 5px;
   background: #fee2e2;
   padding: 1rem;
+}
+.rating {
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  width: 50px;
+  background-color: rgb(29, 150, 29);
+  padding: 0.1rem 0.5rem;
+}
+.discount-price {
+  margin-left: 1rem;
+  color: gray;
+  font-size: 1rem;
+  text-decoration: line-through;
 }
 @media screen and (max-width: 768px) {
   .wrapper {

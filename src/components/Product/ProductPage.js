@@ -127,8 +127,7 @@ function ProductPage() {
     }
     return (
       <button
-        className={`card-btn btn-secondary`}
-        style={{ maxWidth: "200px" }}
+        className={`card-btn wishlistBtn`}
         onClick={deleteProductFromWishlist}
       >
         Remove from wishlist
@@ -175,8 +174,13 @@ function ProductPage() {
         </div>
         <div className="product-data">
           <h1 className="text-l mb-1">{name}</h1>
-          <p className="text-s">
+          <div>
+            <span className="rating">4.4 &#9733; </span>
+            <span className="text-gray">707 ratings | 144 reviews</span>
+          </div>
+          <p className="text-md">
             Price : <span className="text-danger">₹{price}</span>
+            <span className="discount-price">₹{(price + price*0.2).toFixed(2)}</span>
           </p>
           <p>
             Delivery : <span className="text-primary">{delivery} </span>
