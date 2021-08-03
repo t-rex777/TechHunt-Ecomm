@@ -7,6 +7,7 @@ import { getWishlistItems } from "./../Wishlist/helper";
 import { getCartItems } from "./../Cart/helper";
 import { Link } from "react-router-dom";
 import { throwToast } from "../../App";
+import CartBtn from "./CartBtn";
 const ProductCard = ({
   productId,
   title,
@@ -18,27 +19,6 @@ const ProductCard = ({
 }) => {
   const { state, dispatch } = useCart();
 
-  const addProductToCart = async () => {
-    if (!state.user._id) {
-      return throwToast(dispatch, {
-        message: "please sign in first!",
-        color: "warning",
-      });
-    }
-    dispatch({ type: "LOADING", payload: true });
-    await addCartItem(item._id);
-    try {
-      const cartData = await getCartItems();
-      dispatch({ type: "SET_CART", payload: cartData });
-      dispatch({ type: "LOADING", payload: false });
-
-      throwToast(dispatch, { message: "Added to cart", color: "success" });
-    } catch (error) {
-      console.log(error);
-      dispatch({ type: "LOADING", payload: false });
-      throwToast(dispatch, { message: "didn't add to cart", color: "danger" });
-    }
-  };
   const addProductToWishlist = async () => {
     if (!state.user._id) {
       return throwToast(dispatch, {
@@ -85,20 +65,6 @@ const ProductCard = ({
     }
   };
 
-  const cartButton = () => {
-    if (isInCart === undefined) {
-      return (
-        <button className="card-btn btn-secondary" onClick={addProductToCart}>
-          Add to cart
-        </button>
-      );
-    }
-    return (
-      <Link to="/cart">
-        <button className="card-btn btn-secondary">Go to cart</button>
-      </Link>
-    );
-  };
   return (
     <div>
       <div className="card">
@@ -131,7 +97,7 @@ const ProductCard = ({
           <RiTruckFill />
         </p>
         {item.stock === "In stock" ? (
-          cartButton()
+          <CartBtn item={item} isInCart={isInCart} />
         ) : (
           <button className="card-btn" disabled>
             Add to cart
