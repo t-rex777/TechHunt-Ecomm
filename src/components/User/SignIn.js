@@ -141,8 +141,7 @@ function SignIn() {
               Submit
             </button>
           </div>
-        </form>
-        <div className="submit-btn">
+          <div className="submit-btn">
           <button
             type="submit"
             className="btn guest-login btn-primary mt-2"
@@ -151,6 +150,8 @@ function SignIn() {
             Login as Guest
           </button>
         </div>
+        </form>
+        
         <p className="text-center mt-2">
           Don't have an account ? <Link to="/signup">Sign Up</Link>
         </p>
