@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useCart } from "../../cart-context/CartProvider";
 import ProductCard from "./ProductCard";
 import { BsFilterRight } from "react-icons/bs";
-// import Loading from "../Loading/Loading";
 import Nav from "../../Nav/Nav";
 import SideBar from "./../../Nav/SideBar";
 import LoaderPage from "./../LoaderPage/LoaderPage";
