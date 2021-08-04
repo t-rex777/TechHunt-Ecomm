@@ -4,7 +4,8 @@ import { useCart } from "../../cart-context/CartProvider";
 import { addWishlistItem } from "../Wishlist/helper";
 import { deleteCartItem, updateCartItem } from "./helper";
 import { getWishlistItems } from "./../Wishlist/helper";
-import { throwToast } from './../../App';
+import { throwToast } from "./../../App";
+import WishlistTextBtn from "../Buttons/WishlistTextBtn";
 
 const CartCard = ({ title, img, price, item, quantity }) => {
   const { state, dispatch } = useCart();
@@ -44,7 +45,6 @@ const CartCard = ({ title, img, price, item, quantity }) => {
         message: "removed from cart!",
         color: "success",
       });
-     
     } catch (error) {
       console.log(error);
       dispatch({ type: "LOADING", payload: false });
@@ -55,12 +55,13 @@ const CartCard = ({ title, img, price, item, quantity }) => {
     }
   };
 
+  const isInWishlist = state.wishlist.find(
+    (wishlistItem) => wishlistItem._id === item._id
+  );
+
   const addProductToWishlist = async () => {
     dispatch({ type: "LOADING", payload: true });
 
-    const isInWishlist = state.wishlist.find(
-      (wishlistItem) => wishlistItem._id === item._id
-    );
     if (!isInWishlist) {
       await addWishlistItem(item._id);
       try {
@@ -97,7 +98,7 @@ const CartCard = ({ title, img, price, item, quantity }) => {
         />
         <div className="card-main ">
           <div className="card-main-info mr-1">
-            <h1 className="card-header">{title}</h1>
+            <h1 className="card-header ">{title}</h1>
             <p className="card-body">₹ {price}</p>
             <p className="card-body mt-1">
               {item.delivery} <RiTruckFill />
@@ -121,14 +122,11 @@ const CartCard = ({ title, img, price, item, quantity }) => {
             </div>
           </div>
           <div className="interactions">
-            <span
-              className="content-center place-btn mr-2"
-              onClick={addProductToWishlist}
-            >
-              <p>Add to wishlist</p>
+            <span className="content-center ">
+              <WishlistTextBtn item={item} isInWishlist={isInWishlist} />
             </span>
             <span
-              className="content-center remove-btn mb-1 ml-2"
+              className="content-center remove-btn"
               onClick={deleteItem}
               style={{ fontSize: "1.5rem" }}
             >

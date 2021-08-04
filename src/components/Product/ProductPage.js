@@ -22,6 +22,7 @@ function ProductPage() {
       dispatch({ type: "SET_SELECTED_PRODUCT", payload: productData });
       dispatch({ type: "LOADING", payload: false });
     })();
+
   }, [dispatch, productId]);
 
   const isInCart = () => state.cart.find(({ item }) => item.name === name);

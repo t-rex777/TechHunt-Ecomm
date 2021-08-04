@@ -1,65 +1,12 @@
-import { AiFillDelete } from "react-icons/ai";
 import { useCart } from "../../cart-context/CartProvider";
-import { addCartItem } from "../Cart/helper";
-import { getCartItems } from "./../Cart/helper";
-import { deleteWishlistItem, getWishlistItems } from "./helper";
-import { throwToast } from "./../../App";
+import CartBtn from "../Buttons/CartBtn";
+import WishlistDeleteBtn from "../Buttons/WishlistDeleteBtn";
 
 const WishlistCard = ({ title, img, price, item }) => {
-  const { state, dispatch } = useCart();
+  const { state } = useCart();
 
   const isInCart = (productName) =>
     state.cart.find(({ item }) => item.name === productName);
-
-  const deleteProductFromWishlist = async () => {
-    dispatch({ type: "LOADING", payload: true });
-
-    await deleteWishlistItem(item._id);
-    try {
-      const wishlistItems = await getWishlistItems();
-      dispatch({ type: "SET_WISHLIST", payload: wishlistItems });
-      dispatch({ type: "LOADING", payload: false });
-      throwToast(dispatch, {
-        message: "removed from wishlist!",
-        color: "success",
-      });
-    } catch (error) {
-      console.log(error);
-      dispatch({ type: "LOADING", payload: false });
-      throwToast(dispatch, {
-        message: "didn't remove from wishlist!",
-        color: "danger",
-      });
-    }
-  };
-  const addProductToCart = async () => {
-    if (!isInCart(title)) {
-      dispatch({ type: "LOADING", payload: true });
-
-      await addCartItem(item._id);
-      try {
-        const cartData = await getCartItems();
-        dispatch({ type: "SET_CART", payload: cartData });
-        dispatch({ type: "LOADING", payload: false });
-        throwToast(dispatch, {
-          message: "added to cart!",
-          color: "success",
-        });
-      } catch (error) {
-        console.log(error);
-        dispatch({ type: "LOADING", payload: false });
-        throwToast(dispatch, {
-          message: "didn't add to cart!",
-          color: "danger",
-        });
-      }
-    } else {
-      throwToast(dispatch, {
-        message: "Already in cart!",
-        color: "warning",
-      });
-    }
-  };
 
   return (
     <div>
@@ -67,19 +14,11 @@ const WishlistCard = ({ title, img, price, item }) => {
         <img className="card-image" src={img} alt="oneplus" />
         <h1 className="card-header mt-1 text-center">{title}</h1>
         <p className="card-body text-center">₹ {price}</p>
-        <span
-          className=" place-btn"
-          onClick={addProductToCart}
-          style={{ alignSelf: "center" }}
-        >
-          <p>Add to cart</p>
-        </span>
-        <span
-          className="remove-btn"
-          onClick={deleteProductFromWishlist}
-          style={{ alignSelf: "center" }}
-        >
-          <AiFillDelete />
+        <div className="mb-1">
+          <CartBtn item={item} isInCart={isInCart(title)} />
+        </div>
+        <span style={{ alignSelf: "center" }}>
+          <WishlistDeleteBtn item={item} />
         </span>
       </div>
     </div>

@@ -30,9 +30,13 @@ const CartBtn = ({ item, isInCart }) => {
   };
   if (item.stock === "In stock") {
     if (isInCart === undefined) {
-      return (
+     return loading ? (
         <button className="card-btn btn-secondary" onClick={addProductToCart}>
-          {loading ? <MiniLoader /> : "Add to cart"}
+          <MiniLoader />
+        </button>
+      ) : (
+        <button className="card-btn btn-secondary" onClick={addProductToCart}>
+          Add to cart
         </button>
       );
     }
