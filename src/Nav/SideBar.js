@@ -78,7 +78,7 @@ function SideBar() {
         </label>
       </div>
       <button
-        className="btn btn-danger clear-btn"
+        className="clear-btn"
         type="reset"
         onClick={clearAll}
       >

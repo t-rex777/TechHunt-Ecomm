@@ -1,5 +1,5 @@
 /* top Nav */
-.nav{
+.nav {
   background: #ddd6f3; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
@@ -15,11 +15,11 @@
 .nav-items {
   justify-content: flex-end !important;
 }
-.nav-item{
+.nav-item {
   color: rgb(29, 28, 28) !important;
 }
-.nav-item:hover{
-  color:rgb(221, 41, 41) !important;
+.nav-item:hover {
+  color: rgb(221, 41, 41) !important;
 }
 .nav-logo {
   color: rgb(29, 28, 28) !important;
@@ -30,8 +30,8 @@
   top: 1.6rem;
   font-size: 2rem !important;
 }
-.nav-logo:hover{
-  animation:none !important;
+.nav-logo:hover {
+  animation: none !important;
 }
 .badge-circle-s {
   font-size: 15px;
@@ -56,18 +56,18 @@
   margin-left: 1rem;
   position: absolute;
   background-color: red;
-  border:solid 1px #df6d67;
+  border: solid 1px #df6d67;
   width: 20px;
   height: 20px;
   border-radius: 50%;
 }
 
-.mobileNav{
-  background-color: #F87171;
+.mobileNav {
+  background-color: #f87171;
   position: absolute;
   right: 0.5rem;
-  top:4.5rem;
-  width : 10.5rem;
+  top: 4.5rem;
+  width: 10.5rem;
   border-radius: 8px;
   z-index: 1;
 }
@@ -78,24 +78,24 @@
 }
 .stacked-list-item {
   color: #fff;
-  background-color: #F87171;
+  background-color: #f87171;
   border-bottom: none !important;
   padding: 10px 10px !important;
   display: flex;
   justify-content: flex-start;
 }
 .stacked-list-item > h3 {
-  text-decoration: underline #F87171;
+  text-decoration: underline #f87171;
   font-weight: 800;
   font-size: 1rem;
 }
 
 .stacked-list-item:hover {
   color: #000000;
-  background-color: #F87171 !important;
+  background-color: #f87171 !important;
 }
 .stacked-list-item > h3:hover {
-  text-decoration: underline #F87171;
+  text-decoration: underline #f87171;
 }
 
 /* sidebar */
@@ -108,9 +108,12 @@
   margin-bottom: 1rem;
 }
 .clear-btn {
-  height: 40px;
+  padding: 0.2rem 0.5rem;
   align-self: flex-end;
   font-size: 1rem;
+  border: none;
+  color: #fff;
+  background-color: rgb(223, 118, 118);
 }
 
 @media screen and (max-width: 768px) {
@@ -120,10 +123,9 @@
   .sidebar > div > label {
     font-size: 0.9rem;
   }
-  .clear-btn {
-    height: 30px;
+  /* .clear-btn {
     font-size: 0.5rem;
-  }
+  } */
   /* .nav{
     height : 4rem
   } */
