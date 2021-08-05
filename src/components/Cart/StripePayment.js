@@ -16,11 +16,12 @@ function StripePayment() {
         token,
         amount: state.priceDetails.totalAmount,
       };
-      await techHuntAPI.post(`/stripepayment`, {
+      const res = await techHuntAPI.post(`/stripepayment`, {
         ...paymentBody,
       });
+      // console.log(res);
       throwToast(dispatch, {
-        message: "Payment done successfully!",
+        message: "Payment done successfully, check your email for invoice",
         color: "success",
       });
       dispatch({ type: "LOADING", payload: false });
@@ -50,9 +51,12 @@ function StripePayment() {
       billingAddress
       shippingAddress
     >
-      <button className="btn btn-success mt-1" style={{ width: "100%" }}>
+      <button
+        className="btn btn-success mt-1"
+        style={{ width: "100%", fontSize: "1rem" }}
+      >
         Pay with
-        <span style={{ color: "#6058F7", fontWeight: "800" }}> STRIPE</span>
+        <span style={{ color: "#000", fontWeight: "800" }}> STRIPE</span>
       </button>
     </StripeCheckOutButton>
   );

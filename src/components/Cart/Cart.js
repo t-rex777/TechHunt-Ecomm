@@ -47,7 +47,7 @@ function Cart() {
             <h3 className="mt-1  p-1">
               Total Amount : ₹{priceDetails.totalAmount.toLocaleString()}
             </h3>
-            <div style={{ display: "flex", justifyContent: "center" }}>
+            <div>
               <StripePayment />
             </div>
           </div>

@@ -80,25 +80,24 @@ function Product() {
           <SideBar />
         </div>
       }
-      <h1 className="text-center mb-2">{category}</h1>
-      <div className="products">
-        {finalProducts.map((item) => {
-          isInCart(item.name);
-          return (
-            <ProductCard
-              key={item._id}
-              productId={item._id}
-              item={item}
-              title={item.name}
-              img={item.img}
-              price={item.price}
-              quantity={item.quantity}
-              isInCart={isInCart(item.name)}
-              isInWishlist={isInWishlist(item.name)}
-            />
-          );
-        })}
-      </div>
+        <div className="products">
+          {finalProducts.map((item) => {
+            isInCart(item.name);
+            return (
+              <ProductCard
+                key={item._id}
+                productId={item._id}
+                item={item}
+                title={item.name}
+                img={item.img}
+                price={item.price}
+                quantity={item.quantity}
+                isInCart={isInCart(item.name)}
+                isInWishlist={isInWishlist(item.name)}
+              />
+            );
+          })}
+        </div>
     </>
   );
 }

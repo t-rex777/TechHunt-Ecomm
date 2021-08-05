@@ -9,6 +9,7 @@ import CartBtn from "./../Buttons/CartBtn";
 import WishlistTextBtn from "../Buttons/WishlistTextBtn";
 
 function ProductPage() {
+  window.scrollTo(0, 0);
   const { productId } = useParams();
   const { state, dispatch } = useCart();
   const {

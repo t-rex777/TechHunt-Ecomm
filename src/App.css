@@ -13,7 +13,7 @@ body {
 /* products */
 .products {
   display: flex;
-  justify-content: space-evenly;
+  justify-content:center;
   flex-wrap: wrap;
 }
 .card {
@@ -76,7 +76,7 @@ body {
   align-items: center;
   justify-content: flex-end;
   right: 10px;
-  bottom: 20px;
+  bottom: 30px;
 }
 
 .btn-secondary {
@@ -174,7 +174,7 @@ body {
     /* margin-left: -2rem; */
   }
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 996px) {
   .filter {
     font-size: 1rem;
   }

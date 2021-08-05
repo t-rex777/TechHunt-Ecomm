@@ -1,9 +1,7 @@
 import { AiFillDelete } from "react-icons/ai";
 import { RiTruckFill } from "react-icons/ri";
 import { useCart } from "../../cart-context/CartProvider";
-import { addWishlistItem } from "../Wishlist/helper";
 import { deleteCartItem, updateCartItem } from "./helper";
-import { getWishlistItems } from "./../Wishlist/helper";
 import { throwToast } from "./../../App";
 import WishlistTextBtn from "../Buttons/WishlistTextBtn";
 
@@ -59,34 +57,7 @@ const CartCard = ({ title, img, price, item, quantity }) => {
     (wishlistItem) => wishlistItem._id === item._id
   );
 
-  const addProductToWishlist = async () => {
-    dispatch({ type: "LOADING", payload: true });
 
-    if (!isInWishlist) {
-      await addWishlistItem(item._id);
-      try {
-        const wishlistData = await getWishlistItems();
-        dispatch({ type: "SET_WISHLIST", payload: wishlistData });
-        dispatch({ type: "LOADING", payload: false });
-        throwToast(dispatch, {
-          message: "added to wishlist!",
-          color: "success",
-        });
-      } catch (error) {
-        console.log(error);
-        throwToast(dispatch, {
-          message: "didn't add to wishlist!",
-          color: "danger",
-        });
-      }
-    } else {
-      dispatch({ type: "LOADING", payload: false });
-      throwToast(dispatch, {
-        message: "already in wishlist!",
-        color: "warning",
-      });
-    }
-  };
   return (
     <div>
       <div className="cart-card">
