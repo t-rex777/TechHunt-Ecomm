@@ -13,18 +13,18 @@ body {
 /* products */
 .products {
   display: flex;
-  justify-content:center;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 .card {
   display: flex;
   flex-direction: column;
   width: 200px;
-  margin: 10px 5px;
+  margin: 10px 8px;
   padding: 1.5rem;
   height: 420px;
   background-color: #fff;
-  border: solid 2px rgb(122, 121, 121);
+  border: solid 2px rgb(216, 214, 214);
   /* border-radius: 12px; */
 }
 .filter {
@@ -48,7 +48,6 @@ body {
   background-color: #fff;
   border: solid 2px rgba(122, 121, 121, 0.322);
   /* border-radius: 12px; */
-
 }
 .card-main {
   display: flex;
@@ -96,10 +95,15 @@ body {
   margin-bottom: 1rem;
 }
 .quant-btn > button {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   outline: none;
   margin: 0 2rem;
+  border: solid 1px rgb(211, 205, 205);
+  background-color: rgb(255, 255, 255);
+}
+.quant-btn>button:hover{
+  background-color: rgb(187, 180, 180);
 }
 .quant-btn > p {
   font-size: 1.2rem;
@@ -159,7 +163,7 @@ body {
 .wishlist:hover {
   color: red;
 }
-@media screen and (max-width:1055px) {
+@media screen and (max-width: 1055px) {
   .cart-card {
     flex-direction: column;
     justify-content: center;
@@ -194,7 +198,7 @@ body {
     justify-content: space-evenly;
     align-items: center;
   }
-  .card-header{
+  .card-header {
     text-align: center;
   }
   .card-main-info {
@@ -219,6 +223,6 @@ body {
     position: static;
     justify-content: center;
     flex-direction: column;
-    margin-right: 0 ;
+    margin-right: 0;
   }
 }
