@@ -27,6 +27,8 @@ function Product() {
   const [viewFilter, setFilter] = useState(false);
   useEffect(() => {
     window.scrollTo(0, 0);
+    dispatch({ type: "FASTDELIVERY_OFF" });
+    dispatch({ type: "INSTOCK_ON" });
     if (category === "Phone") {
       const filteredProducts = products.filter(
         (product) => product.category === "Phone"
@@ -66,7 +68,7 @@ function Product() {
 
   return (
     <>
-        {state.loading && <LoaderPage />}
+      {state.loading && <LoaderPage />}
       <Nav />
       <div className="product-page">
         <SideNav />
@@ -84,26 +86,31 @@ function Product() {
             <div
               style={viewFilter ? { display: "block" } : { display: "none" }}
             >
-              <FilterModal setFilter={setFilter} /> {/* check this , values are not persisting*/}
+              <FilterModal setFilter={setFilter} />{" "}
+              {/* check this , values are not persisting*/}
             </div>
           </div>
           <div className="products">
-            {finalProducts.map((item) => {
-              isInCart(item.name);
-              return (
-                <ProductCard
-                  key={item._id}
-                  productId={item._id}
-                  item={item}
-                  title={item.name}
-                  img={item.img}
-                  price={item.price}
-                  quantity={item.quantity}
-                  isInCart={isInCart(item.name)}
-                  isInWishlist={isInWishlist(item.name)}
-                />
-              );
-            })}
+            {finalProducts.length > 0 ? (
+              finalProducts.map((item) => {
+                isInCart(item.name);
+                return (
+                  <ProductCard
+                    key={item._id}
+                    productId={item._id}
+                    item={item}
+                    title={item.name}
+                    img={item.img}
+                    price={item.price}
+                    quantity={item.quantity}
+                    isInCart={isInCart(item.name)}
+                    isInWishlist={isInWishlist(item.name)}
+                  />
+                );
+              })
+            ) : (
+              <h1 className="text-center ml-2 mt-2">No products found!</h1>
+            )}
           </div>
         </div>
       </div>

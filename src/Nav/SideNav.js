@@ -1,22 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useCart } from "../cart-context/CartProvider";
 import { getProducts } from "./../components/Product/helper";
 import "./nav.css";
 
 function SideNav() {
   const { state, dispatch } = useCart();
-  const { products, stock, delivery } = state;
-
+  const { products, stock, fastDelivery } = state;
+  const [sort, setSort] = useState({
+    hightolow: false,
+    lowtohigh: false,
+  });
   const sortByPrice = (e) => {
-    e.target.value === "highToLow" && dispatch({ type: "SORT_DES" });
-    e.target.value === "lowToHigh" && dispatch({ type: "SORT_ASC" });
+    if (e.target.value === "highToLow") {
+      setSort({
+        hightolow: true,
+        lowtohigh: false,
+      });
+      dispatch({ type: "SORT_DES" });
+    }
+    if (e.target.value === "lowToHigh") {
+      setSort({
+        hightolow: false,
+        lowtohigh: true,
+      });
+      dispatch({ type: "SORT_ASC" });
+    }
   };
 
   const filterProducts = (e) => {
     e.target.value === "outOfStock" && dispatch({ type: "FILTER_STOCK" });
     e.target.value === "fastDelivery" && dispatch({ type: "FILTER_DELIVERY" });
   };
-
 
   const clearAll = async () => {
     try {
@@ -39,6 +53,7 @@ function SideNav() {
           type="radio"
           id="highToLow"
           name="sort"
+          checked={sort.hightolow}
           value="highToLow"
           onClick={sortByPrice}
           className="mb-1"
@@ -50,6 +65,7 @@ function SideNav() {
         <input
           type="radio"
           id="lowToHigh"
+          checked={sort.lowtohigh}
           name="sort"
           value="lowToHigh"
           onClick={sortByPrice}
@@ -78,7 +94,7 @@ function SideNav() {
           id="fastDelivery"
           value="fastDelivery"
           onChange={filterProducts}
-          checked={delivery}
+          checked={fastDelivery}
           className="mb-1"
         />
         <label htmlFor="fastDelivery" className="text-sm ml-1">

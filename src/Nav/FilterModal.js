@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { useCart } from "../cart-context/CartProvider";
 import { getProducts } from "./../components/Product/helper";
 import "./nav.css";
 function FilterModal({ setFilter }) {
   const { state, dispatch } = useCart();
-  const { products, stock, delivery } = state;
+  const { products, stock, fastDelivery } = state;
+  const [sort, setSort] = useState({
+    hightolow: false,
+    lowtohigh: false,
+  });
   const sortByPrice = (e) => {
-    e.target.value === "highToLow" && dispatch({ type: "SORT_DES" });
-    e.target.value === "lowToHigh" && dispatch({ type: "SORT_ASC" });
+    if (e.target.value === "highToLow") {
+      setSort({
+        hightolow: true,
+        lowtohigh: false,
+      });
+      dispatch({ type: "SORT_DES" });
+    }
+    if (e.target.value === "lowToHigh") {
+      setSort({
+        hightolow: false,
+        lowtohigh: true,
+      });
+      dispatch({ type: "SORT_ASC" });
+    }
   };
 
   const filterProducts = (e) => {
@@ -38,6 +54,7 @@ function FilterModal({ setFilter }) {
           value="highToLow"
           onClick={sortByPrice}
           className="mb-1"
+          checked={sort.hightolow}
         />
         <label htmlFor="highToLow" className="text-sm ml-1">
           Price - High to low
@@ -49,6 +66,7 @@ function FilterModal({ setFilter }) {
           name="sort"
           value="lowToHigh"
           onClick={sortByPrice}
+          checked={sort.lowtohigh}
         />
         <label htmlFor="lowToHigh" className="text-sm ml-1">
           Price - Low to high
@@ -74,7 +92,7 @@ function FilterModal({ setFilter }) {
           id="fastDelivery"
           value="fastDelivery"
           onChange={filterProducts}
-          checked={delivery}
+          checked={fastDelivery}
           className="mb-1"
         />
         <label htmlFor="fastDelivery" className="text-sm ml-1">

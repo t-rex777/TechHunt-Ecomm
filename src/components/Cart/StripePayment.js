@@ -16,7 +16,7 @@ function StripePayment() {
         token,
         amount: state.priceDetails.totalAmount,
       };
-      const res = await techHuntAPI.post(`/stripepayment`, {
+      await techHuntAPI.post(`/stripepayment`, {
         ...paymentBody,
       });
       // console.log(res);
