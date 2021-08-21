@@ -98,24 +98,42 @@
   text-decoration: underline #f87171;
 }
 
-/* sidebar */
-.sidebar {
-  background-color: #fff;
-  display: flex;
-  justify-content: flex-end;
-  border-bottom: solid 5px rgb(223, 118, 118);
-  border-radius: 0 0 15px 0;
-  margin-bottom: 1rem;
+/* sidenav */
+.sidenav {
+  min-height: 100vh;
+  width: fit-content;
+  border-right: solid 1px rgb(216, 212, 212);
 }
+.sidenav-item {
+  width: 180px;
+}
+
+/* filter-modal */
+.filter-modal {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  background-color: #fff;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+.filter-modal-item {
+  margin-top: 5rem;
+  margin-left: 2rem;
+}
+
 .clear-btn {
+  margin-top: 1rem;
   padding: 0.2rem 0.5rem;
-  align-self: flex-end;
+  /* align-self: flex-end; */
   font-size: 1rem;
   border: none;
   color: #fff;
   background-color: rgb(223, 118, 118);
 }
-
 @media screen and (max-width: 768px) {
   .sidebar > div > h1 {
     font-size: 1rem;
@@ -123,12 +141,6 @@
   .sidebar > div > label {
     font-size: 0.9rem;
   }
-  /* .clear-btn {
-    font-size: 0.5rem;
-  } */
-  /* .nav{
-    height : 4rem
-  } */
   .hamBurger {
     display: block;
   }
@@ -140,8 +152,14 @@
   }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 520px) {
   .sidebar {
     flex-direction: column;
+  }
+  .sidenav {
+    display: none;
+  }
+  .filter-modal {
+    display: flex;
   }
 }

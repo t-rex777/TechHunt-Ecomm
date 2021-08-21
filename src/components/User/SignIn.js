@@ -31,9 +31,22 @@ function SignIn() {
     e.preventDefault();
     dispatch({ type: "LOADING", payload: true });
     try {
+      if (!user.password || !user.re_password || !user.email) {
+        // show error
+        throwToast(dispatch, {
+          message: "Please fill all details!",
+          color: "warning",
+        });
+        dispatch({ type: "LOADING", payload: false });
+        return "";
+      }
       if (user.password !== user.re_password) {
         // show error
-        alert("Both passwords does not match!!");
+        throwToast(dispatch, {
+          message: "Both passwords should be same!",
+          color: "warning",
+        });
+        dispatch({ type: "LOADING", payload: false });
         return "";
       }
       const data = await signin(user);
@@ -142,16 +155,16 @@ function SignIn() {
             </button>
           </div>
           <div className="submit-btn">
-          <button
-            type="submit"
-            className="btn guest-login btn-primary mt-2"
-            onClick={loginAsGuest}
-          >
-            Login as Guest
-          </button>
-        </div>
+            <button
+              type="submit"
+              className="btn guest-login btn-primary mt-2"
+              onClick={loginAsGuest}
+            >
+              Login as Guest
+            </button>
+          </div>
         </form>
-        
+
         <p className="text-center mt-2">
           Don't have an account ? <Link to="/signup">Sign Up</Link>
         </p>

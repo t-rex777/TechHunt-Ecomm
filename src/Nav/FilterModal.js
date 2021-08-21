@@ -2,8 +2,7 @@ import React from "react";
 import { useCart } from "../cart-context/CartProvider";
 import { getProducts } from "./../components/Product/helper";
 import "./nav.css";
-
-function SideBar() {
+function FilterModal({ setFilter }) {
   const { state, dispatch } = useCart();
   const { products, stock, delivery } = state;
   const sortByPrice = (e) => {
@@ -25,18 +24,20 @@ function SideBar() {
     dispatch({ type: "SET_FINALPRODUCTS", payload: products });
     dispatch({ type: "FASTDELIVERY_OFF" });
     dispatch({ type: "INSTOCK_ON" });
+    setFilter(false);
   };
-
   return (
-    <form className="sidebar p-1" style={{transition:"500ms"}}>
-      <div className="mr-4 mb-2">
-        <h1 className="text-md">Sort By</h1>
+    <form className="filter-modal">
+      <h1 className="mb-1 mt-2 text-center">Filters</h1>
+      <div className="sidenav-item mt-2 mb-2">
+        <h1 className="text-md mb-1">Sort By</h1>
         <input
           type="radio"
           id="highToLow"
           name="sort"
           value="highToLow"
           onClick={sortByPrice}
+          className="mb-1"
         />
         <label htmlFor="highToLow" className="text-sm ml-1">
           Price - High to low
@@ -53,14 +54,16 @@ function SideBar() {
           Price - Low to high
         </label>
       </div>
-      <div className="mr-4">
-        <h1 className="text-md">Filter</h1>
+
+      <div className="sidenav-item">
+        <h1 className="text-md mb-1">Filter</h1>
         <input
           type="checkbox"
           id="outOfStock"
           value="outOfStock"
           onChange={filterProducts}
           checked={stock}
+          className="mb-1"
         />
         <label htmlFor="outOfStock" className="text-sm ml-1">
           Include Out Of Stock{" "}
@@ -72,20 +75,25 @@ function SideBar() {
           value="fastDelivery"
           onChange={filterProducts}
           checked={delivery}
+          className="mb-1"
         />
         <label htmlFor="fastDelivery" className="text-sm ml-1">
           Fast Delivery
         </label>
       </div>
+      <div>{/* <h1 className="text-md">Category</h1> */}</div>
       <button
-        className="clear-btn"
+        className="clear-btn mt-3"
         type="reset"
-        onClick={clearAll}
+        onClick={() => setFilter(false)}
       >
+        Apply
+      </button>
+      <button className="clear-btn mt-1" type="reset" onClick={clearAll}>
         Clear
       </button>
     </form>
   );
 }
 
-export default SideBar;
+export default FilterModal;

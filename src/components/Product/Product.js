@@ -3,8 +3,9 @@ import { useCart } from "../../cart-context/CartProvider";
 import ProductCard from "./ProductCard";
 import { BsFilterRight } from "react-icons/bs";
 import Nav from "../../Nav/Nav";
-import SideBar from "./../../Nav/SideBar";
 import LoaderPage from "./../LoaderPage/LoaderPage";
+import SideNav from "../../Nav/SideNav";
+import FilterModal from "./../../Nav/FilterModal";
 
 function Product() {
   const { state, dispatch } = useCart();
@@ -25,6 +26,7 @@ function Product() {
 
   const [viewFilter, setFilter] = useState(false);
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (category === "Phone") {
       const filteredProducts = products.filter(
         (product) => product.category === "Phone"
@@ -64,40 +66,47 @@ function Product() {
 
   return (
     <>
+        {state.loading && <LoaderPage />}
       <Nav />
-      {state.loading && <LoaderPage />}
-      <span
-        className="filter mr-1 "
-        onClick={() => {
-          setFilter(!viewFilter);
-        }}
-      >
-        <BsFilterRight size={20} />
-        Filter
-      </span>
-      {
-        <div style={viewFilter ? { display: "block" } : { display: "none" }}>
-          <SideBar />
+      <div className="product-page">
+        <SideNav />
+        <div className="product-main">
+          <span
+            className="filter mr-1 "
+            onClick={() => {
+              setFilter(!viewFilter);
+            }}
+          >
+            <BsFilterRight size={20} />
+            Filter
+          </span>
+          <div>
+            <div
+              style={viewFilter ? { display: "block" } : { display: "none" }}
+            >
+              <FilterModal setFilter={setFilter} /> {/* check this , values are not persisting*/}
+            </div>
+          </div>
+          <div className="products">
+            {finalProducts.map((item) => {
+              isInCart(item.name);
+              return (
+                <ProductCard
+                  key={item._id}
+                  productId={item._id}
+                  item={item}
+                  title={item.name}
+                  img={item.img}
+                  price={item.price}
+                  quantity={item.quantity}
+                  isInCart={isInCart(item.name)}
+                  isInWishlist={isInWishlist(item.name)}
+                />
+              );
+            })}
+          </div>
         </div>
-      }
-        <div className="products">
-          {finalProducts.map((item) => {
-            isInCart(item.name);
-            return (
-              <ProductCard
-                key={item._id}
-                productId={item._id}
-                item={item}
-                title={item.name}
-                img={item.img}
-                price={item.price}
-                quantity={item.quantity}
-                isInCart={isInCart(item.name)}
-                isInWishlist={isInWishlist(item.name)}
-              />
-            );
-          })}
-        </div>
+      </div>
     </>
   );
 }

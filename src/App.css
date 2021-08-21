@@ -11,6 +11,12 @@ body {
 }
 
 /* products */
+.product-page {
+  display: flex;
+}
+.product-main {
+  display: flex;
+}
 .products {
   display: flex;
   justify-content: flex-start;
@@ -22,13 +28,13 @@ body {
   width: 200px;
   margin: 10px 8px;
   padding: 1.5rem;
-  height: 420px;
+  height: 450px;
   background-color: #fff;
-  border: solid 2px rgb(216, 214, 214);
+  border: solid 1px rgb(216, 214, 214);
   /* border-radius: 12px; */
 }
 .filter {
-  display: flex;
+  display: none;
   justify-content: flex-end;
   font-size: 1.5rem;
   cursor: pointer;
@@ -102,7 +108,7 @@ body {
   border: solid 1px rgb(211, 205, 205);
   background-color: rgb(255, 255, 255);
 }
-.quant-btn>button:hover{
+.quant-btn > button:hover {
   background-color: rgb(187, 180, 180);
 }
 .quant-btn > p {
@@ -224,5 +230,18 @@ body {
     justify-content: center;
     flex-direction: column;
     margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .products {
+    justify-content: center;
+  }
+  .product-main {
+    display: flex;
+    flex-direction: column;
+  }
+  .filter {
+    display: flex;
   }
 }
