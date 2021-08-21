@@ -37,6 +37,10 @@ function FilterModal({ setFilter }) {
     } catch (error) {
       console.log(error);
     }
+    setSort({
+      hightolow: false,
+      lowtohigh: false,
+    });
     dispatch({ type: "SET_FINALPRODUCTS", payload: products });
     dispatch({ type: "FASTDELIVERY_OFF" });
     dispatch({ type: "INSTOCK_ON" });
