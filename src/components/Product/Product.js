@@ -6,10 +6,12 @@ import Nav from "../../Nav/Nav";
 import LoaderPage from "./../LoaderPage/LoaderPage";
 import SideNav from "../../Nav/SideNav";
 import FilterModal from "./../../Nav/FilterModal";
+import {  useSortCategory } from "./helper";
 
 function Product() {
-  const { state, dispatch } = useCart();
-  const { products, finalProducts, category } = state;
+  const { state } = useCart();
+  const { finalProducts } = state;
+
   const isInCart = (productName) =>
     state.cart.find(({ item }) => item.name === productName);
 
@@ -23,48 +25,14 @@ function Product() {
     });
     return wishlistId;
   };
-
   const [viewFilter, setFilter] = useState(false);
+
+  useSortCategory();
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch({ type: "FASTDELIVERY_OFF" });
-    dispatch({ type: "INSTOCK_ON" });
-    if (category === "Phone") {
-      const filteredProducts = products.filter(
-        (product) => product.category === "Phone"
-      );
-      dispatch({ type: "SET_FINALPRODUCTS", payload: filteredProducts });
-      dispatch({ type: "SET_CATEGORYPRODUCTS", payload: filteredProducts });
-    } else if (category === "Earphone") {
-      const filteredProducts = products.filter(
-        (product) => product.category === "Earphone"
-      );
-      dispatch({ type: "SET_CATEGORYPRODUCTS", payload: filteredProducts });
-      dispatch({ type: "SET_FINALPRODUCTS", payload: filteredProducts });
-    } else if (category === "TV") {
-      const filteredProducts = products.filter(
-        (product) => product.category === "TV"
-      );
-      dispatch({ type: "SET_CATEGORYPRODUCTS", payload: filteredProducts });
-      dispatch({ type: "SET_FINALPRODUCTS", payload: filteredProducts });
-    } else if (category === "Watch") {
-      const filteredProducts = products.filter(
-        (product) => product.category === "Watch"
-      );
-      dispatch({ type: "SET_CATEGORYPRODUCTS", payload: filteredProducts });
-      dispatch({ type: "SET_FINALPRODUCTS", payload: filteredProducts });
-    } else if (category === "Storage") {
-      const filteredProducts = products.filter(
-        (product) => product.category === "Storage"
-      );
-      dispatch({ type: "SET_CATEGORYPRODUCTS", payload: filteredProducts });
-      dispatch({ type: "SET_FINALPRODUCTS", payload: filteredProducts });
-    } else if (category === "All") {
-      dispatch({ type: "SET_CATEGORYPRODUCTS", payload: products });
-      dispatch({ type: "SET_FINALPRODUCTS", payload: products });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
   return (
     <>

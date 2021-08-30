@@ -7,3 +7,5 @@ export const techHuntAPI = Axios.create({
 
 export const setTechHuntHeader = (token) =>
   (techHuntAPI.defaults.headers.common["authorization"] = `Bearer ${token}`);
+
+

@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { useCart } from "../cart-context/CartProvider";
-import { getProducts } from "./../components/Product/helper";
+import {
+  brands,
+  getProducts,
+  useSortByBrand,
+} from "./../components/Product/helper";
 import "./nav.css";
 function FilterModal({ setFilter }) {
   const { state, dispatch } = useCart();
   const { products, stock, fastDelivery } = state;
+  const [brand, setBrand, handleBrandChange] = useSortByBrand();
   const [sort, setSort] = useState({
     hightolow: false,
     lowtohigh: false,
@@ -45,6 +50,7 @@ function FilterModal({ setFilter }) {
     dispatch({ type: "FASTDELIVERY_OFF" });
     dispatch({ type: "INSTOCK_ON" });
     setFilter(false);
+    setBrand([]);
   };
   return (
     <form className="filter-modal">
@@ -58,7 +64,7 @@ function FilterModal({ setFilter }) {
           value="highToLow"
           onClick={sortByPrice}
           className="mb-1"
-          checked={sort.hightolow}
+          defaultChecked={sort.hightolow}
         />
         <label htmlFor="highToLow" className="text-sm ml-1">
           Price - High to low
@@ -70,7 +76,7 @@ function FilterModal({ setFilter }) {
           name="sort"
           value="lowToHigh"
           onClick={sortByPrice}
-          checked={sort.lowtohigh}
+          defaultChecked={sort.lowtohigh}
         />
         <label htmlFor="lowToHigh" className="text-sm ml-1">
           Price - Low to high
@@ -84,7 +90,7 @@ function FilterModal({ setFilter }) {
           id="outOfStock"
           value="outOfStock"
           onChange={filterProducts}
-          checked={stock}
+          defaultChecked={stock}
           className="mb-1"
         />
         <label htmlFor="outOfStock" className="text-sm ml-1">
@@ -96,14 +102,32 @@ function FilterModal({ setFilter }) {
           id="fastDelivery"
           value="fastDelivery"
           onChange={filterProducts}
-          checked={fastDelivery}
+          defaultChecked={fastDelivery}
           className="mb-1"
         />
         <label htmlFor="fastDelivery" className="text-sm ml-1">
           Fast Delivery
         </label>
       </div>
-      <div>{/* <h1 className="text-md">Category</h1> */}</div>
+      <div className="sidenav-item mt-1">
+        <h1 className="text-md mb-1">Brands</h1>
+        {brands.map(({ id, name }) => (
+          <div key={id}>
+            <input
+              type="checkbox"
+              id={id}
+              value={name}
+              onChange={handleBrandChange}
+              defaultChecked={brand.includes(name)}
+              className="mb-1"
+            />
+            <label htmlFor={id} className="text-sm ml-1">
+              {name}
+            </label>
+            <br />
+          </div>
+        ))}
+      </div>
       <button
         className="clear-btn mt-3"
         type="reset"
@@ -111,7 +135,7 @@ function FilterModal({ setFilter }) {
       >
         Apply
       </button>
-      <button className="clear-btn mt-1" type="reset" onClick={clearAll}>
+      <button className="clear-btn mt-1 mb-2" type="reset" onClick={clearAll}>
         Clear
       </button>
     </form>

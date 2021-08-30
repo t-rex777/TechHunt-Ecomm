@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useCart } from "../cart-context/CartProvider";
-import { getProducts } from "./../components/Product/helper";
+import { brands, getProducts, useSortByBrand } from "./../components/Product/helper";
 import "./nav.css";
 
 function SideNav() {
   const { state, dispatch } = useCart();
   const { products, stock, fastDelivery } = state;
+  const [brand, setBrand, handleBrandChange] = useSortByBrand();
   const [sort, setSort] = useState({
     hightolow: false,
     lowtohigh: false,
@@ -42,11 +43,14 @@ function SideNav() {
     setSort({
       hightolow: false,
       lowtohigh: false,
-    })
+    });
     dispatch({ type: "SET_FINALPRODUCTS", payload: products });
     dispatch({ type: "FASTDELIVERY_OFF" });
     dispatch({ type: "INSTOCK_ON" });
+    setBrand([]);
   };
+
+
 
   return (
     <form className="sidenav pl-2 pr-2 mr-1">
@@ -57,7 +61,7 @@ function SideNav() {
           type="radio"
           id="highToLow"
           name="sort"
-          checked={sort.hightolow}
+          defaultChecked={sort.hightolow}
           value="highToLow"
           onClick={sortByPrice}
           className="mb-1"
@@ -69,7 +73,7 @@ function SideNav() {
         <input
           type="radio"
           id="lowToHigh"
-          checked={sort.lowtohigh}
+          defaultChecked={sort.lowtohigh}
           name="sort"
           value="lowToHigh"
           onClick={sortByPrice}
@@ -86,7 +90,7 @@ function SideNav() {
           id="outOfStock"
           value="outOfStock"
           onChange={filterProducts}
-          checked={stock}
+          defaultChecked={stock}
           className="mb-1"
         />
         <label htmlFor="outOfStock" className="text-sm ml-1">
@@ -98,12 +102,31 @@ function SideNav() {
           id="fastDelivery"
           value="fastDelivery"
           onChange={filterProducts}
-          checked={fastDelivery}
+          defaultChecked={fastDelivery}
           className="mb-1"
         />
         <label htmlFor="fastDelivery" className="text-sm ml-1">
           Fast Delivery
         </label>
+      </div>
+      <div className="sidenav-item mt-2">
+        <h1 className="text-md mb-1">Brands</h1>
+        {brands.map(({ id, name }) => (
+          <div key={id}>
+            <input
+              type="checkbox"
+              id={id}
+              value={name}
+              onChange={handleBrandChange}
+              defaultChecked={brand.includes(name)}
+              className="mb-1"
+            />
+            <label htmlFor={id} className="text-sm ml-1">
+              {name}
+            </label>
+            <br />
+          </div>
+        ))}
       </div>
       <button className="clear-btn" type="reset" onClick={clearAll}>
         Clear
