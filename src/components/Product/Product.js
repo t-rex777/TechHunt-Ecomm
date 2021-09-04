@@ -55,7 +55,6 @@ function Product() {
               style={viewFilter ? { display: "block" } : { display: "none" }}
             >
               <FilterModal setFilter={setFilter} />{" "}
-              {/* check this , values are not persisting*/}
             </div>
           </div>
           <div className="products">

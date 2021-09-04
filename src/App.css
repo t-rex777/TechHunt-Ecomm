@@ -16,6 +16,7 @@ body {
 }
 .product-main {
   display: flex;
+  justify-content: center;
 }
 .products {
   display: flex;
@@ -26,7 +27,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 200px;
-  margin: 10px 8px;
+  margin: 10px 18px;
   padding: 1.5rem;
   height: 450px;
   background-color: #fff;
@@ -185,6 +186,9 @@ body {
   }
 }
 @media screen and (max-width: 996px) {
+  .products {
+    justify-content: center;
+  }
   .filter {
     font-size: 1rem;
   }
@@ -233,10 +237,10 @@ body {
   }
 }
 
+/* @media screen and (max-width: 873px) {
+} */
+
 @media screen and (max-width: 520px) {
-  .products {
-    justify-content: center;
-  }
   .product-main {
     display: flex;
     flex-direction: column;

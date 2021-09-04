@@ -71,7 +71,7 @@ export const brands = [
   { id: "apple", name: "Apple" },
   { id: "sony", name: "Sony" },
   { id: "mi", name: "Mi" },
-  { id: "sandisk", name: "Sandisk" },
+  { id: "sandisk", name: "SanDisk" },
   { id: "strontium", name: "Strontium" },
   { id: "hp", name: "HP" },
   { id: "wd", name: "WD" },
