@@ -30,7 +30,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 200px;
-  margin: 10px 8px;
+  margin: 10px 18px;
   padding: 1.5rem;
   height: 450px;
   background-color: #fff;
@@ -189,6 +189,9 @@ body {
   }
 }
 @media screen and (max-width: 996px) {
+  .products {
+    justify-content: center;
+  }
   .filter {
     font-size: 1rem;
   }
@@ -237,13 +240,19 @@ body {
   }
 }
 
+/* @media screen and (max-width: 873px) {
+} */
+
 @media screen and (max-width: 520px) {
+<<<<<<< HEAD
   .products {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+=======
+>>>>>>> 73dcac36da24af0c8c4d26378e88057b3368cd44
   .product-main {
     display: flex;
     flex-direction: column;
