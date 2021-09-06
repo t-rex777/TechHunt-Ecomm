@@ -244,15 +244,12 @@ body {
 } */
 
 @media screen and (max-width: 520px) {
-<<<<<<< HEAD
   .products {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
-=======
->>>>>>> 73dcac36da24af0c8c4d26378e88057b3368cd44
   .product-main {
     display: flex;
     flex-direction: column;
