@@ -110,9 +110,8 @@ export const useSortByBrand = () => {
         payload: filteredFinalProducts,
       });
     }
+    // eslint-disable-next-line
   }, [brand]);
 
   return [brand, setBrand, handleBrandChange];
 };
-
-

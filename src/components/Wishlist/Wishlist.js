@@ -12,7 +12,7 @@ function Wishlist() {
     <>
       <Nav />
       {state.loading && <LoaderPage />}
-      <h1 className="text-center text-xl">Wishlist</h1>
+      <h2 className="text-center mt-1 mb-1">My wishlist ({wishlist.length})</h2>
       {wishlist.length !== 0 ? (
         <div className="products" style={{ justifyContent: "center" }}>
           {wishlist.map((item) => {
@@ -29,7 +29,12 @@ function Wishlist() {
         </div>
       ) : (
         <div className="empty-img mt-4">
-          <img className="responsive" src={emptyWishlist} alt="emptywishlist" style={{maxWidth:"300px"}} />
+          <img
+            className="responsive"
+            src={emptyWishlist}
+            alt="emptywishlist"
+            style={{ maxWidth: "300px" }}
+          />
           <h3 className="mt-4">You can wish more ...</h3>
         </div>
       )}

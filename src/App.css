@@ -16,11 +16,15 @@ body {
 }
 .product-main {
   display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
 }
 .products {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
 }
 .card {
   display: flex;
@@ -223,7 +227,7 @@ body {
     font-weight: 500;
   }
   .card {
-    width: 250px;
+    width: 220px;
   }
   .interactions {
     position: static;
@@ -235,7 +239,10 @@ body {
 
 @media screen and (max-width: 520px) {
   .products {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
   }
   .product-main {
     display: flex;
@@ -243,5 +250,6 @@ body {
   }
   .filter {
     display: flex;
+    padding: 1rem;
   }
 }

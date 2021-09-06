@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useCart } from "../cart-context/CartProvider";
 import { brands, getProducts, useSortByBrand } from "./../components/Product/helper";
 import "./nav.css";

@@ -4,7 +4,7 @@ import CartCard from "./CartCard";
 import emptyCart from "../../images/emptycart.svg";
 import Nav from "./../../Nav/Nav";
 import LoaderPage from "./../LoaderPage/LoaderPage";
-import StripePayment from './StripePayment';
+import StripePayment from "./StripePayment";
 
 function Cart() {
   const { state } = useCart();
@@ -13,7 +13,7 @@ function Cart() {
   return (
     <>
       <Nav />
-      <h1 className="text-center text-xl">Cart</h1>
+      <h2 className="ml-3 mt-1 mb-1" >My cart ({cart.length})</h2>
       {state.loading && <LoaderPage />}
       {cart.length !== 0 ? (
         <div className="cartpage">
